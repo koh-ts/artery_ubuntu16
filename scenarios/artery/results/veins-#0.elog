@@ -1,5 +1,5 @@
 E # 0 t 0 m 1 ce -1 msg -1
-SB v 1284 rid veins-0-20181204-15:44:39-20334 b 1000
+SB v 1284 rid veins-0-20181204-16:02:58-22761 b 1000
 KF p -1 c "" s ""
 MC id 1 c omnetpp::cModule t artery.veins.World n World cm 1
 MS id 1 d bgb=$playgroundSizeX,$playgroundSizeY
@@ -50,7 +50,7 @@ ME
 MB sm 1 tm 2 m initialize(1)
 ME
 MB sm 1 tm 4 m initialize(1)
-- INFO (ObstacleControl)World.obstacles: obstaclesXML is 0x381f9e0
+- INFO (ObstacleControl)World.obstacles: obstaclesXML is 0x42c0b70
 ME
 
 E # 1 t 0 m 7 ce 0 msg 0
@@ -9039,3 +9039,2308 @@ SH sm 55 sg 3
 SH sm 56 sg 0
 ES t 0.205671297573
 CL id 784 tid 784 eid 782 etid 782 c WaveShortMessage n "" l 704 pe 55 cid 785
+
+E # 56 t 0.205671297573 m 66 ce 55 msg 784
+BS id 61 tid 61 eid 61 etid 61 c omnetpp::cMessage n "next Mac Event" pe 2
+ES t 0.205683
+
+E # 57 t 0.205683 m 66 ce 56 msg 61
+CM id 786 tid 786 eid 786 etid 786 c omnetpp::cMessage n "" pe -1
+CL id 784 tid 784 eid 782 etid 782 c WaveShortMessage n "" l 704 pe 56 cid 787
+MB sm 66 tm 65 m ""
+CM id 788 tid 788 eid 788 etid 788 c omnetpp::cMessage n "Radio switching over" k 22001 pe -1
+BS id 788 tid 788 eid 788 etid 788 c omnetpp::cMessage n "Radio switching over" k 22001 pe 57
+SH sm 65 sg 7
+ES t 0.205683
+CL id 788 tid 788 eid 788 etid 788 c omnetpp::cMessage n "Radio switching over" k 22001 pe 57 cid 789
+ME
+CL id 786 tid 786 eid 782 etid 782 c Mac80211Pkt n "" l 704 pe 57 cid 790
+BS id 786 tid 786 eid 782 etid 782 c Mac80211Pkt n "" l 704 pe 57
+SH sm 66 sg 11
+ES t 0.205684
+CL id 786 tid 786 eid 782 etid 782 c Mac80211Pkt n "" l 704 pe 57 cid 791
+
+E # 58 t 0.205683 m 66 ce 57 msg 788
+DM id 788 tid 788 eid 788 etid 788 c omnetpp::cMessage n "Radio switching over" k 22001 pe 58
+
+E # 59 t 0.205684 m 65 ce 57 msg 786
+CM id 792 tid 792 eid 792 etid 792 c omnetpp::cMessage n "" k 22003 pe -1
+BS id 51 tid 51 eid 51 etid 51 c omnetpp::cMessage n "transmission over" k 22000 pe 2
+ES t 0.205852
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 793
+BS id 793 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 12 dg 0 pd 0.0000040171
+SH sm 12 sg 0
+SH sm 14 sg 8
+ES t 0.2056880171 is 1
+CL id 793 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 794
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 795
+BS id 795 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 26 dg 0 pd 0.000004314595
+SH sm 26 sg 0
+SH sm 28 sg 8
+ES t 0.205688314595 is 1
+CL id 795 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 796
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 797
+BS id 797 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 124 dg 0 pd 0.000003318417
+SH sm 124 sg 0
+SH sm 126 sg 8
+ES t 0.205687318417 is 1
+CL id 797 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 798
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 799
+BS id 799 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 138 dg 0 pd 0.000004856149
+SH sm 138 sg 0
+SH sm 140 sg 8
+ES t 0.205688856149 is 1
+CL id 799 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 800
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 801
+BS id 801 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 166 dg 0 pd 0.000002736506
+SH sm 166 sg 0
+SH sm 168 sg 8
+ES t 0.205686736506 is 1
+CL id 801 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 802
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 803
+BS id 803 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 180 dg 0 pd 0.000002421693
+SH sm 180 sg 0
+SH sm 182 sg 8
+ES t 0.205686421693 is 1
+CL id 803 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 804
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 805
+BS id 805 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 222 dg 0 pd 0.000004178006
+SH sm 222 sg 0
+SH sm 224 sg 8
+ES t 0.205688178006 is 1
+CL id 805 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 806
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 807
+BS id 807 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 250 dg 0 pd 0.000003142406
+SH sm 250 sg 0
+SH sm 252 sg 8
+ES t 0.205687142406 is 1
+CL id 807 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 808
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 809
+BS id 809 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 292 dg 0 pd 0.000002009344
+SH sm 292 sg 0
+SH sm 294 sg 8
+ES t 0.205686009344 is 1
+CL id 809 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 810
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 811
+BS id 811 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 306 dg 0 pd 0.000004085628
+SH sm 306 sg 0
+SH sm 308 sg 8
+ES t 0.205688085628 is 1
+CL id 811 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 812
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 813
+BS id 813 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 320 dg 0 pd 0.000004202237
+SH sm 320 sg 0
+SH sm 322 sg 8
+ES t 0.205688202237 is 1
+CL id 813 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 814
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 815
+BS id 815 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 348 dg 0 pd 0.000001617755
+SH sm 348 sg 0
+SH sm 350 sg 8
+ES t 0.205685617755 is 1
+CL id 815 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 816
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 817
+BS id 817 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 376 dg 0 pd 0.000002354328
+SH sm 376 sg 0
+SH sm 378 sg 8
+ES t 0.205686354328 is 1
+CL id 817 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 818
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 819
+BS id 819 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 390 dg 0 pd 0.000003443705
+SH sm 390 sg 0
+SH sm 392 sg 8
+ES t 0.205687443705 is 1
+CL id 819 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 820
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 821
+BS id 821 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 404 dg 0 pd 0.000001021877
+SH sm 404 sg 0
+SH sm 406 sg 8
+ES t 0.205685021877 is 1
+CL id 821 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 822
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 823
+BS id 823 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 418 dg 0 pd 0.000004419926
+SH sm 418 sg 0
+SH sm 420 sg 8
+ES t 0.205688419926 is 1
+CL id 823 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 824
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 825
+BS id 825 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 432 dg 0 pd 0.000003920342
+SH sm 432 sg 0
+SH sm 434 sg 8
+ES t 0.205687920342 is 1
+CL id 825 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 826
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 827
+BS id 827 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 446 dg 0 pd 0.000001009713
+SH sm 446 sg 0
+SH sm 448 sg 8
+ES t 0.205685009713 is 1
+CL id 827 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 828
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 829
+BS id 829 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 488 dg 0 pd 0.000004052968
+SH sm 488 sg 0
+SH sm 490 sg 8
+ES t 0.205688052968 is 1
+CL id 829 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 830
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 831
+BS id 831 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 502 dg 0 pd 0.000002891043
+SH sm 502 sg 0
+SH sm 504 sg 8
+ES t 0.205686891043 is 1
+CL id 831 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 832
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 833
+BS id 833 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 558 dg 0 pd 0.00000131616
+SH sm 558 sg 0
+SH sm 560 sg 8
+ES t 0.20568531616 is 1
+CL id 833 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 834
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 835
+BS id 835 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 586 dg 0 pd 0.000004931785
+SH sm 586 sg 0
+SH sm 588 sg 8
+ES t 0.205688931785 is 1
+CL id 835 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 836
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 837
+BS id 837 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 698 dg 0 pd 0.000003167365
+SH sm 698 sg 0
+SH sm 700 sg 8
+ES t 0.205687167365 is 1
+CL id 837 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 838
+BS id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59
+SD sm 65 dm 712 dg 0 pd 0.000004043391
+SH sm 712 sg 0
+SH sm 714 sg 8
+ES t 0.205688043391 is 1
+CL id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 59 cid 839
+
+E # 60 t 0.205685009713 m 457 ce 59 msg 827
+MB sm 457 tm 4 m ""
+MS id 5 d p=1640.18,50;i=msg/paperclip
+MS id 5 d p=1640.18,1640.18;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1640.18;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1672.47,50;i=msg/paperclip
+MS id 5 d p=1672.47,1672.47;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1672.47;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1648.52,50;i=msg/paperclip
+MS id 5 d p=1648.52,1648.52;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1648.52;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1507.97,50;i=msg/paperclip
+MS id 5 d p=1507.97,1507.97;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1507.97;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1540.93,50;i=msg/paperclip
+MS id 5 d p=1540.93,1540.93;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1540.93;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1625.99,50;i=msg/paperclip
+MS id 5 d p=1625.99,1625.99;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1625.99;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1529.48,50;i=msg/paperclip
+MS id 5 d p=1529.48,1529.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1529.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1617.75,50;i=msg/paperclip
+MS id 5 d p=1617.75,1617.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1617.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1639.97,50;i=msg/paperclip
+MS id 5 d p=1639.97,1639.97;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1639.97;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1633.89,50;i=msg/paperclip
+MS id 5 d p=1633.89,1633.89;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1633.89;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1495.03,50;i=msg/paperclip
+MS id 5 d p=1495.03,1495.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1495.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1524.14,50;i=msg/paperclip
+MS id 5 d p=1524.14,1524.14;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1524.14;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1565.63,50;i=msg/paperclip
+MS id 5 d p=1565.63,1565.63;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1565.63;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1592.18,50;i=msg/paperclip
+MS id 5 d p=1592.18,1592.18;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1592.18;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 827 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 60
+ES t 0.205853009713 is 1
+
+E # 61 t 0.205685021877 m 415 ce 59 msg 821
+MB sm 415 tm 4 m ""
+MS id 5 d p=1414.71,50;i=msg/paperclip
+MS id 5 d p=1414.71,1414.71;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1414.71;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1434.42,50;i=msg/paperclip
+MS id 5 d p=1434.42,1434.42;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1434.42;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1450.74,50;i=msg/paperclip
+MS id 5 d p=1450.74,1450.74;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1450.74;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1472.98,50;i=msg/paperclip
+MS id 5 d p=1472.98,1472.98;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1472.98;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1451.81,50;i=msg/paperclip
+MS id 5 d p=1451.81,1451.81;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1451.81;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 821 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 61
+ES t 0.205853021877 is 1
+
+E # 62 t 0.20568531616 m 569 ce 59 msg 833
+MB sm 569 tm 4 m ""
+MS id 5 d p=1620.29,50;i=msg/paperclip
+MS id 5 d p=1620.29,1620.29;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1620.29;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1547.59,50;i=msg/paperclip
+MS id 5 d p=1547.59,1547.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1547.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1584.41,50;i=msg/paperclip
+MS id 5 d p=1584.41,1584.41;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1584.41;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1452.58,50;i=msg/paperclip
+MS id 5 d p=1452.58,1452.58;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1452.58;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1494.46,50;i=msg/paperclip
+MS id 5 d p=1494.46,1494.46;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1494.46;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1414.71,50;i=msg/paperclip
+MS id 5 d p=1414.71,1414.71;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1414.71;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1444.97,50;i=msg/paperclip
+MS id 5 d p=1444.97,1444.97;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1444.97;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1463.06,50;i=msg/paperclip
+MS id 5 d p=1463.06,1463.06;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1463.06;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1439.58,50;i=msg/paperclip
+MS id 5 d p=1439.58,1439.58;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1439.58;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1465.85,50;i=msg/paperclip
+MS id 5 d p=1465.85,1465.85;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1465.85;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1524.28,50;i=msg/paperclip
+MS id 5 d p=1524.28,1524.28;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1524.28;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1481.54,50;i=msg/paperclip
+MS id 5 d p=1481.54,1481.54;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1481.54;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1734.05,50;i=msg/paperclip
+MS id 5 d p=1734.05,1734.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1734.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1774.29,50;i=msg/paperclip
+MS id 5 d p=1774.29,1774.29;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1774.29;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1744.08,50;i=msg/paperclip
+MS id 5 d p=1744.08,1744.08;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1744.08;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 833 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 62
+ES t 0.20585331616 is 1
+
+E # 63 t 0.205685617755 m 359 ce 59 msg 815
+MB sm 359 tm 4 m ""
+MS id 5 d p=1414.71,50;i=msg/paperclip
+MS id 5 d p=1414.71,1414.71;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1414.71;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1502.32,50;i=msg/paperclip
+MS id 5 d p=1502.32,1502.32;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1502.32;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1486.09,50;i=msg/paperclip
+MS id 5 d p=1486.09,1486.09;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1486.09;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1475.6,50;i=msg/paperclip
+MS id 5 d p=1475.6,1475.6;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1475.6;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1534.27,50;i=msg/paperclip
+MS id 5 d p=1534.27,1534.27;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1534.27;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1523.9,50;i=msg/paperclip
+MS id 5 d p=1523.9,1523.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1523.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1433.27,50;i=msg/paperclip
+MS id 5 d p=1433.27,1433.27;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1433.27;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1677.58,50;i=msg/paperclip
+MS id 5 d p=1677.58,1677.58;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1677.58;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1570.75,50;i=msg/paperclip
+MS id 5 d p=1570.75,1570.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1570.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1634.21,50;i=msg/paperclip
+MS id 5 d p=1634.21,1634.21;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1634.21;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1626.86,50;i=msg/paperclip
+MS id 5 d p=1626.86,1626.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1626.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1600.86,50;i=msg/paperclip
+MS id 5 d p=1600.86,1600.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1600.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1602.49,50;i=msg/paperclip
+MS id 5 d p=1602.49,1602.49;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1602.49;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1578.31,50;i=msg/paperclip
+MS id 5 d p=1578.31,1578.31;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1578.31;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1659.44,50;i=msg/paperclip
+MS id 5 d p=1659.44,1659.44;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1659.44;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 815 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 63
+ES t 0.205853617755 is 1
+
+E # 64 t 0.205686009344 m 303 ce 59 msg 809
+MB sm 303 tm 4 m ""
+MS id 5 d p=1130.71,50;i=msg/paperclip
+MS id 5 d p=1130.71,1130.71;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1130.71;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1142.61,50;i=msg/paperclip
+MS id 5 d p=1142.61,1142.61;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1142.61;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1153.17,50;i=msg/paperclip
+MS id 5 d p=1153.17,1153.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1153.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1154.51,50;i=msg/paperclip
+MS id 5 d p=1154.51,1154.51;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1154.51;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1143.81,50;i=msg/paperclip
+MS id 5 d p=1143.81,1143.81;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1143.81;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1143.01,50;i=msg/paperclip
+MS id 5 d p=1143.01,1143.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1143.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1169.46,50;i=msg/paperclip
+MS id 5 d p=1169.46,1169.46;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1169.46;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1389.9,50;i=msg/paperclip
+MS id 5 d p=1389.9,1389.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1327.66,50;i=msg/paperclip
+MS id 5 d p=1327.66,1327.66;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1327.66;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1336.42,50;i=msg/paperclip
+MS id 5 d p=1336.42,1336.42;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1336.42;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1181.78,50;i=msg/paperclip
+MS id 5 d p=1181.78,1181.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1181.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1194.35,50;i=msg/paperclip
+MS id 5 d p=1194.35,1194.35;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1194.35;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1190.27,50;i=msg/paperclip
+MS id 5 d p=1190.27,1190.27;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1190.27;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1181.89,50;i=msg/paperclip
+MS id 5 d p=1181.89,1181.89;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1181.89;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1180.39,50;i=msg/paperclip
+MS id 5 d p=1180.39,1180.39;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1180.39;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 809 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 64
+ES t 0.205854009344 is 1
+
+E # 65 t 0.205686354328 m 387 ce 59 msg 817
+MB sm 387 tm 4 m ""
+MS id 5 d p=1358.75,50;i=msg/paperclip
+MS id 5 d p=1358.75,1358.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1358.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1404.72,50;i=msg/paperclip
+MS id 5 d p=1404.72,1404.72;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1404.72;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1376.24,50;i=msg/paperclip
+MS id 5 d p=1376.24,1376.24;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1376.24;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1409.11,50;i=msg/paperclip
+MS id 5 d p=1409.11,1409.11;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1409.11;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.59,50;i=msg/paperclip
+MS id 5 d p=1407.59,1407.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1400.54,50;i=msg/paperclip
+MS id 5 d p=1400.54,1400.54;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1400.54;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1405.91,50;i=msg/paperclip
+MS id 5 d p=1405.91,1405.91;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1405.91;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1371.47,50;i=msg/paperclip
+MS id 5 d p=1371.47,1371.47;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1371.47;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1367.12,50;i=msg/paperclip
+MS id 5 d p=1367.12,1367.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1367.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1366.57,50;i=msg/paperclip
+MS id 5 d p=1366.57,1366.57;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1366.57;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 817 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 65
+ES t 0.205854354328 is 1
+
+E # 66 t 0.205686421693 m 191 ce 59 msg 803
+MB sm 191 tm 4 m ""
+MS id 5 d p=1008.86,50;i=msg/paperclip
+MS id 5 d p=1008.86,1008.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1008.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1023.22,50;i=msg/paperclip
+MS id 5 d p=1023.22,1023.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1023.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1389.9,50;i=msg/paperclip
+MS id 5 d p=1389.9,1389.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1031.94,50;i=msg/paperclip
+MS id 5 d p=1031.94,1031.94;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1031.94;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1039.92,50;i=msg/paperclip
+MS id 5 d p=1039.92,1039.92;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1039.92;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1051.13,50;i=msg/paperclip
+MS id 5 d p=1051.13,1051.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1051.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1087.86,50;i=msg/paperclip
+MS id 5 d p=1087.86,1087.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1087.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1127.79,50;i=msg/paperclip
+MS id 5 d p=1127.79,1127.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1127.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1087.16,50;i=msg/paperclip
+MS id 5 d p=1087.16,1087.16;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1087.16;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1091.83,50;i=msg/paperclip
+MS id 5 d p=1091.83,1091.83;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1091.83;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1133.25,50;i=msg/paperclip
+MS id 5 d p=1133.25,1133.25;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1133.25;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1100.31,50;i=msg/paperclip
+MS id 5 d p=1100.31,1100.31;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1100.31;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1076.76,50;i=msg/paperclip
+MS id 5 d p=1076.76,1076.76;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1076.76;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1069.18,50;i=msg/paperclip
+MS id 5 d p=1069.18,1069.18;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1069.18;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1139.81,50;i=msg/paperclip
+MS id 5 d p=1139.81,1139.81;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1139.81;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 803 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 66
+ES t 0.205854421693 is 1
+
+E # 67 t 0.205686736506 m 177 ce 59 msg 801
+MB sm 177 tm 4 m ""
+MS id 5 d p=1395.88,50;i=msg/paperclip
+MS id 5 d p=1395.88,1395.88;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1395.88;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1358.75,50;i=msg/paperclip
+MS id 5 d p=1358.75,1358.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1358.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1404.72,50;i=msg/paperclip
+MS id 5 d p=1404.72,1404.72;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1404.72;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.61,50;i=msg/paperclip
+MS id 5 d p=1407.61,1407.61;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.61;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1410.64,50;i=msg/paperclip
+MS id 5 d p=1410.64,1410.64;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1410.64;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1376.24,50;i=msg/paperclip
+MS id 5 d p=1376.24,1376.24;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1376.24;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1409.11,50;i=msg/paperclip
+MS id 5 d p=1409.11,1409.11;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1409.11;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.59,50;i=msg/paperclip
+MS id 5 d p=1407.59,1407.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1400.54,50;i=msg/paperclip
+MS id 5 d p=1400.54,1400.54;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1400.54;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1405.91,50;i=msg/paperclip
+MS id 5 d p=1405.91,1405.91;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1405.91;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1405.22,50;i=msg/paperclip
+MS id 5 d p=1405.22,1405.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1405.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1403.83,50;i=msg/paperclip
+MS id 5 d p=1403.83,1403.83;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1403.83;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1394.37,50;i=msg/paperclip
+MS id 5 d p=1394.37,1394.37;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1394.37;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1398.62,50;i=msg/paperclip
+MS id 5 d p=1398.62,1398.62;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1398.62;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 801 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 67
+ES t 0.205854736506 is 1
+
+E # 68 t 0.205686891043 m 513 ce 59 msg 831
+MB sm 513 tm 4 m ""
+MS id 5 d p=1389.35,50;i=msg/paperclip
+MS id 5 d p=1389.35,1389.35;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.35;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.03,50;i=msg/paperclip
+MS id 5 d p=1381.03,1381.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1335.47,50;i=msg/paperclip
+MS id 5 d p=1335.47,1335.47;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1335.47;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1334.75,50;i=msg/paperclip
+MS id 5 d p=1334.75,1334.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1334.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1397.43,50;i=msg/paperclip
+MS id 5 d p=1397.43,1397.43;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1397.43;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1398.64,50;i=msg/paperclip
+MS id 5 d p=1398.64,1398.64;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1398.64;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.59,50;i=msg/paperclip
+MS id 5 d p=1407.59,1407.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1389.9,50;i=msg/paperclip
+MS id 5 d p=1389.9,1389.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1400.54,50;i=msg/paperclip
+MS id 5 d p=1400.54,1400.54;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1400.54;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1363.78,50;i=msg/paperclip
+MS id 5 d p=1363.78,1363.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1363.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1261.35,50;i=msg/paperclip
+MS id 5 d p=1261.35,1261.35;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1261.35;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1269.05,50;i=msg/paperclip
+MS id 5 d p=1269.05,1269.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1269.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1253.13,50;i=msg/paperclip
+MS id 5 d p=1253.13,1253.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1253.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1243.53,50;i=msg/paperclip
+MS id 5 d p=1243.53,1243.53;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1243.53;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1243.91,50;i=msg/paperclip
+MS id 5 d p=1243.91,1243.91;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1243.91;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 831 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 68
+ES t 0.205854891043 is 1
+
+E # 69 t 0.205687142406 m 261 ce 59 msg 807
+MB sm 261 tm 4 m ""
+MS id 5 d p=1002.92,50;i=msg/paperclip
+MS id 5 d p=1002.92,1002.92;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1002.92;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1031.85,50;i=msg/paperclip
+MS id 5 d p=1031.85,1031.85;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1031.85;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1041.04,50;i=msg/paperclip
+MS id 5 d p=1041.04,1041.04;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1041.04;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1099.84,50;i=msg/paperclip
+MS id 5 d p=1099.84,1099.84;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1099.84;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1069.98,50;i=msg/paperclip
+MS id 5 d p=1069.98,1069.98;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1069.98;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1084.1,50;i=msg/paperclip
+MS id 5 d p=1084.1,1084.1;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1084.1;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1075.01,50;i=msg/paperclip
+MS id 5 d p=1075.01,1075.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1075.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1389.9,50;i=msg/paperclip
+MS id 5 d p=1389.9,1389.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1053.4,50;i=msg/paperclip
+MS id 5 d p=1053.4,1053.4;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1053.4;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1063.01,50;i=msg/paperclip
+MS id 5 d p=1063.01,1063.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1063.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1182.33,50;i=msg/paperclip
+MS id 5 d p=1182.33,1182.33;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1182.33;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1111.86,50;i=msg/paperclip
+MS id 5 d p=1111.86,1111.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1111.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1167.45,50;i=msg/paperclip
+MS id 5 d p=1167.45,1167.45;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1167.45;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=976.08,50;i=msg/paperclip
+MS id 5 d p=976.08,976.08;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,976.08;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 807 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 69
+ES t 0.205855142406 is 1
+
+E # 70 t 0.205687167365 m 709 ce 59 msg 837
+MB sm 709 tm 4 m ""
+MS id 5 d p=1623.01,50;i=msg/paperclip
+MS id 5 d p=1623.01,1623.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1623.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1637.25,50;i=msg/paperclip
+MS id 5 d p=1637.25,1637.25;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1637.25;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1444.97,50;i=msg/paperclip
+MS id 5 d p=1444.97,1444.97;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1444.97;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1458.05,50;i=msg/paperclip
+MS id 5 d p=1458.05,1458.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1458.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1471.78,50;i=msg/paperclip
+MS id 5 d p=1471.78,1471.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1471.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2019.7,50;i=msg/paperclip
+MS id 5 d p=2019.7,2019.7;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2019.7;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1989.27,50;i=msg/paperclip
+MS id 5 d p=1989.27,1989.27;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1989.27;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2014.7,50;i=msg/paperclip
+MS id 5 d p=2014.7,2014.7;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2014.7;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1952.29,50;i=msg/paperclip
+MS id 5 d p=1952.29,1952.29;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1952.29;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1550.52,50;i=msg/paperclip
+MS id 5 d p=1550.52,1550.52;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1550.52;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1750.88,50;i=msg/paperclip
+MS id 5 d p=1750.88,1750.88;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1750.88;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1738.48,50;i=msg/paperclip
+MS id 5 d p=1738.48,1738.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1738.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1779.06,50;i=msg/paperclip
+MS id 5 d p=1779.06,1779.06;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1779.06;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1706.22,50;i=msg/paperclip
+MS id 5 d p=1706.22,1706.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1706.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 837 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 70
+ES t 0.205855167365 is 1
+
+E # 71 t 0.205687318417 m 135 ce 59 msg 797
+MB sm 135 tm 4 m ""
+MS id 5 d p=1480.29,50;i=msg/paperclip
+MS id 5 d p=1480.29,1480.29;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1480.29;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1432.5,50;i=msg/paperclip
+MS id 5 d p=1432.5,1432.5;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1432.5;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1447.19,50;i=msg/paperclip
+MS id 5 d p=1447.19,1447.19;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1447.19;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1436.17,50;i=msg/paperclip
+MS id 5 d p=1436.17,1436.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1436.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1452.55,50;i=msg/paperclip
+MS id 5 d p=1452.55,1452.55;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1452.55;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1444.79,50;i=msg/paperclip
+MS id 5 d p=1444.79,1444.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1444.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1464.9,50;i=msg/paperclip
+MS id 5 d p=1464.9,1464.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1464.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1413.63,50;i=msg/paperclip
+MS id 5 d p=1413.63,1413.63;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1413.63;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1423.79,50;i=msg/paperclip
+MS id 5 d p=1423.79,1423.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1423.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1409.11,50;i=msg/paperclip
+MS id 5 d p=1409.11,1409.11;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1409.11;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1417.79,50;i=msg/paperclip
+MS id 5 d p=1417.79,1417.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1417.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.59,50;i=msg/paperclip
+MS id 5 d p=1407.59,1407.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1413.12,50;i=msg/paperclip
+MS id 5 d p=1413.12,1413.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1413.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1495.53,50;i=msg/paperclip
+MS id 5 d p=1495.53,1495.53;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1495.53;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 797 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 71
+ES t 0.205855318417 is 1
+
+E # 72 t 0.205687443705 m 401 ce 59 msg 819
+MB sm 401 tm 4 m ""
+MS id 5 d p=919.45,50;i=msg/paperclip
+MS id 5 d p=919.45,919.45;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,919.45;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=896.66,50;i=msg/paperclip
+MS id 5 d p=896.66,896.66;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,896.66;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=993.75,50;i=msg/paperclip
+MS id 5 d p=993.75,993.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,993.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=979.53,50;i=msg/paperclip
+MS id 5 d p=979.53,979.53;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,979.53;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=947.57,50;i=msg/paperclip
+MS id 5 d p=947.57,947.57;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,947.57;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1020.31,50;i=msg/paperclip
+MS id 5 d p=1020.31,1020.31;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1020.31;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=998.82,50;i=msg/paperclip
+MS id 5 d p=998.82,998.82;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,998.82;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=996.2,50;i=msg/paperclip
+MS id 5 d p=996.2,996.2;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,996.2;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1389.9,50;i=msg/paperclip
+MS id 5 d p=1389.9,1389.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1389.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.36,50;i=msg/paperclip
+MS id 5 d p=1381.36,1381.36;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.36;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1027.08,50;i=msg/paperclip
+MS id 5 d p=1027.08,1027.08;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1027.08;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1036.91,50;i=msg/paperclip
+MS id 5 d p=1036.91,1036.91;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1036.91;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1081.44,50;i=msg/paperclip
+MS id 5 d p=1081.44,1081.44;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1081.44;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1074.82,50;i=msg/paperclip
+MS id 5 d p=1074.82,1074.82;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1074.82;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1087.13,50;i=msg/paperclip
+MS id 5 d p=1087.13,1087.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1087.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 819 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 72
+ES t 0.205855443705 is 1
+
+E # 73 t 0.205687920342 m 443 ce 59 msg 825
+MB sm 443 tm 4 m ""
+MS id 5 d p=1549.02,50;i=msg/paperclip
+MS id 5 d p=1549.02,1549.02;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1549.02;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1541.12,50;i=msg/paperclip
+MS id 5 d p=1541.12,1541.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1541.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1550.23,50;i=msg/paperclip
+MS id 5 d p=1550.23,1550.23;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1550.23;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1677.03,50;i=msg/paperclip
+MS id 5 d p=1677.03,1677.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1677.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1604.9,50;i=msg/paperclip
+MS id 5 d p=1604.9,1604.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1604.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1590.13,50;i=msg/paperclip
+MS id 5 d p=1590.13,1590.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1590.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1577.24,50;i=msg/paperclip
+MS id 5 d p=1577.24,1577.24;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1577.24;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1594.8,50;i=msg/paperclip
+MS id 5 d p=1594.8,1594.8;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1594.8;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1637.83,50;i=msg/paperclip
+MS id 5 d p=1637.83,1637.83;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1637.83;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1738.75,50;i=msg/paperclip
+MS id 5 d p=1738.75,1738.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1738.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1607.51,50;i=msg/paperclip
+MS id 5 d p=1607.51,1607.51;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1607.51;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1649.86,50;i=msg/paperclip
+MS id 5 d p=1649.86,1649.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1649.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1746.62,50;i=msg/paperclip
+MS id 5 d p=1746.62,1746.62;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1746.62;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1748.14,50;i=msg/paperclip
+MS id 5 d p=1748.14,1748.14;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1748.14;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 825 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 73
+ES t 0.205855920342 is 1
+
+E # 74 t 0.2056880171 m 23 ce 59 msg 793
+MB sm 23 tm 4 m ""
+MS id 5 d p=1581.9,50;i=msg/paperclip
+MS id 5 d p=1581.9,1581.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1581.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1623.01,50;i=msg/paperclip
+MS id 5 d p=1623.01,1623.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1623.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1637.25,50;i=msg/paperclip
+MS id 5 d p=1637.25,1637.25;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1637.25;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1444.97,50;i=msg/paperclip
+MS id 5 d p=1444.97,1444.97;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1444.97;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1458.05,50;i=msg/paperclip
+MS id 5 d p=1458.05,1458.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1458.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1471.78,50;i=msg/paperclip
+MS id 5 d p=1471.78,1471.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1471.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2019.7,50;i=msg/paperclip
+MS id 5 d p=2019.7,2019.7;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2019.7;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2047.2,50;i=msg/paperclip
+MS id 5 d p=2047.2,2047.2;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2047.2;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2031.53,50;i=msg/paperclip
+MS id 5 d p=2031.53,2031.53;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2031.53;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1994.62,50;i=msg/paperclip
+MS id 5 d p=1994.62,1994.62;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1994.62;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2037.79,50;i=msg/paperclip
+MS id 5 d p=2037.79,2037.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2037.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1952.29,50;i=msg/paperclip
+MS id 5 d p=1952.29,1952.29;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1952.29;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1748.17,50;i=msg/paperclip
+MS id 5 d p=1748.17,1748.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1748.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1789.9,50;i=msg/paperclip
+MS id 5 d p=1789.9,1789.9;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1789.9;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 793 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 74
+ES t 0.2058560171 is 1
+
+E # 75 t 0.205688043391 m 723 ce 59 msg 792
+MB sm 723 tm 4 m ""
+MS id 5 d p=1604.13,50;i=msg/paperclip
+MS id 5 d p=1604.13,1604.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1604.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1559.72,50;i=msg/paperclip
+MS id 5 d p=1559.72,1559.72;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1559.72;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1597.43,50;i=msg/paperclip
+MS id 5 d p=1597.43,1597.43;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1597.43;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1600.17,50;i=msg/paperclip
+MS id 5 d p=1600.17,1600.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1600.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1608.18,50;i=msg/paperclip
+MS id 5 d p=1608.18,1608.18;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1608.18;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1572.12,50;i=msg/paperclip
+MS id 5 d p=1572.12,1572.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1572.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1564.42,50;i=msg/paperclip
+MS id 5 d p=1564.42,1564.42;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1564.42;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1575.96,50;i=msg/paperclip
+MS id 5 d p=1575.96,1575.96;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1575.96;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1593.77,50;i=msg/paperclip
+MS id 5 d p=1593.77,1593.77;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1593.77;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1580.13,50;i=msg/paperclip
+MS id 5 d p=1580.13,1580.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1580.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1588.06,50;i=msg/paperclip
+MS id 5 d p=1588.06,1588.06;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1588.06;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1583.78,50;i=msg/paperclip
+MS id 5 d p=1583.78,1583.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1583.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1612.39,50;i=msg/paperclip
+MS id 5 d p=1612.39,1612.39;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1612.39;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1413.63,50;i=msg/paperclip
+MS id 5 d p=1413.63,1413.63;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1413.63;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1423.48,50;i=msg/paperclip
+MS id 5 d p=1423.48,1423.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1423.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 792 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 75
+ES t 0.205856043391 is 1
+
+E # 76 t 0.205688052968 m 499 ce 59 msg 829
+MB sm 499 tm 4 m ""
+MS id 5 d p=1604.13,50;i=msg/paperclip
+MS id 5 d p=1604.13,1604.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1604.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1559.72,50;i=msg/paperclip
+MS id 5 d p=1559.72,1559.72;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1559.72;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1597.43,50;i=msg/paperclip
+MS id 5 d p=1597.43,1597.43;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1597.43;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1600.17,50;i=msg/paperclip
+MS id 5 d p=1600.17,1600.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1600.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1608.18,50;i=msg/paperclip
+MS id 5 d p=1608.18,1608.18;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1608.18;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1572.12,50;i=msg/paperclip
+MS id 5 d p=1572.12,1572.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1572.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1564.42,50;i=msg/paperclip
+MS id 5 d p=1564.42,1564.42;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1564.42;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1575.96,50;i=msg/paperclip
+MS id 5 d p=1575.96,1575.96;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1575.96;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1593.77,50;i=msg/paperclip
+MS id 5 d p=1593.77,1593.77;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1593.77;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1580.13,50;i=msg/paperclip
+MS id 5 d p=1580.13,1580.13;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1580.13;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1588.06,50;i=msg/paperclip
+MS id 5 d p=1588.06,1588.06;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1588.06;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1583.78,50;i=msg/paperclip
+MS id 5 d p=1583.78,1583.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1583.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1612.39,50;i=msg/paperclip
+MS id 5 d p=1612.39,1612.39;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1612.39;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1413.63,50;i=msg/paperclip
+MS id 5 d p=1413.63,1413.63;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1413.63;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1423.48,50;i=msg/paperclip
+MS id 5 d p=1423.48,1423.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1423.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 829 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 76
+ES t 0.205856052968 is 1
+
+E # 77 t 0.205688085628 m 317 ce 59 msg 811
+MB sm 317 tm 4 m ""
+MS id 5 d p=1971.44,50;i=msg/paperclip
+MS id 5 d p=1971.44,1971.44;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1971.44;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1950.34,50;i=msg/paperclip
+MS id 5 d p=1950.34,1950.34;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1950.34;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1959.67,50;i=msg/paperclip
+MS id 5 d p=1959.67,1959.67;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1959.67;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2040.14,50;i=msg/paperclip
+MS id 5 d p=2040.14,2040.14;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2040.14;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1894.19,50;i=msg/paperclip
+MS id 5 d p=1894.19,1894.19;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1894.19;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1567.98,50;i=msg/paperclip
+MS id 5 d p=1567.98,1567.98;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1567.98;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1889.64,50;i=msg/paperclip
+MS id 5 d p=1889.64,1889.64;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1889.64;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1502.31,50;i=msg/paperclip
+MS id 5 d p=1502.31,1502.31;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1502.31;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1488.93,50;i=msg/paperclip
+MS id 5 d p=1488.93,1488.93;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1488.93;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1529.01,50;i=msg/paperclip
+MS id 5 d p=1529.01,1529.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1529.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1484.61,50;i=msg/paperclip
+MS id 5 d p=1484.61,1484.61;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1484.61;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1715.32,50;i=msg/paperclip
+MS id 5 d p=1715.32,1715.32;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1715.32;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1708.54,50;i=msg/paperclip
+MS id 5 d p=1708.54,1708.54;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1708.54;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1721.43,50;i=msg/paperclip
+MS id 5 d p=1721.43,1721.43;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1721.43;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1474.46,50;i=msg/paperclip
+MS id 5 d p=1474.46,1474.46;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1474.46;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=2084.46,50;i=msg/paperclip
+MS id 5 d p=2084.46,2084.46;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,2084.46;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 811 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 77
+ES t 0.205856085628 is 1
+
+E # 78 t 0.205688178006 m 233 ce 59 msg 805
+MB sm 233 tm 4 m ""
+MS id 5 d p=936.49,50;i=msg/paperclip
+MS id 5 d p=936.49,936.49;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,936.49;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1012.99,50;i=msg/paperclip
+MS id 5 d p=1012.99,1012.99;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1012.99;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=942.48,50;i=msg/paperclip
+MS id 5 d p=942.48,942.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,942.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=906.05,50;i=msg/paperclip
+MS id 5 d p=906.05,906.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,906.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=928.85,50;i=msg/paperclip
+MS id 5 d p=928.85,928.85;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,928.85;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=913.03,50;i=msg/paperclip
+MS id 5 d p=913.03,913.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,913.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=999.3,50;i=msg/paperclip
+MS id 5 d p=999.3,999.3;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,999.3;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=983.3,50;i=msg/paperclip
+MS id 5 d p=983.3,983.3;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,983.3;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.36,50;i=msg/paperclip
+MS id 5 d p=1381.36,1381.36;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.36;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1043.96,50;i=msg/paperclip
+MS id 5 d p=1043.96,1043.96;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1043.96;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1027.32,50;i=msg/paperclip
+MS id 5 d p=1027.32,1027.32;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1027.32;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1057.2,50;i=msg/paperclip
+MS id 5 d p=1057.2,1057.2;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1057.2;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=439.1,50;i=msg/paperclip
+MS id 5 d p=439.1,439.1;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,439.1;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 805 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 78
+ES t 0.205856178006 is 1
+
+E # 79 t 0.205688202237 m 331 ce 59 msg 813
+MB sm 331 tm 4 m ""
+MS id 5 d p=1012.99,50;i=msg/paperclip
+MS id 5 d p=1012.99,1012.99;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1012.99;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1014.75,50;i=msg/paperclip
+MS id 5 d p=1014.75,1014.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1014.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.36,50;i=msg/paperclip
+MS id 5 d p=1381.36,1381.36;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.36;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1052.68,50;i=msg/paperclip
+MS id 5 d p=1052.68,1052.68;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1052.68;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1069.22,50;i=msg/paperclip
+MS id 5 d p=1069.22,1069.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1069.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=492.01,50;i=msg/paperclip
+MS id 5 d p=492.01,492.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,492.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=485.45,50;i=msg/paperclip
+MS id 5 d p=485.45,485.45;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,485.45;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=524.98,50;i=msg/paperclip
+MS id 5 d p=524.98,524.98;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,524.98;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=506.96,50;i=msg/paperclip
+MS id 5 d p=506.96,506.96;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,506.96;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=514.47,50;i=msg/paperclip
+MS id 5 d p=514.47,514.47;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,514.47;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 813 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 79
+ES t 0.205856202237 is 1
+
+E # 80 t 0.205688314595 m 37 ce 59 msg 795
+MB sm 37 tm 4 m ""
+MS id 5 d p=980.5,50;i=msg/paperclip
+MS id 5 d p=980.5,980.5;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,980.5;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1080.19,50;i=msg/paperclip
+MS id 5 d p=1080.19,1080.19;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1080.19;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1095.86,50;i=msg/paperclip
+MS id 5 d p=1095.86,1095.86;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1095.86;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.36,50;i=msg/paperclip
+MS id 5 d p=1381.36,1381.36;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.36;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1069.03,50;i=msg/paperclip
+MS id 5 d p=1069.03,1069.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1069.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=464.44,50;i=msg/paperclip
+MS id 5 d p=464.44,464.44;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,464.44;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=503.3,50;i=msg/paperclip
+MS id 5 d p=503.3,503.3;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,503.3;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=491.59,50;i=msg/paperclip
+MS id 5 d p=491.59,491.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,491.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=565.82,50;i=msg/paperclip
+MS id 5 d p=565.82,565.82;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,565.82;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 795 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 80
+ES t 0.205856314595 is 1
+
+E # 81 t 0.205688419926 m 429 ce 59 msg 823
+MB sm 429 tm 4 m ""
+MS id 5 d p=1509.87,50;i=msg/paperclip
+MS id 5 d p=1509.87,1509.87;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1509.87;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1523.85,50;i=msg/paperclip
+MS id 5 d p=1523.85,1523.85;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1523.85;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1503.05,50;i=msg/paperclip
+MS id 5 d p=1503.05,1503.05;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1503.05;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1432.5,50;i=msg/paperclip
+MS id 5 d p=1432.5,1432.5;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1432.5;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1488.6,50;i=msg/paperclip
+MS id 5 d p=1488.6,1488.6;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1488.6;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1495.08,50;i=msg/paperclip
+MS id 5 d p=1495.08,1495.08;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1495.08;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1413.63,50;i=msg/paperclip
+MS id 5 d p=1413.63,1413.63;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1413.63;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1423.79,50;i=msg/paperclip
+MS id 5 d p=1423.79,1423.79;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1423.79;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1409.11,50;i=msg/paperclip
+MS id 5 d p=1409.11,1409.11;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1409.11;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1407.59,50;i=msg/paperclip
+MS id 5 d p=1407.59,1407.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1407.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1423.48,50;i=msg/paperclip
+MS id 5 d p=1423.48,1423.48;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1423.48;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1434.37,50;i=msg/paperclip
+MS id 5 d p=1434.37,1434.37;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1434.37;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1444.22,50;i=msg/paperclip
+MS id 5 d p=1444.22,1444.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1444.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1729.07,50;i=msg/paperclip
+MS id 5 d p=1729.07,1729.07;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1729.07;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 823 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 81
+ES t 0.205856419926 is 1
+
+E # 82 t 0.205688856149 m 149 ce 59 msg 799
+MB sm 149 tm 4 m ""
+MS id 5 d p=1543.77,50;i=msg/paperclip
+MS id 5 d p=1543.77,1543.77;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1543.77;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1541.12,50;i=msg/paperclip
+MS id 5 d p=1541.12,1541.12;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1541.12;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1550.23,50;i=msg/paperclip
+MS id 5 d p=1550.23,1550.23;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1550.23;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1595.44,50;i=msg/paperclip
+MS id 5 d p=1595.44,1595.44;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1595.44;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1588.17,50;i=msg/paperclip
+MS id 5 d p=1588.17,1588.17;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1588.17;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1579.59,50;i=msg/paperclip
+MS id 5 d p=1579.59,1579.59;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1579.59;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1570.34,50;i=msg/paperclip
+MS id 5 d p=1570.34,1570.34;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1570.34;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1592.93,50;i=msg/paperclip
+MS id 5 d p=1592.93,1592.93;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1592.93;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1575.01,50;i=msg/paperclip
+MS id 5 d p=1575.01,1575.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1575.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1742.53,50;i=msg/paperclip
+MS id 5 d p=1742.53,1742.53;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1742.53;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1601.38,50;i=msg/paperclip
+MS id 5 d p=1601.38,1601.38;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1601.38;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1745.88,50;i=msg/paperclip
+MS id 5 d p=1745.88,1745.88;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1745.88;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1483.47,50;i=msg/paperclip
+MS id 5 d p=1483.47,1483.47;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1483.47;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1504.87,50;i=msg/paperclip
+MS id 5 d p=1504.87,1504.87;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1504.87;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 799 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 82
+ES t 0.205856856149 is 1
+
+E # 83 t 0.205688931785 m 597 ce 59 msg 835
+MB sm 597 tm 4 m ""
+MS id 5 d p=1012.99,50;i=msg/paperclip
+MS id 5 d p=1012.99,1012.99;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1012.99;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1014.75,50;i=msg/paperclip
+MS id 5 d p=1014.75,1014.75;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1014.75;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1381.36,50;i=msg/paperclip
+MS id 5 d p=1381.36,1381.36;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1381.36;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1052.68,50;i=msg/paperclip
+MS id 5 d p=1052.68,1052.68;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1052.68;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=1069.22,50;i=msg/paperclip
+MS id 5 d p=1069.22,1069.22;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,1069.22;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=356.21,50;i=msg/paperclip
+MS id 5 d p=356.21,356.21;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,356.21;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=434.42,50;i=msg/paperclip
+MS id 5 d p=434.42,434.42;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,434.42;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=492.01,50;i=msg/paperclip
+MS id 5 d p=492.01,492.01;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,492.01;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=485.45,50;i=msg/paperclip
+MS id 5 d p=485.45,485.45;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,485.45;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=472.03,50;i=msg/paperclip
+MS id 5 d p=472.03,472.03;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,472.03;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=381.78,50;i=msg/paperclip
+MS id 5 d p=381.78,381.78;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,381.78;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+MS id 5 d p=397.39,50;i=msg/paperclip
+MS id 5 d p=397.39,397.39;i=msg/paperclip
+BU id 5 txt hit
+MS id 5 d p=260,397.39;i=msg/paperclip
+MS id 5 d p=260,50;i=msg/paperclip
+ME
+BS id 835 tid 792 eid 782 etid 782 c AirFrame11p n "" k 22003 p 10 l 750 pe 83
+ES t 0.205856931785 is 1
+
+E # 84 t 0.205852 m 65 ce 59 msg 51
+CM id 840 tid 840 eid 840 etid 840 c omnetpp::cMessage n "Transmission over" k 22000 pe -1
+BS id 840 tid 840 eid 840 etid 840 c omnetpp::cMessage n "Transmission over" k 22000 pe 84
+SH sm 65 sg 7
+ES t 0.205852
+CL id 840 tid 840 eid 840 etid 840 c omnetpp::cMessage n "Transmission over" k 22000 pe 84 cid 841
+CM id 842 tid 842 eid 842 etid 842 c omnetpp::cMessage n ChannelStatus pe -1
+BS id 842 tid 842 eid 842 etid 842 c omnetpp::cMessage n ChannelStatus pe 84
+SH sm 65 sg 7
+ES t 0.205852
+CL id 842 tid 842 eid 842 etid 842 c omnetpp::cMessage n ChannelStatus pe 84 cid 843
+
+E # 85 t 0.205852 m 66 ce 84 msg 840
+MB sm 66 tm 65 m ""
+CM id 844 tid 844 eid 844 etid 844 c omnetpp::cMessage n "Radio switching over" k 22001 pe -1
+BS id 844 tid 844 eid 844 etid 844 c omnetpp::cMessage n "Radio switching over" k 22001 pe 85
+SH sm 65 sg 7
+ES t 0.205852
+CL id 844 tid 844 eid 844 etid 844 c omnetpp::cMessage n "Radio switching over" k 22001 pe 85 cid 845
+ME
+DM id 784 tid 784 eid 784 etid 784 c omnetpp::cMessage n "" pe 57
+DM id 840 tid 840 eid 840 etid 840 c omnetpp::cMessage n "Transmission over" k 22000 pe 85
+
+E # 86 t 0.205852 m 66 ce 84 msg 842
+DM id 842 tid 842 eid 842 etid 842 c omnetpp::cMessage n ChannelStatus pe 86
+
+E # 87 t 0.205852 m 66 ce 85 msg 844
+DM id 844 tid 844 eid 844 etid 844 c omnetpp::cMessage n "Radio switching over" k 22001 pe 87
+
+E # 88 t 0.205853009713 m 457 ce 60 msg 827
+DM id 827 tid 792 eid 827 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 88
+
+E # 89 t 0.205853021877 m 415 ce 61 msg 821
+DM id 821 tid 792 eid 821 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 89
+
+E # 90 t 0.20585331616 m 569 ce 62 msg 833
+DM id 833 tid 792 eid 833 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 90
+
+E # 91 t 0.205853617755 m 359 ce 63 msg 815
+DM id 815 tid 792 eid 815 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 91
+
+E # 92 t 0.205854009344 m 303 ce 64 msg 809
+DM id 809 tid 792 eid 809 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 92
+
+E # 93 t 0.205854354328 m 387 ce 65 msg 817
+DM id 817 tid 792 eid 817 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 93
+
+E # 94 t 0.205854421693 m 191 ce 66 msg 803
+DM id 803 tid 792 eid 803 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 94
+
+E # 95 t 0.205854736506 m 177 ce 67 msg 801
+DM id 801 tid 792 eid 801 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 95
+
+E # 96 t 0.205854891043 m 513 ce 68 msg 831
+DM id 831 tid 792 eid 831 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 96
+
+E # 97 t 0.205855142406 m 261 ce 69 msg 807
+DM id 807 tid 792 eid 807 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 97
+
+E # 98 t 0.205855167365 m 709 ce 70 msg 837
+DM id 837 tid 792 eid 837 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 98
+
+E # 99 t 0.205855318417 m 135 ce 71 msg 797
+DM id 797 tid 792 eid 797 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 99
+
+E # 100 t 0.205855443705 m 401 ce 72 msg 819
+DM id 819 tid 792 eid 819 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 100
+
+E # 101 t 0.205855920342 m 443 ce 73 msg 825
+DM id 825 tid 792 eid 825 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 101
+
+E # 102 t 0.2058560171 m 23 ce 74 msg 793
+DM id 793 tid 792 eid 793 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 102
+
+E # 103 t 0.205856043391 m 723 ce 75 msg 792
+DM id 792 tid 792 eid 792 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 103
+
+E # 104 t 0.205856052968 m 499 ce 76 msg 829
+DM id 829 tid 792 eid 829 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 104
+
+E # 105 t 0.205856085628 m 317 ce 77 msg 811
+DM id 811 tid 792 eid 811 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 105
+
+E # 106 t 0.205856178006 m 233 ce 78 msg 805
+DM id 805 tid 792 eid 805 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 106
+
+E # 107 t 0.205856202237 m 331 ce 79 msg 813
+DM id 813 tid 792 eid 813 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 107
+
+E # 108 t 0.205856314595 m 37 ce 80 msg 795
+DM id 795 tid 792 eid 795 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 108
+
+E # 109 t 0.205856419926 m 429 ce 81 msg 823
+DM id 823 tid 792 eid 823 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 109
+
+E # 110 t 0.205856856149 m 149 ce 82 msg 799
+DM id 799 tid 792 eid 799 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 110
+
+E # 111 t 0.205856931785 m 597 ce 83 msg 835
+DM id 835 tid 792 eid 835 etid 792 c omnetpp::cMessage n "" k 22003 p 10 pe 111
+
+E # 112 t 0.213521817327 m 242 ce 2 msg 244
+MB sm 242 tm 245 m request
+MB sm 245 tm 244 m request
+CM id 846 tid 846 eid 846 etid 846 c omnetpp::cMessage n "GeoNet packet" pe -1
+BS id 846 tid 846 eid 846 etid 846 c artery::GeoNetPacket n "GeoNet packet" l 704 pe 112
+SH sm 244 sg 1
+SH sm 241 sg 1
+ES t 0.213521817327
+CM id 847 tid 847 eid 847 etid 847 c omnetpp::cMessage n "" pe -1
+ME
+MB sm 245 tm 246 m cancel
+ME
+MB sm 245 tm 246 m schedule
+CE id 243 tid 243 eid 243 etid 243 c omnetpp::cMessage n "runtime update" pe 2
+BS id 243 tid 243 eid 243 etid 243 c omnetpp::cMessage n "runtime update" pe 112
+ES t 3.839777
+ME
+ME
+BS id 244 tid 244 eid 244 etid 244 c omnetpp::cMessage n "middleware update" pe 112
+ES t 0.313521817327
+
+E # 113 t 0.213521817327 m 240 ce 112 msg 846
+CM id 848 tid 848 eid 848 etid 848 c omnetpp::cMessage n "" pe -1
+BS id 848 tid 848 eid 846 etid 846 c WaveShortMessage n "" l 704 pe 113
+SH sm 240 sg 5
+SH sm 237 sg 3
+SH sm 238 sg 0
+ES t 0.213521817327
+CL id 848 tid 848 eid 846 etid 846 c WaveShortMessage n "" l 704 pe 113 cid 849
+
+E # 114 t 0.213521817327 m 248 ce 113 msg 848
+BS id 256 tid 256 eid 256 etid 256 c omnetpp::cMessage n "next Mac Event" pe 2
+ES t 0.213522
+
+E # 115 t 0.213522 m 248 ce 114 msg 256
+CM id 850 tid 850 eid 850 etid 850 c omnetpp::cMessage n "" pe -1
+CL id 848 tid 848 eid 846 etid 846 c WaveShortMessage n "" l 704 pe 114 cid 851
+MB sm 248 tm 247 m ""
+CM id 852 tid 852 eid 852 etid 852 c omnetpp::cMessage n "Radio switching over" k 22001 pe -1
+BS id 852 tid 852 eid 852 etid 852 c omnetpp::cMessage n "Radio switching over" k 22001 pe 115
+SH sm 247 sg 7
+ES t 0.213522
+CL id 852 tid 852 eid 852 etid 852 c omnetpp::cMessage n "Radio switching over" k 22001 pe 115 cid 853
+ME
+CL id 850 tid 850 eid 846 etid 846 c Mac80211Pkt n "" l 704 pe 115 cid 854
+BS id 850 tid 850 eid 846 etid 846 c Mac80211Pkt n "" l 704 pe 115
+SH sm 248 sg 11
+ES t 0.213523
+CL id 850 tid 850 eid 846 etid 846 c Mac80211Pkt n "" l 704 pe 115 cid 855
+
+E # 116 t 0.213522 m 248 ce 115 msg 852
+DM id 852 tid 852 eid 852 etid 852 c omnetpp::cMessage n "Radio switching over" k 22001 pe 116
+
+E # 117 t 0.213523 m 247 ce 115 msg 850
+CM id 856 tid 856 eid 856 etid 856 c omnetpp::cMessage n "" k 22003 pe -1
+BS id 246 tid 246 eid 246 etid 246 c omnetpp::cMessage n "transmission over" k 22000 pe 2
+ES t 0.213691
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 857
+BS id 857 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 12 dg 0 pd 0.000004627844
+SH sm 12 sg 0
+SH sm 14 sg 8
+ES t 0.213527627844 is 1
+CL id 857 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 858
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 859
+BS id 859 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 40 dg 0 pd 0.000004510283
+SH sm 40 sg 0
+SH sm 42 sg 8
+ES t 0.213527510283 is 1
+CL id 859 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 860
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 861
+BS id 861 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 68 dg 0 pd 0.000001666763
+SH sm 68 sg 0
+SH sm 70 sg 8
+ES t 0.213524666763 is 1
+CL id 861 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 862
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 863
+BS id 863 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 82 dg 0 pd 0.000002823363
+SH sm 82 sg 0
+SH sm 84 sg 8
+ES t 0.213525823363 is 1
+CL id 863 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 864
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 865
+BS id 865 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 110 dg 0 pd 0.000001833968
+SH sm 110 sg 0
+SH sm 112 sg 8
+ES t 0.213524833968 is 1
+CL id 865 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 866
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 867
+BS id 867 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 124 dg 0 pd 0.000004141661
+SH sm 124 sg 0
+SH sm 126 sg 8
+ES t 0.213527141661 is 1
+CL id 867 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 868
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 869
+BS id 869 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 138 dg 0 pd 0.000002193129
+SH sm 138 sg 0
+SH sm 140 sg 8
+ES t 0.213525193129 is 1
+CL id 869 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 870
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 871
+BS id 871 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 152 dg 0 pd 0.000001255112
+SH sm 152 sg 0
+SH sm 154 sg 8
+ES t 0.213524255112 is 1
+CL id 871 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 872
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 873
+BS id 873 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 166 dg 0 pd 0.000004987526
+SH sm 166 sg 0
+SH sm 168 sg 8
+ES t 0.213527987526 is 1
+CL id 873 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 874
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 875
+BS id 875 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 194 dg 0 pd 0.000002732895
+SH sm 194 sg 0
+SH sm 196 sg 8
+ES t 0.213525732895 is 1
+CL id 875 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 876
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 877
+BS id 877 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 264 dg 0 pd 0.000003440118
+SH sm 264 sg 0
+SH sm 266 sg 8
+ES t 0.213526440118 is 1
+CL id 877 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 878
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 879
+BS id 879 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 278 dg 0 pd 0.000001723732
+SH sm 278 sg 0
+SH sm 280 sg 8
+ES t 0.213524723732 is 1
+CL id 879 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 880
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 881
+BS id 881 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 306 dg 0 pd 0.000003056091
+SH sm 306 sg 0
+SH sm 308 sg 8
+ES t 0.213526056091 is 1
+CL id 881 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 882
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 883
+BS id 883 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 334 dg 0 pd 0.000001638571
+SH sm 334 sg 0
+SH sm 336 sg 8
+ES t 0.213524638571 is 1
+CL id 883 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 884
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 885
+BS id 885 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 362 dg 0 pd 0.000000784157
+SH sm 362 sg 0
+SH sm 364 sg 8
+ES t 0.213523784157 is 1
+CL id 885 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 886
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 887
+BS id 887 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 418 dg 0 pd 0.000003210096
+SH sm 418 sg 0
+SH sm 420 sg 8
+ES t 0.213526210096 is 1
+CL id 887 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 888
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 889
+BS id 889 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 432 dg 0 pd 0.000002967632
+SH sm 432 sg 0
+SH sm 434 sg 8
+ES t 0.213525967632 is 1
+CL id 889 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 890
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 891
+BS id 891 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 460 dg 0 pd 0.000000517024
+SH sm 460 sg 0
+SH sm 462 sg 8
+ES t 0.213523517024 is 1
+CL id 891 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 892
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 893
+BS id 893 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 474 dg 0 pd 0.000004600639
+SH sm 474 sg 0
+SH sm 476 sg 8
+ES t 0.213527600639 is 1
+CL id 893 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 894
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 895
+BS id 895 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 488 dg 0 pd 0.000003056291
+SH sm 488 sg 0
+SH sm 490 sg 8
+ES t 0.213526056291 is 1
+CL id 895 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 896
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 897
+BS id 897 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 516 dg 0 pd 0.000004502223
+SH sm 516 sg 0
+SH sm 518 sg 8
+ES t 0.213527502223 is 1
+CL id 897 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 898
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 899
+BS id 899 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 530 dg 0 pd 0.000001018131
+SH sm 530 sg 0
+SH sm 532 sg 8
+ES t 0.213524018131 is 1
+CL id 899 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 900
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 901
+BS id 901 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 544 dg 0 pd 0.000004726018
+SH sm 544 sg 0
+SH sm 546 sg 8
+ES t 0.213527726018 is 1
+CL id 901 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 902
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 903
+BS id 903 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 572 dg 0 pd 0.000001753346
+SH sm 572 sg 0
+SH sm 574 sg 8
+ES t 0.213524753346 is 1
+CL id 903 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 904
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 905
+BS id 905 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 628 dg 0 pd 0.000002249389
+SH sm 628 sg 0
+SH sm 630 sg 8
+ES t 0.213525249389 is 1
+CL id 905 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 906
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 907
+BS id 907 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 642 dg 0 pd 0.000001723715
+SH sm 642 sg 0
+SH sm 644 sg 8
+ES t 0.213524723715 is 1
+CL id 907 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 908
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 909
+BS id 909 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 684 dg 0 pd 0.000003347246
+SH sm 684 sg 0
+SH sm 686 sg 8
+ES t 0.213526347246 is 1
+CL id 909 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 910
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 911
+BS id 911 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 698 dg 0 pd 0.000004845329
+SH sm 698 sg 0
+SH sm 700 sg 8
+ES t 0.213527845329 is 1
+CL id 911 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 912
+BS id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117
+SD sm 247 dm 712 dg 0 pd 0.000003067217
+SH sm 712 sg 0
+SH sm 714 sg 8
+ES t 0.213526067217 is 1
+CL id 856 tid 856 eid 846 etid 846 c AirFrame11p n "" k 22003 p 10 l 750 pe 117 cid 913

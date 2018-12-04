@@ -17,8 +17,8 @@ simtime_t BaseDecider::processSignal(AirFrame* frame) {
 
 	assert(frame);
 	deciderEV << "Processing AirFrame..." << endl;
-	std::cout << "processSignal signal state is " << getSignalState(frame) << endl;
-	std::cout << "signal state info " << NEW << "\t" << EXPECT_HEADER << "\t" << EXPECT_END << endl;
+	// std::cout << "processSignal signal state is " << getSignalState(frame) << endl;
+	// std::cout << "signal state info " << NEW << "\t" << EXPECT_HEADER << "\t" << EXPECT_END << endl;
 	switch(getSignalState(frame)) {
 	case NEW:
 		return processNewSignal(frame);
