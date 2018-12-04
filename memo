@@ -1,0 +1,55 @@
+** Event #131  t=1.159284461639  World.node[0].middleware (VehicleMiddleware, id=21)  on selfmsg middleware update (omnetpp::cMessage, id=21)
+
+INFO (VehicleMiddleware)World.node[0].middleware: handling message
+INFO (VehicleMiddleware)World.node[0].middleware: middleware updating...
+INFO (VehicleMiddleware)World.node[0].middleware: aaaaaaaaaaadfapwoeifjasdofjapweoifjaosjfdfpaowefij
+INFO (VehicleMiddleware)World.node[0].middleware: sending cam......
+** Event #132  t=1.159284461639  World.node[0].radioDriver[0] (RadioDriver, id=19)  on GeoNet packet (artery::GeoNetPacket, id=149)
+
+** Event #133  t=1.159284461639  World.node[0].wlan[0].mgmt (Ieee80211MgmtAdhoc, id=23)  on GeoNet packet (artery::GeoNetPacket, id=149)
+
+INFO (Ieee80211MgmtAdhoc)World.node[0].wlan[0].mgmt: Packet arrived from upper layers: (artery::GeoNetPacket)GeoNet packet
+** Event #134  t=1.159284461639  World.node[0].wlan[0].mac (Ieee80211Mac, id=24)  on GeoNet packet (inet::ieee80211::Ieee80211DataFrameWithSNAP, id=152)
+
+INFO (Ieee80211Mac)World.node[0].wlan[0].mac: Frame (inet::ieee80211::Ieee80211DataFrameWithSNAP)GeoNet packet received from higher layer, receiver = FF-FF-FF-FF-FF-FF
+INFO (Hcf)World.node[0].wlan[0].mac.hcf: World.node[0].wlan[0].mac.hcf: Processing upper frame: GeoNet packet
+INFO (Hcf)World.node[0].wlan[0].mac.hcf: World.node[0].wlan[0].mac.hcf: The upper frame has been classified as a Best effort frame.
+INFO (Hcf)World.node[0].wlan[0].mac.hcf: World.node[0].wlan[0].mac.hcf: Frame GeoNet packet has been inserted into the PendingQueue.
+DETAIL (Hcf)World.node[0].wlan[0].mac.hcf: World.node[0].wlan[0].mac.hcf: Requesting channel for access category Best effort
+DETAIL (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: Starting contention: cw = 15, slots = 2
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: backoffslots = 2 slotTime = 0.000013
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: lastBusyTime = 1.059492461639 lastIdle = 1.059284461639
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: waitInterval = 0
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: The expected channel access of the Best effort queue is: 1.159284461639
+** Event #135  t=1.159284461639  World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention (Contention, id=71)  on selfmsg startTx (omnetpp::cMessage, id=9)
+
+** Event #136  t=1.159284461639  World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention (Contention, id=71)  on selfmsg channelGranted (omnetpp::cMessage, id=10)
+
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: Channel granted: contention started at 1.159284461639
+DETAIL (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: Channel access granted to the Best effort queue
+INFO (Contention)World.node[0].wlan[0].mac.hcf.edca.edcaf[1].contention: Transmitting, frame = (inet::ieee80211::Ieee80211DataFrameWithSNAP)GeoNet packet
+** Event #137  t=1.159284461639  World.node[0].wlan[0].mac.tx (Tx, id=32)  on selfmsg endIFS (omnetpp::cMessage, id=17)
+
+DETAIL (Tx)World.node[0].wlan[0].mac.tx: Tx: endIfsTimer expired
+** Event #138  t=1.159284461639  World.node[0].wlan[0].radio (Ieee80211ScalarRadio, id=25)  on configureRadioMode (omnetpp::cMessage, id=156)
+
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Radio mode changed from RECEIVER to TRANSMITTER
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio reception state from IDLE to UNDEFINED.
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmission state from UNDEFINED to IDLE.
+** Event #139  t=1.159284461639  World.node[0].wlan[0].radio (Ieee80211ScalarRadio, id=25)  on GeoNet packet (inet::ieee80211::Ieee80211DataFrameWithSNAP, id=155)
+
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Transmission started: (inet::physicallayer::RadioFrame)GeoNet packet WHOLE as Ieee80211ScalarTransmission, mode = { Ieee80211OFDMMode, preambleMode = { Ieee80211OFDMPreambleMode }, signalMode = { Ieee80211OFDMSignalMode }, dataMode = { Ieee80211OFDMDataMode, netBitrate = 6e+06 bps } }, channel = { Ieee80211Channel, channelNumber = 180 }, power = 0.2 W, bitrate = 6e+06 bps, headerBitLength = 24, payloadBitLength = 984, carrierFrequency = 5.9e+09 Hz, bandwidth = 1e+07 Hz, modulation = { BPSKModulation }, id = 9, transmitterId = 0, startTime = 1.159284461639, endTime = 1.159492461639, startPosition = (2389.64, 1553.54, 1.5), preambleDuration = 0.000032, headerPosition = 0.000008, dataPosition = 0.000168, endPosition = (2389.64, 1553.54, 1.5), startOrientation = (2.78968, 0, 0), endOrientation = (2.78968, 0, 0)
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmission state from IDLE to TRANSMITTING.
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmitted signal part from NONE to WHOLE.
+** Event #140  t=1.159492461639  World.node[0].wlan[0].radio (Ieee80211ScalarRadio, id=25)  on selfmsg transmissionTimer (omnetpp::cMessage, id=19)
+
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Transmission ended: (inet::physicallayer::RadioFrame)GeoNet packet WHOLE as Ieee80211ScalarTransmission, mode = { Ieee80211OFDMMode, preambleMode = { Ieee80211OFDMPreambleMode }, signalMode = { Ieee80211OFDMSignalMode }, dataMode = { Ieee80211OFDMDataMode, netBitrate = 6e+06 bps } }, channel = { Ieee80211Channel, channelNumber = 180 }, power = 0.2 W, bitrate = 6e+06 bps, headerBitLength = 24, payloadBitLength = 984, carrierFrequency = 5.9e+09 Hz, bandwidth = 1e+07 Hz, modulation = { BPSKModulation }, id = 9, transmitterId = 0, startTime = 1.159284461639, endTime = 1.159492461639, startPosition = (2389.64, 1553.54, 1.5), preambleDuration = 0.000032, headerPosition = 0.000008, dataPosition = 0.000168, endPosition = (2389.64, 1553.54, 1.5), startOrientation = (2.78968, 0, 0), endOrientation = (2.78968, 0, 0)
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmission state from TRANSMITTING to IDLE.
+DETAIL (Tx)World.node[0].wlan[0].mac.tx: World.node[0].wlan[0].mac.tx: Tx: radioTransmissionFinished()
+INFO (Tx)World.node[0].wlan[0].mac.tx: World.node[0].wlan[0].mac.tx: Frame sequence finished
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmitted signal part from WHOLE to NONE.
+** Event #141  t=1.159492461639  World.node[0].wlan[0].radio (Ieee80211ScalarRadio, id=25)  on configureRadioMode (omnetpp::cMessage, id=161)
+
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Radio mode changed from TRANSMITTER to RECEIVER
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio reception state from UNDEFINED to IDLE.
+INFO (Ieee80211ScalarRadio)World.node[0].wlan[0].radio: Changing radio transmission state from IDLE to UNDEFINED.
