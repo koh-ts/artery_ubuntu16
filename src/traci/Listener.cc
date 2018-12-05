@@ -42,8 +42,8 @@ void Listener::unsubscribeTraCI()
 void Listener::receiveSignal(cComponent*, simsignal_t signal, const SimTime&, cObject*)
 {
 
-  std::cout << "listener receiveSignal: signal is " << signal << endl;
-  std::cout << "listener receiveSignal: signal info  " << stepSignal <<"\t"<< initSignal <<"\t"<< closeSignal << endl;
+  // std::cout << "listener receiveSignal: signal is " << signal << endl;
+  // std::cout << "listener receiveSignal: signal info  " << stepSignal <<"\t"<< initSignal <<"\t"<< closeSignal << endl;
     if (signal == stepSignal) {
         traciStep();
     } else if (signal == initSignal) {

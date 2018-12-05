@@ -42,7 +42,6 @@ SimpleObstacleShadowing::SimpleObstacleShadowing(ObstacleControl& obstacleContro
 void SimpleObstacleShadowing::filterSignal(AirFrame *frame, const Coord& sendersPos, const Coord& receiverPos) {
 	Signal& s = frame->getSignal();
 	double factor = obstacleControl.calculateAttenuation(sendersPos, receiverPos);
-	std::cout << "factor is " << factor << endl;
 
 	debugEV << "value is: " << factor << endl;
 

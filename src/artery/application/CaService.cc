@@ -85,7 +85,7 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 	const vanetza::asn1::Cam* cam = boost::apply_visitor(visitor, *packet);
 	if (cam && cam->validate()) {
 		CaObject obj = visitor.shared_wrapper;
-		std::cout << "scSignalCamReceived" << endl;
+		// std::cout << "scSignalCamReceived" << endl;
 		emit(scSignalCamReceived, &obj);
 
 		const vanetza::asn1::Cam& msg = obj.asn1();
@@ -144,7 +144,7 @@ bool CaService::checkSpeedDelta() const
 void CaService::sendCam(const SimTime& T_now)
 {
 	EV_INFO << "sending cam......" << endl;
-	std::cout << "sending cam ........" << endl;
+	// std::cout << "sending cam ........" << endl;
 	uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
 	auto cam = createCooperativeAwarenessMessage(*mVehicleDataProvider, genDeltaTimeMod);
 

@@ -228,7 +228,7 @@ double ObstacleControl::calculateAttenuation(const Coord& senderPos, const Coord
 				factor *= o->calculateAttenuation(senderPos, receiverPos);
 
 				// draw a "hit!" bubble
-				if (annotations && (factor != factorOld)) annotations->drawBubble(o->getBboxP1(), "hit");
+				// if (annotations && (factor != factorOld)) annotations->drawBubble(o->getBboxP1(), "hit");
 
 				// bail if attenuation is already extremely high
 				if (factor < 1e-30) break;

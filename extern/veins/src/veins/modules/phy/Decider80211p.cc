@@ -51,7 +51,7 @@ simtime_t Decider80211p::processNewSignal(AirFrame* msg) {
 	double recvPower = signal.getReceivingPower()->getValue(start);
 
 	if (recvPower < sensitivity) {
-		std::cout << "signal is too weak" << endl;
+		// std::cout << "signal is too weak" << endl;
 		//annotate the frame, so that we won't try decoding it at its end
 		frame->setUnderSensitivity(true);
 		//check channel busy status. a superposition of low power frames might turn channel status to busy
@@ -61,7 +61,7 @@ simtime_t Decider80211p::processNewSignal(AirFrame* msg) {
 		return signal.getReceptionEnd();
 	}
 	else {
-		std::cout << "signal is strong enough" << endl;
+		// std::cout << "signal is strong enough" << endl;
 		setChannelIdleStatus(false);
 
 		if (phy11p->getRadioState() == Radio::TX) {
