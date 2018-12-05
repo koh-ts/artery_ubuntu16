@@ -4,7 +4,7 @@ from xml.dom import minidom
 import random
 
 
-route_num = 50
+route_num = 1
 
 try:
 

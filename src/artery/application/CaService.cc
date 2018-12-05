@@ -70,7 +70,7 @@ void CaService::initialize()
 	mDccRestriction = par("withDccRestriction");
 	mFixedRate = par("fixedRate");
 
-	const std::string output = "../../output.txt";
+	const std::string output = "../../output/output_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
   ofs.open(output, std::ios::out);
 }
 
@@ -95,7 +95,7 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		const omnetpp::SimTime expiry = mTimer->getTimeFor(tai) + lifetime;
 
 		// fprintf(fp, "%d\t%s", (int)(msg->header.stationID), std::to_string(expiry));
-		ofs << msg->header.stationID << "\t" << expiry << std::endl;
+		ofs << "station id is: " << msg->header.stationID << "\t" << "expiry is: " << expiry << std::endl;
 
 		mLocalDynamicMap->updateAwareness(obj);
 	}
