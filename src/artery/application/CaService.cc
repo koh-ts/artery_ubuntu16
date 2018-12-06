@@ -87,15 +87,25 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		CaObject obj = visitor.shared_wrapper;
 		// std::cout << "scSignalCamReceived" << endl;
 		emit(scSignalCamReceived, &obj);
-
 		const vanetza::asn1::Cam& msg = obj.asn1();
 
 		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
 		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
-		const omnetpp::SimTime expiry = mTimer->getTimeFor(tai) + lifetime;
-
+		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
+		// std::cout << tai << endl;
 		// fprintf(fp, "%d\t%s", (int)(msg->header.stationID), std::to_string(expiry));
-		ofs << "station id is: " << msg->header.stationID << "\t" << "expiry is: " << expiry << std::endl;
+		// std::cout << "generationDeltaTime is: " << msg->cam.generationDeltaTime;
+		ofs << "time: " << omnetpp::simTime() << "\tsrc station id: " << msg->header.stationID << "\t" <<
+		// ofs << "recv pos is: " << mVehicleDataProvider->longitude() << endl;
+		"src cam time: " << timeStamp << "\t" <<
+		"src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "," <<
+		msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t" <<
+		"dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << "," <<
+		round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << "\t" << endl;
+		std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
+		std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
+		// ofs << "\t src pos is: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "," << msg->cam.camParameters.basicContainer.referencePosition.latitude << endl;
+		// ofs << "distance is: " << Position::distance(mVehicleDataProvider->position(),
 
 		mLocalDynamicMap->updateAwareness(obj);
 	}
@@ -145,6 +155,7 @@ void CaService::sendCam(const SimTime& T_now)
 {
 	EV_INFO << "sending cam......" << endl;
 	// std::cout << "sending cam ........" << endl;
+	ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
 	uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
 	auto cam = createCooperativeAwarenessMessage(*mVehicleDataProvider, genDeltaTimeMod);
 
