@@ -205,29 +205,67 @@ network IPv4LargeNet
         }
     submodules:
         routerBB[n]: Router;
-        slanBB[n*bbs]: IPv4SmallLAN;
-        mlanBB[n*bbm]: IPv4MediumLAN;
-        llanBB[n*bbl]: IPv4LargeLAN;
+        slanBB[n*bbs]: IPv4SmallLAN {
+            @display("p=625,50");
+        }
+        mlanBB[n*bbm]: IPv4MediumLAN {
+            @display("p=531,22");
+        }
+        llanBB[n*bbl]: IPv4LargeLAN {
+            @display("p=464,21");
+        }
         routerA: Router;
-        serverA: StandardHost;
-        slanA[as]: IPv4SmallLAN;
-        mlanA[am]: IPv4MediumLAN;
-        llanA[al]: IPv4LargeLAN;
+        serverA: StandardHost {
+            @display("p=218,187");
+        }
+        slanA[as]: IPv4SmallLAN {
+            @display("p=170,320");
+        }
+        mlanA[am]: IPv4MediumLAN {
+            @display("p=189,265");
+        }
+        llanA[al]: IPv4LargeLAN {
+            @display("p=240,354");
+        }
         routerB: Router;
-        serverB: StandardHost;
-        slanB[bs]: IPv4SmallLAN;
-        mlanB[bm]: IPv4MediumLAN;
-        llanB[bl]: IPv4LargeLAN;
+        serverB: StandardHost {
+            @display("p=385,50");
+        }
+        slanB[bs]: IPv4SmallLAN {
+            @display("p=230,117");
+        }
+        mlanB[bm]: IPv4MediumLAN {
+            @display("p=260,85");
+        }
+        llanB[bl]: IPv4LargeLAN {
+            @display("p=319,49");
+        }
         routerC: Router;
-        serverC: StandardHost;
-        slanC[cs]: IPv4SmallLAN;
-        mlanC[cm]: IPv4MediumLAN;
-        llanC[cl]: IPv4LargeLAN;
+        serverC: StandardHost {
+            @display("p=404,369");
+        }
+        slanC[cs]: IPv4SmallLAN {
+            @display("p=337,355");
+        }
+        mlanC[cm]: IPv4MediumLAN {
+            @display("p=472,369");
+        }
+        llanC[cl]: IPv4LargeLAN {
+            @display("p=556,368");
+        }
         routerD: Router;
-        serverD: StandardHost;
-        slanD[ds]: IPv4SmallLAN;
-        mlanD[dm]: IPv4MediumLAN;
-        llanD[dl]: IPv4LargeLAN;
+        serverD: StandardHost {
+            @display("p=673,212");
+        }
+        slanD[ds]: IPv4SmallLAN {
+            @display("p=655,155");
+        }
+        mlanD[dm]: IPv4MediumLAN {
+            @display("p=606,320");
+        }
+        llanD[dl]: IPv4LargeLAN {
+            @display("p=654,279");
+        }
         configurator: IPv4NetworkConfigurator {
             @display("p=121,37");
         }

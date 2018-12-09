@@ -7,19 +7,30 @@ import artery.veins.RSU;
 import org.car2x.veins.base.modules.BaseWorldUtility;
 import org.car2x.veins.modules.world.annotations.AnnotationManager;
 import traci.Manager;
+import artery.application.ProxyCamDev;
+import inet.node.inet.Router;
+import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
+import ned.DatarateChannel;
+
 
 network World
 {
     parameters:
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
-        int numRoadSideUnits = default(0);
-
+		int numProxyCamDevs = default(0);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
         @display("bgb=$playgroundSizeX,$playgroundSizeY");
 
+    types:
+            channel ethline extends DatarateChannel
+            {
+                delay = 500ns;
+                datarate = 10Mbps;
+            }
+ 
     submodules:
         connectionManager: ConnectionManager {
             @display("p=40,100");
@@ -55,6 +66,14 @@ network World
                 @display("p=100,20");
         }
 
-        rsu[numRoadSideUnits]: RSU {
+		pcam[numProxyCamDevs]: ProxyCamDev {
+		}
+		
+		configurator: IPv4NetworkConfigurator {
+            @display("p=112,278");
         }
+        
+    connections:
+        pcam[0].ethg <--> ethline <--> pcam[1].ethg;
+		
 }
