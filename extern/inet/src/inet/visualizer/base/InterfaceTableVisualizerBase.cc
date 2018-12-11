@@ -233,17 +233,26 @@ void InterfaceTableVisualizerBase::receiveSignal(cComponent *source, simsignal_t
 {
     Enter_Method_Silent();
     if (signal == NF_INTERFACE_CREATED) {
-        auto networkNode = getContainingNode(static_cast<cModule *>(source));
+        auto networkNode = getContainingNode(static_cast<cModule *>(source));        
+        if (networkNode->getParentModule() != getSystemModule()) {
+          return;
+        }
         if (nodeFilter.matches(networkNode)) {
             auto interfaceEntry = static_cast<InterfaceEntry *>(object);
             if (interfaceFilter.matches(interfaceEntry)) {
                 auto interfaceVisualization = createInterfaceVisualization(networkNode, interfaceEntry);
+                std::cout << "networknode is " << networkNode->getName() << endl;
+                std::cout << "networknode is " << networkNode->getFullPath() << endl;
+                std::cout << "ahsdfoaefoajfawpoejawopjfoawejfwpoeafj" << endl;
                 addInterfaceVisualization(interfaceVisualization);
             }
         }
     }
     else if (signal == NF_INTERFACE_DELETED) {
         auto networkNode = getContainingNode(static_cast<cModule *>(source));
+        if (networkNode->getParentModule() != getSystemModule()) {
+          return;
+        }
         if (nodeFilter.matches(networkNode)) {
             auto interfaceEntry = static_cast<InterfaceEntry *>(object);
             if (interfaceFilter.matches(interfaceEntry)) {
@@ -254,6 +263,9 @@ void InterfaceTableVisualizerBase::receiveSignal(cComponent *source, simsignal_t
     }
     else if (signal == NF_INTERFACE_CONFIG_CHANGED || signal == NF_INTERFACE_IPv4CONFIG_CHANGED) {
         auto networkNode = getContainingNode(static_cast<cModule *>(source));
+        if (networkNode->getParentModule() != getSystemModule()) {
+          return;
+        }
         if (object != nullptr && nodeFilter.matches(networkNode)) {
             auto interfaceEntryDetails = static_cast<InterfaceEntryChangeDetails *>(object);
             auto interfaceEntry = interfaceEntryDetails->getInterfaceEntry();
@@ -282,4 +294,3 @@ void InterfaceTableVisualizerBase::receiveSignal(cComponent *source, simsignal_t
 } // namespace visualizer
 
 } // namespace inet
-

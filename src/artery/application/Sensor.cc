@@ -13,18 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "SensorService.h"
+#include "Sensor.h"
 
 namespace artery {
 
-Define_Module(SensorService);
+Define_Module(Sensor);
 
-void SensorService::initialize()
+void Sensor::initialize()
 {
     // TODO - Generated method body
 }
 
-void SensorService::handleMessage(cMessage *msg)
+void Sensor::handleMessage(cMessage *msg)
 {
     // TODO - Generated method body
 }

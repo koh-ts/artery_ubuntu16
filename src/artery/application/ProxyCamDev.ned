@@ -15,17 +15,19 @@
 
 package artery.application;
 
-import artery.veins.RSU;
 import inet.node.inet.Router;
+import artery.application.Disseminator;
+import artery.application.Sensor;
 import ned.DatarateChannel;
-import org.car2x.veins.base.modules.IMobility;
+//import org.car2x.veins.base.modules.IMobility;
+import inet.visualizer.integrated.IntegratedVisualizer;
+import inet.mobility.contract.IMobility;
 
-
-module ProxyCamDev
+network ProxyCamDev
 {
     parameters:
-        string mobilityType = default("artery.veins.Mobility");
-
+        string mobilityType = default("inet.mobility.static.StationaryMobility");
+		@networkNode;
     gates:
         inout ethg;
 
@@ -36,20 +38,25 @@ module ProxyCamDev
             datarate = 10Mbps;
         }
     submodules:
-        rsu: RSU {
-            @display("p=374,73");
-        }
-
         router: Router {
             @display("p=91,73");
         }
 
-        mobility: <mobilityType> like IMobility {
-            parameters:
-                @display("p=225,151");
+        disseminator: Disseminator {
+            @display("p=374,73");
         }
 
+        sensor: Sensor {
+            @display("p=374,170");
+        }
+        mobility: <mobilityType> like IMobility {
+            parameters:
+                @display("p=167,196");
+        }
+
+
     connections:
-        rsu.ethg++ <--> ethline <--> router.ethg++;
+        disseminator.ethg++ <--> ethline <--> router.ethg++;
+        sensor.ethg++ <--> ethline <--> router.ethg++;
         router.ethg++ <--> ethg;
 }

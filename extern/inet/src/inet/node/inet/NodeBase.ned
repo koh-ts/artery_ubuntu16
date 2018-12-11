@@ -44,7 +44,7 @@ import inet.power.contract.IEnergyStorage;
 module NodeBase like INetworkNode
 {
     parameters:
-        @display("bgb=,448");
+        @display("bgb=939,477");
         @networkNode;
         @labels(node,ethernet-node,wireless-node);
         bool hasStatus = default(false);
@@ -96,7 +96,7 @@ module NodeBase like INetworkNode
         // network layer
         networkLayer: <networkLayerType> like INetworkLayer {
             parameters:
-                @display("p=329,287;q=queue");
+                @display("p=461,292;q=queue");
         }
         // routing table
         routingTable: <routingTableType> like IRoutingTable if routingTableType != "" {
@@ -116,23 +116,23 @@ module NodeBase like INetworkNode
         }
         wlan[numRadios]: <default("Ieee80211Nic")> like IWirelessNic {
             parameters:
-                @display("p=216,406,row,60;q=queue");
+                @display("p=350,406,row,60;q=queue");
         }
         eth[sizeof(ethg)]: <default("EthernetInterface")> like IWiredNic {
             parameters:
-                @display("p=368,406,row,60;q=txQueue");
+                @display("p=656,406,row,60;q=txQueue");
         }
         ppp[sizeof(pppg)]: <default("PPPInterface")> like IWiredNic {
             parameters:
-                @display("p=558,406,row,60;q=txQueue");
+                @display("p=807,406,row,60;q=txQueue");
         }
         ext[numExtInterfaces]: <default("ExtInterface")> like IExternalNic {
             parameters:
-                @display("p=149,406,row,10;q=txQueue;i=block/ifcard");
+                @display("p=198,406,row,10;q=txQueue;i=block/ifcard");
         }
         tun[numTunInterfaces]: <default("TunInterface")> like ITunNic {
             parameters:
-                @display("p=213,406,row,10;q=txQueue;i=block/ifcard");
+                @display("p=500,406,row,10;q=txQueue;i=block/ifcard");
         }
 
     connections allowunconnected:

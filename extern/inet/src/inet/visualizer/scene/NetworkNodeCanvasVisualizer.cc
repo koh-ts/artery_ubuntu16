@@ -32,6 +32,7 @@ void NetworkNodeCanvasVisualizer::initialize(int stage)
         zIndex = par("zIndex");
         auto canvas = visualizerTargetModule->getCanvas();
         canvasProjection = CanvasProjection::getCanvasProjection(canvas);
+        // init(getSystemModule(), visualizerTargetModule);
         for (cModule::SubmoduleIterator it(getSystemModule()); !it.end(); it++) {
             auto networkNode = *it;
             if (isNetworkNode(networkNode) && nodeFilter.matches(networkNode)) {
@@ -42,6 +43,22 @@ void NetworkNodeCanvasVisualizer::initialize(int stage)
             }
         }
     }
+}
+
+void NetworkNodeCanvasVisualizer::init(cModule *mod, cModule *visualizerTargetModule) {
+  std::cout << "hello" << endl;
+  std::cout << mod->getFullPath() << endl;
+
+  for (cModule::SubmoduleIterator it(mod); !it.end(); it++) {
+      auto networkNode = *it;
+      if (isNetworkNode(networkNode) && nodeFilter.matches(networkNode)) {
+          auto visualization = createNetworkNodeVisualization(networkNode);
+          visualization->setZIndex(zIndex);
+          setNetworkNodeVisualization(networkNode, visualization);
+          visualizerTargetModule->getCanvas()->addFigure(visualization);
+      }
+      init(networkNode, visualizerTargetModule);
+  }
 }
 
 void NetworkNodeCanvasVisualizer::refreshDisplay() const
@@ -68,10 +85,10 @@ NetworkNodeCanvasVisualization *NetworkNodeCanvasVisualizer::getNetworkNodeVisua
 
 void NetworkNodeCanvasVisualizer::setNetworkNodeVisualization(const cModule *networkNode, NetworkNodeCanvasVisualization *networkNodeVisualization)
 {
+  std::cout << networkNode->getFullPath() << endl;
     networkNodeVisualizations[networkNode] = networkNodeVisualization;
 }
 
 } // namespace visualizer
 
 } // namespace inet
-

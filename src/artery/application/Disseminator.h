@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __ARTERY_DISSEMINATIONSERVICE_H_
-#define __ARTERY_DISSEMINATIONSERVICE_H_
+#ifndef __ARTERY_DISSEMINATOR_H_
+#define __ARTERY_DISSEMINATOR_H_
 
 #include <omnetpp.h>
 #include "inet/common/INETDefs.h"
@@ -29,7 +29,7 @@ namespace artery {
 /**
  * TODO - Generated class
  */
-class DisseminationService : public ApplicationBase
+class Disseminator : public ApplicationBase
 {
   protected:
     UDPSocket socket;

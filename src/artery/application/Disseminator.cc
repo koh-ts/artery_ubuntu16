@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "DisseminationService.h"
+#include "Disseminator.h"
 
 namespace artery {
 
-Define_Module(DisseminationService);
+Define_Module(Disseminator);
 
-void DisseminationService::initialize(int stage)
+void Disseminator::initialize(int stage)
 {
     ApplicationBase::initialize(stage);
 
@@ -30,7 +30,7 @@ void DisseminationService::initialize(int stage)
     }
 }
 
-void DisseminationService::handleMessageWhenUp(cMessage *msg)
+void Disseminator::handleMessageWhenUp(cMessage *msg)
 {
     if (msg->getKind() == UDP_I_ERROR) {
         // ICMP error report -- discard it
@@ -56,19 +56,19 @@ void DisseminationService::handleMessageWhenUp(cMessage *msg)
     }
 }
 
-void DisseminationService::refreshDisplay() const
+void Disseminator::refreshDisplay() const
 {
     char buf[40];
     sprintf(buf, "echoed: %d pks", numEchoed);
     getDisplayString().setTagArg("t", 0, buf);
 }
 
-void DisseminationService::finish()
+void Disseminator::finish()
 {
     ApplicationBase::finish();
 }
 
-bool DisseminationService::handleNodeStart(IDoneCallback *doneCallback)
+bool Disseminator::handleNodeStart(IDoneCallback *doneCallback)
 {
     socket.setOutputGate(gate("udpOut"));
     int localPort = par("localPort");
@@ -78,13 +78,13 @@ bool DisseminationService::handleNodeStart(IDoneCallback *doneCallback)
     return true;
 }
 
-bool DisseminationService::handleNodeShutdown(IDoneCallback *doneCallback)
+bool Disseminator::handleNodeShutdown(IDoneCallback *doneCallback)
 {
     //TODO if(socket.isOpened()) socket.close();
     return true;
 }
 
-void DisseminationService::handleNodeCrash()
+void Disseminator::handleNodeCrash()
 {
 }
 

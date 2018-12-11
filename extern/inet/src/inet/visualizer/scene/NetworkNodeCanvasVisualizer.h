@@ -42,6 +42,8 @@ class INET_API NetworkNodeCanvasVisualizer : public NetworkNodeVisualizerBase
 
   public:
     virtual NetworkNodeCanvasVisualization *getNetworkNodeVisualization(const cModule *networkNode) const;
+  private:
+    void init(cModule *mod, cModule *visualizerTargetModule);
 };
 
 } // namespace visualizer
@@ -49,4 +51,3 @@ class INET_API NetworkNodeCanvasVisualizer : public NetworkNodeVisualizerBase
 } // namespace inet
 
 #endif // ifndef __INET_NETWORKNODECANVASVISUALIZER_H
-

@@ -13,21 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package artery.application;
+#ifndef __ARTERY_SENSOR_H_
+#define __ARTERY_SENSOR_H_
 
-//
-// TODO auto-generated module
-//
-simple DisseminationService
+#include <omnetpp.h>
+
+using namespace omnetpp;
+
+namespace artery {
+
+/**
+ * TODO - Generated class
+ */
+class Sensor : public cSimpleModule
 {
-    parameters:
-	    @signal[rcvdPk](type=cPacket);
-		@signal[CamSent](type=CaObject);
-        string interfaceTableModule;   // The path to the InterfaceTable module
-        int localPort;  // local port to listen on
-        @display("i=block/app");
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
 
-    gates:
-        input udpIn @labels(UDPControlInfo/up);
-		
-}
+} //namespace
+
+#endif

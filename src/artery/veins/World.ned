@@ -11,6 +11,7 @@ import artery.application.ProxyCamDev;
 import inet.node.inet.Router;
 import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
 import ned.DatarateChannel;
+import inet.visualizer.integrated.IntegratedVisualizer;
 
 
 network World
@@ -18,22 +19,23 @@ network World
     parameters:
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
-		int numProxyCamDevs = default(0);
+        int numProxyCamDevs = default(2);
+    	int num = default(2);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
-        @display("bgb=$playgroundSizeX,$playgroundSizeY");
+        @display("bgb=506,483");
 
     types:
-            channel ethline extends DatarateChannel
-            {
-                delay = 500ns;
-                datarate = 10Mbps;
-            }
- 
+        channel ethline extends DatarateChannel
+        {
+            delay = 500ns;
+            datarate = 10Mbps;
+        }
+
     submodules:
         connectionManager: ConnectionManager {
-            @display("p=40,100");
+            @display("p=69,131");
         }
 
         world: BaseWorldUtility {
@@ -41,13 +43,13 @@ network World
                 playgroundSizeX = playgroundSizeX;
                 playgroundSizeY = playgroundSizeY;
                 playgroundSizeZ = playgroundSizeZ;
-                @display("p=40,150");
+                @display("p=40,199");
         }
 
         obstacles: ObstacleControl if withObstacles {
             parameters:
                 traciCoreModule = "^.traci.core";
-                @display("p=40,200");
+                @display("p=40,254");
         }
         annotations: AnnotationManager {
             @display("p=260,50");
@@ -66,14 +68,23 @@ network World
                 @display("p=100,20");
         }
 
-		pcam[numProxyCamDevs]: ProxyCamDev {
-		}
-		
-		configurator: IPv4NetworkConfigurator {
+        router[num]: Router {
+            @display("p=200,147");
+        }
+
+        pcam[numProxyCamDevs]: ProxyCamDev {
+            @display("p=330,218");
+        }
+
+        configurator: IPv4NetworkConfigurator {
             @display("p=112,278");
         }
-        
+        visualizer: IntegratedVisualizer {
+            @display("p=282,31");
+        }
+
     connections:
-        pcam[0].ethg <--> ethline <--> pcam[1].ethg;
-		
+        pcam[0].ethg <--> ethline <--> router[0].ethg++;
+        pcam[1].ethg <--> ethline <--> router[0].ethg++;
+
 }

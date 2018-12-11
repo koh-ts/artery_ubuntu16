@@ -49,6 +49,7 @@ void InterfaceTableCanvasVisualizer::initialize(int stage)
 
 InterfaceTableVisualizerBase::InterfaceVisualization *InterfaceTableCanvasVisualizer::createInterfaceVisualization(cModule *networkNode, InterfaceEntry *interfaceEntry)
 {
+    std::cout << "hello interface visualization" << endl;
     BoxedLabelFigure *figure = nullptr;
     auto gate = displayWiredInterfacesAtConnections ? getOutputGate(networkNode, interfaceEntry) : nullptr;
     if (gate == nullptr) {
@@ -68,19 +69,25 @@ InterfaceTableVisualizerBase::InterfaceVisualization *InterfaceTableCanvasVisual
         }
     }
     auto networkNodeVisualization = networkNodeVisualizer->getNetworkNodeVisualization(networkNode);
+
+    std::cout << "end interface visualization" << endl;
     return new InterfaceCanvasVisualization(networkNodeVisualization, figure, networkNode->getId(), interfaceEntry->getInterfaceId());
 }
 
 cModule *InterfaceTableCanvasVisualizer::getNetworkNode(const InterfaceVisualization *interfaceVisualization)
 {
+    std::cout << "hello get networknode" << endl;
     L3AddressResolver addressResolver;
     return getSimulation()->getModule(interfaceVisualization->networkNodeId);
 }
 
 InterfaceEntry *InterfaceTableCanvasVisualizer::getInterfaceEntry(const InterfaceVisualization *interfaceVisualization)
 {
+    std::cout << "hello getinterfaceentry" << endl;
     L3AddressResolver addressResolver;
+    std::cout << "hello getNetworkNode from getinterfaceentry" << endl;
     auto networkNode = getNetworkNode(interfaceVisualization);
+    std::cout << "end getinterfaceentry" << endl;
     if (networkNode == nullptr)
         return nullptr;
     auto interfaceTable = addressResolver.findInterfaceTableOf(networkNode);
@@ -91,41 +98,62 @@ InterfaceEntry *InterfaceTableCanvasVisualizer::getInterfaceEntry(const Interfac
 
 cGate *InterfaceTableCanvasVisualizer::getOutputGate(cModule *networkNode, InterfaceEntry *interfaceEntry)
 {
+    std::cout << "hello and end getoutputgate a" << endl;
     if (interfaceEntry->getNodeOutputGateId() == -1)
+        std::cout << "returning null a" << endl;
         return nullptr;
     cGate *outputGate = networkNode->gate(interfaceEntry->getNodeOutputGateId());
-    if (outputGate == nullptr || outputGate->getChannel() == nullptr)
+    if (outputGate == nullptr || outputGate->getChannel() == nullptr) {
+        std::cout << "returning null b" << endl;
         return nullptr;
-    else
+    }else
         return outputGate;
 }
 
 cGate *InterfaceTableCanvasVisualizer::getOutputGate(const InterfaceVisualization *interfaceVisualization)
 {
+    std::cout << "hello getoutputgate b" << endl;
+    std::cout << "hello getNetworkNode from getoutputgate b" << endl;
     auto networkNode = getNetworkNode(interfaceVisualization);
+    std::cout << "hello getinterfaceentry from getoutputgate b" << endl;
     auto interfaceEntry = getInterfaceEntry(interfaceVisualization);
-    if (interfaceEntry == nullptr)
+    if (interfaceEntry == nullptr) {
+    std::cout << "end getoutputgate" << endl;
         return nullptr;
-    else
+    }else {
+      std::cout << "hello getoutputgate from getoutputgate b" << endl;
+      std::cout << "end getoutputgate b after getOutputgate a" << endl;
         return getOutputGate(networkNode, interfaceEntry);
+      }
 }
 
 void InterfaceTableCanvasVisualizer::addInterfaceVisualization(const InterfaceVisualization *interfaceVisualization)
 {
+    std::cout << "hello addinterfacevisualization" << endl;
     InterfaceTableVisualizerBase::addInterfaceVisualization(interfaceVisualization);
     auto interfaceCanvasVisualization = static_cast<const InterfaceCanvasVisualization *>(interfaceVisualization);
+    std::cout << "hello getoutputgate from addInterfaceVisualization" << endl;
     auto gate = displayWiredInterfacesAtConnections ? getOutputGate(interfaceVisualization) : nullptr;
+    std::cout << "gate is null? " << (gate!= nullptr) << endl;
     if (gate != nullptr) {
         cDisplayString& displayString = gate->getDisplayString();
+        std::cout << "hello getVisualizationText from addInterfaceVisualization" << endl;
         displayString.setTagArg("t", 0, getVisualizationText(getInterfaceEntry(interfaceVisualization)).c_str());
         displayString.setTagArg("t", 1, "l");
     }
-    else
+    else {
+      std::cout << "interfaceCanvasVisualization is null? " << (interfaceCanvasVisualization == nullptr) << endl;
+      std::cout << "networkNodeVisualization is null? " << (interfaceCanvasVisualization->networkNodeVisualization == nullptr) << endl;
+
         interfaceCanvasVisualization->networkNodeVisualization->addAnnotation(interfaceCanvasVisualization->figure, interfaceCanvasVisualization->figure->getBounds().getSize(), placementHint, placementPriority);
+      }
+    std::cout << "END addinterfacevisualization" << endl;
+
 }
 
 void InterfaceTableCanvasVisualizer::removeInterfaceVisualization(const InterfaceVisualization *interfaceVisualization)
 {
+    std::cout << "hello removeinterfacevisualization" << endl;
     InterfaceTableVisualizerBase::removeInterfaceVisualization(interfaceVisualization);
     auto interfaceCanvasVisualization = static_cast<const InterfaceCanvasVisualization *>(interfaceVisualization);
     auto gate = displayWiredInterfacesAtConnections ? getOutputGate(interfaceVisualization) : nullptr;
@@ -137,6 +165,7 @@ void InterfaceTableCanvasVisualizer::removeInterfaceVisualization(const Interfac
 
 void InterfaceTableCanvasVisualizer::refreshInterfaceVisualization(const InterfaceVisualization *interfaceVisualization, const InterfaceEntry *interfaceEntry)
 {
+    std::cout << "hello refreshinterfacevisualization" << endl;
     auto interfaceCanvasVisualization = static_cast<const InterfaceCanvasVisualization *>(interfaceVisualization);
     auto gate = displayWiredInterfacesAtConnections ? getOutputGate(interfaceVisualization) : nullptr;
     if (gate != nullptr)
@@ -151,4 +180,3 @@ void InterfaceTableCanvasVisualizer::refreshInterfaceVisualization(const Interfa
 } // namespace visualizer
 
 } // namespace inet
-
