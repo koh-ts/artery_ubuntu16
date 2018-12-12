@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- generated on 2018-12-12 20:12:43.932278 by $Id$
+  options: -n grid.net.xml <doubleminus>flow=30 <doubleminus>route-file=grid_un_fixed.rou.xml
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <flow id="0" begin="0" end="3600" period="30" from="2/0to1/0" to="0/0to1/0"/>
+    <flow id="1" begin="0" end="3600" period="30" from="0/0to1/0" to="2/0to2/1"/>
+    <flow id="2" begin="0" end="3600" period="30" from="1/0to0/0" to="0/1to0/2"/>
+    <flow id="3" begin="0" end="3600" period="30" from="0/1to0/0" to="1/2to2/2"/>
+    <flow id="4" begin="0" end="3600" period="30" from="0/0to0/1" to="1/1to2/1"/>
+    <flow id="5" begin="0" end="3600" period="30" from="0/2to1/2" to="1/1to2/1"/>
+    <flow id="6" begin="0" end="3600" period="30" from="1/1to1/2" to="1/1to1/0"/>
+    <flow id="7" begin="0" end="3600" period="30" from="1/1to2/1" to="1/0to0/0"/>
+    <flow id="8" begin="0" end="3600" period="30" from="0/1to0/0" to="0/0to1/0"/>
+    <flow id="9" begin="0" end="3600" period="30" from="1/1to2/1" to="0/2to0/1"/>
+    <flow id="10" begin="0" end="3600" period="30" from="1/1to1/0" to="1/1to0/1"/>
+    <flow id="11" begin="0" end="3600" period="30" from="1/2to2/2" to="0/0to1/0"/>
+    <flow id="12" begin="0" end="3600" period="30" from="1/2to2/2" to="2/1to1/1"/>
+    <flow id="13" begin="0" end="3600" period="30" from="2/2to2/1" to="0/1to1/1"/>
+    <flow id="14" begin="0" end="3600" period="30" from="1/1to1/0" to="0/1to0/2"/>
+    <flow id="15" begin="0" end="3600" period="30" from="1/0to2/0" to="2/1to2/0"/>
+    <flow id="16" begin="0" end="3600" period="30" from="0/0to1/0" to="2/0to2/1"/>
+    <flow id="17" begin="0" end="3600" period="30" from="2/0to1/0" to="2/1to2/0"/>
+    <flow id="18" begin="0" end="3600" period="30" from="0/0to1/0" to="1/2to1/1"/>
+    <flow id="19" begin="0" end="3600" period="30" from="0/1to0/2" to="2/1to2/2"/>
+    <flow id="20" begin="0" end="3600" period="30" from="0/1to0/2" to="1/0to0/0"/>
+    <flow id="21" begin="0" end="3600" period="30" from="1/2to2/2" to="1/1to1/0"/>
+    <flow id="22" begin="0" end="3600" period="30" from="2/2to1/2" to="2/0to2/1"/>
+    <flow id="23" begin="0" end="3600" period="30" from="2/1to2/2" to="0/0to0/1"/>
+    <flow id="24" begin="0" end="3600" period="30" from="2/1to2/0" to="1/1to2/1"/>
+    <flow id="25" begin="0" end="3600" period="30" from="2/0to1/0" to="2/1to2/2"/>
+    <flow id="26" begin="0" end="3600" period="30" from="0/0to1/0" to="1/2to0/2"/>
+    <flow id="27" begin="0" end="3600" period="30" from="1/0to2/0" to="1/1to1/0"/>
+    <flow id="28" begin="0" end="3600" period="30" from="0/0to0/1" to="1/0to2/0"/>
+    <flow id="29" begin="0" end="3600" period="30" from="1/1to1/2" to="2/0to2/1"/>
+</routes>

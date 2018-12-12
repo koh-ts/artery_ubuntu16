@@ -4,21 +4,21 @@ from xml.dom import minidom
 import random
 
 
-route_num = 1
-map_name = "bunkyo-ku"
+map_name = "grid"
+from_path = "./" + map_name + "_un_fixed.rou.xml"
+to_path = "./" + map_name + ".rou.xml"
+
+route_num = 30
+car_pop_interval = 3
+sim_time = 600
 
 try:
-
+    print("$SUMO_HOME/tools/randomTrips.py -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
     res = subprocess.getoutput("$SUMO_HOME/tools/randomTrips.py -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
     print(res)
 except:
     print("Error.")
 
-
-from_path = "./" + map_name + "_un_fixed.rou.xml"
-to_path = "./" + map_name + ".rou.xml"
-car_pop_interval = 0.1
-sim_time = 600
 
 
 tree = ET.parse(from_path)
