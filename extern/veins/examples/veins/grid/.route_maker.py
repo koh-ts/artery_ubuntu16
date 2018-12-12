@@ -8,18 +8,17 @@ map_name = "grid"
 from_path = "./" + map_name + "_un_fixed.rou.xml"
 to_path = "./" + map_name + ".rou.xml"
 
-route_num = 30
-car_pop_interval = 3
+route_num = 9
+car_pop_interval = 0.1
 sim_time = 600
+min_distance = 200
 
 try:
-    print("$SUMO_HOME/tools/randomTrips.py -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
-    res = subprocess.getoutput("$SUMO_HOME/tools/randomTrips.py -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
+    print("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " --flows=" + str(route_num) + " -n " + map_name + ".net.xml --route-file=" + map_name + "_un_fixed.rou.xml")
+    res = subprocess.getoutput("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " -e 100 -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
     print(res)
 except:
     print("Error.")
-
-
 
 tree = ET.parse(from_path)
 root = tree.getroot()
