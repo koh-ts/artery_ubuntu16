@@ -17,20 +17,19 @@ package inet.applications.udpapp;
 
 import inet.applications.contract.IUDPApp;
 
-simple UDPCAMApp like IUDPApp
+//
+// TODO auto-generated module
+//
+simple UDPCamListener like IUDPApp
 {
     parameters:
-        int localPort = default(-1);  // local port (-1: use ephemeral port)
-//        string serverAddress;  // server address
-//        int serverPort;  // server port
-        double startTime @unit(s) = default(1s);
+        string interfaceTableModule;   // The path to the InterfaceTable module
+        int localPort;  // local port to listen on
         @display("i=block/app");
-        @signal[rcvdPk](type=cPacket);
-        @statistic[rcvdPk](title="packets received"; source=rcvdPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
-        @statistic[throughput](title="throughput"; unit=bps; source="throughput(rcvdPk)"; record=vector);
-        @statistic[endToEndDelay](title="end-to-end delay"; source="messageAge(rcvdPk)"; unit=s; record=histogram,vector; interpolationmode=none);
+        @signal[pk](type=cPacket);
+        @statistic[echoedPk](title="packets echoed"; source=pk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     gates:
         input udpIn @labels(UDPControlInfo/up);
         output udpOut @labels(UDPControlInfo/down);
-
+    
 }

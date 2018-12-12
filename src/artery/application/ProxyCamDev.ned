@@ -22,6 +22,8 @@ import ned.DatarateChannel;
 //import org.car2x.veins.base.modules.IMobility;
 import inet.visualizer.integrated.IntegratedVisualizer;
 import inet.mobility.contract.IMobility;
+import inet.node.inet.StandardHost;
+
 
 network ProxyCamDev
 {
@@ -42,11 +44,11 @@ network ProxyCamDev
             @display("p=91,73");
         }
 
-        disseminator: Disseminator {
+        disseminator: StandardHost {
             @display("p=374,73");
         }
 
-        sensor: Sensor {
+        sensor: StandardHost {
             @display("p=374,170");
         }
         mobility: <mobilityType> like IMobility {
