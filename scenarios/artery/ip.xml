@@ -1,0 +1,6 @@
+<config>
+  <interface hosts="pcam[*].router" names="eth0" address="10.0.x.1" />
+  <interface hosts="pcam[*].sensor" names="eth0" address="10.0.x.2" />
+	<interface hosts="pcam[*].disseminator" names="eth0" address="10.0.x.3" />
+  <interface hosts="router pcam[*].router" address="10.1.0.x"/>
+</config>

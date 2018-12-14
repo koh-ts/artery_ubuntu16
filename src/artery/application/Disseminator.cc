@@ -18,74 +18,35 @@
 namespace artery {
 
 Define_Module(Disseminator);
+//
+//simsignal_t UDPCamListener::rcvdPkSignal = registerSignal("campktrcv");
+
+Disseminator::Disseminator()
+{
+}
+
+Disseminator::~Disseminator()
+{
+}
 
 void Disseminator::initialize(int stage)
 {
-    ApplicationBase::initialize(stage);
+    std::cout << this->getSubmodule("udpApp[0]")->getFullPath() << endl;
+    auto udpcamlsn = this->getSubmodule("udpApp[0]")->subscribe(UDPCamListener::rcvdPkSignal,this)
 
-    if (stage == INITSTAGE_LOCAL) {
-        // init statistics
-        numEchoed = 0;
-        WATCH(numEchoed);
+}
+
+bool Disseminator::disseminate(cPacket *pk)
+{
+
+}
+
+void Disseminator::receiveSignal(cComponent*, simsignal_t sig, cObject* obj, cObject*)
+{
+    if (sig == rcvdPkSignal) {
+        std::cout << "signal received!!!!!!!!!!!!!!!!!!" << endl;
+        cPacket* pk = check_and_cast<cPacket>(obj);
+        disseminate(pk);
     }
 }
-
-void Disseminator::handleMessageWhenUp(cMessage *msg)
-{
-    if (msg->getKind() == UDP_I_ERROR) {
-        // ICMP error report -- discard it
-        delete msg;
-    }
-    else if (msg->getKind() == UDP_I_DATA) {
-        cPacket *pk = PK(msg);
-        // statistics
-        numEchoed++;
-        emit(pkSignal, pk);
-
-        // determine its source address/port
-        UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->removeControlInfo());
-        L3Address srcAddress = ctrl->getSrcAddr();
-        int srcPort = ctrl->getSrcPort();
-        delete ctrl;
-
-        // send back
-        socket.sendTo(pk, srcAddress, srcPort);
-    }
-    else {
-        throw cRuntimeError("Message received with unexpected message kind = %d", msg->getKind());
-    }
-}
-
-void Disseminator::refreshDisplay() const
-{
-    char buf[40];
-    sprintf(buf, "echoed: %d pks", numEchoed);
-    getDisplayString().setTagArg("t", 0, buf);
-}
-
-void Disseminator::finish()
-{
-    ApplicationBase::finish();
-}
-
-bool Disseminator::handleNodeStart(IDoneCallback *doneCallback)
-{
-    socket.setOutputGate(gate("udpOut"));
-    int localPort = par("localPort");
-    socket.bind(localPort);
-    MulticastGroupList mgl = getModuleFromPar<IInterfaceTable>(par("interfaceTableModule"), this)->collectMulticastGroups();
-    socket.joinLocalMulticastGroups(mgl);
-    return true;
-}
-
-bool Disseminator::handleNodeShutdown(IDoneCallback *doneCallback)
-{
-    //TODO if(socket.isOpened()) socket.close();
-    return true;
-}
-
-void Disseminator::handleNodeCrash()
-{
-}
-
 } //namespace

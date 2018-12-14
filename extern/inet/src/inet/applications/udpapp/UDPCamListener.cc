@@ -24,12 +24,10 @@ namespace inet {
 
 Define_Module(UDPCamListener);
 
-simsignal_t UDPCamListener::rcvdPkSignal = registerSignal("pk");
+simsignal_t UDPCamListener::rcvdPkSignal = cComponent::registerSignal("campktrcv");
 
 void UDPCamListener::initialize(int stage)
 {
-    std::cout << "helleeeeeeeeee" << endl;
-    std::cout << stage << endl;
     ApplicationBase::initialize(stage);
 
     if (stage == INITSTAGE_LOCAL) {
@@ -39,14 +37,12 @@ void UDPCamListener::initialize(int stage)
 
 void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 {
-    std::cout << "hello" << endl;
     if (msg->getKind() == UDP_I_DATA) {
         receiveCAM(PK(msg));
     }
     else {
         throw cRuntimeError("Message received with unexpected message kind = %d", msg->getKind());
     }
-    std::cout << "aaa" << endl;
 }
 
 void UDPCamListener::receiveCAM(cPacket *pk)
@@ -58,7 +54,8 @@ void UDPCamListener::receiveCAM(cPacket *pk)
     UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
     L3Address srcAddress = ctrl->getSrcAddr();
     std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
-//    this->getParentModule()->getParentModule()
+//    std::cout << check_and_cast<artery::Disseminator>this->getParentModule()->handleMessage(pk) << endl;
+
     delete pk;
 }
 

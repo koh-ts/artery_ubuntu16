@@ -22,30 +22,21 @@
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/transportlayer/contract/udp/UDPSocket.h"
 
-using namespace omnetpp;
 
 namespace artery {
 
 /**
  * TODO - Generated class
  */
-class Disseminator : public ApplicationBase
+class Disseminator : public ApplicationBase, public omnetpp::cListener
 {
+  public:
+    Disseminator();
+    ~Disseminator();
+    void initialize(int stage);
+    bool disseminate();
   protected:
-    UDPSocket socket;
-    int numEchoed;    // just for WATCH
-    static simsignal_t pkSignal;
-
-  protected:
-    virtual int numInitStages() const override { return NUM_INIT_STAGES; }
-    virtual void initialize(int stage) override;
-    virtual void handleMessageWhenUp(cMessage *msg) override;
-    virtual void finish() override;
-    virtual void refreshDisplay() const override;
-
-    virtual bool handleNodeStart(IDoneCallback *doneCallback) override;
-    virtual bool handleNodeShutdown(IDoneCallback *doneCallback) override;
-    virtual void handleNodeCrash() override;
+    void receiveSignal(omnetpp::cComponent*, omnetpp::simsignal_t, omnetpp::cObject*, omnetpp::cObject*) override;
 
 };
 

@@ -23,13 +23,14 @@ import ned.DatarateChannel;
 import inet.visualizer.integrated.IntegratedVisualizer;
 import inet.mobility.contract.IMobility;
 import inet.node.inet.StandardHost;
+import inet.node.ethernet.EtherSwitch;
 
 
 network ProxyCamDev
 {
     parameters:
         string mobilityType = default("inet.mobility.static.StationaryMobility");
-		@networkNode;
+        @networkNode;
     gates:
         inout ethg;
 
@@ -41,24 +42,30 @@ network ProxyCamDev
         }
     submodules:
         router: Router {
-            @display("p=91,73");
+            @display("p=77,138");
         }
 
-        disseminator: StandardHost {
-            @display("p=374,73");
+        switch: EtherSwitch {
+            @display("p=184,137");
         }
 
-        sensor: StandardHost {
-            @display("p=374,170");
+        disseminator: Disseminator {
+            @display("p=374,81");
         }
+
+        sensor: Sensor {
+            @display("p=374,191");
+        }
+
         mobility: <mobilityType> like IMobility {
             parameters:
-                @display("p=167,196");
+                @display("p=96,50");
         }
 
 
     connections:
-        disseminator.ethg++ <--> ethline <--> router.ethg++;
-        sensor.ethg++ <--> ethline <--> router.ethg++;
+        router.ethg++ <--> ethline <--> switch.ethg++;
+        sensor.ethg++ <--> ethline <--> switch.ethg++;
+        disseminator.ethg++ <--> ethline <--> switch.ethg++;
         router.ethg++ <--> ethg;
 }

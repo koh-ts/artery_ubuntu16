@@ -31,5 +31,4 @@ simple UDPCamListener like IUDPApp
     gates:
         input udpIn @labels(UDPControlInfo/up);
         output udpOut @labels(UDPControlInfo/down);
-    
 }
