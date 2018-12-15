@@ -30,9 +30,10 @@ namespace inet {
  */
 class INET_API UDPCamListener : public ApplicationBase
 {
+  public:
+    static simsignal_t rcvdPkSignal;
   protected:
     UDPSocket socket;
-    static simsignal_t rcvdPkSignal;
 
   protected:
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }

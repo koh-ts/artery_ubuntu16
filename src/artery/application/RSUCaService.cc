@@ -4,6 +4,7 @@
 #include "artery/application/VehicleDataProvider.h"
 #include "artery/utility/simtime_cast.h"
 #include "veins/base/utils/Coord.h"
+#include "inet/applications/udpapp/UDPCamListener.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
 #include <omnetpp/cexception.h>
@@ -73,13 +74,13 @@ void RSUCaService::initialize()
     const std::string output = "../../output/output_" + this-> getFullPath() + ".txt";
   ofs.open(output, std::ios::out);
     std::cout << "hello again again again again again" << endl;
-    subscribe(scSignalCamReceived);
+    findHost()->subscribe(inet::UDPCamListener::rcvdPkSignal,this);
 
 }
 
 
 void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
-
+  std::cout << "sending cam with packet..." << endl;
   EV_INFO << "sending cam......" << endl;
   // std::cout << "sending cam ........" << endl;
   ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
@@ -114,13 +115,12 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   this->request(request, std::move(payload));
 }
 
-void RSUCaService::receiveSignal(cComponent* source, simsignal_t signal, cObject*, cObject*)
+void RSUCaService::receiveSignal(cComponent* source, simsignal_t signal, cObject* obj1, cObject* obj2)
 {
-   EV_INFO << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << endl;
-    if (signal == scSignalCamReceived) {
+    Enter_Method_Silent();
+    if (signal == inet::UDPCamListener::rcvdPkSignal) {
         std::cout << "cam packet get!!" << endl;
-        auto& vehicle = getFacilities().get_const<traci::VehicleController>();
-        EV_INFO << "Vehicle " << vehicle.getVehicleId() << " received a CAM in sibling serivce\n";
+        sendCAMWithPacket((cPacket*)obj1);
     }
 }
 
