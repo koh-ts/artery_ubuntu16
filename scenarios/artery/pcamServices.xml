@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services>
-  <!-- <service type="artery.application.SensorService">
-	</service> -->
-  <service type="artery.application.DisseminationService">
+	<service type="artery.application.RSUCaService">
+		<listener port="2002" />
 	</service>
 </services>

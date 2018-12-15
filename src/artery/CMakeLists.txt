@@ -22,6 +22,7 @@ add_library(core SHARED
     application/den/SuspendableUseCase.cc
     application/den/TrafficJamUseCase.cc
     application/den/UseCase.cc
+    application/RSUCaService.cc
     networking/AccessInterface.cc
     networking/DccEntityBase.cc
     networking/FsmDccEntity.cc

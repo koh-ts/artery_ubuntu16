@@ -19,7 +19,7 @@ network World
     parameters:
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
-        int numProxyCamDevs = default(2);
+        int numProxyCamDevs = default(0);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
@@ -74,16 +74,16 @@ network World
         pcam[numProxyCamDevs]: ProxyCamDev {
             @display("p=330,218");
         }
-
+        
         configurator: IPv4NetworkConfigurator {
             @display("p=112,278");
         }
-        visualizer: IntegratedVisualizer {
-            @display("p=282,31");
-        }
+//        visualizer: IntegratedVisualizer {
+//            @display("p=282,31");
+//        }
 
     connections:
-        pcam[0].ethg <--> ethline <--> router[0].ethg++;
-        pcam[1].ethg <--> ethline <--> router[0].ethg++;
+        pcam[0].ethg <--> ethline <--> router.ethg++;
+        pcam[1].ethg <--> ethline <--> router.ethg++;
 
 }

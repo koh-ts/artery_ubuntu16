@@ -67,7 +67,6 @@ module Disseminator extends StandardHost
         nic.upperLayerIn <-- appl.lowerLayerOut;
         nic.upperControlOut --> appl.lowerControlIn;
         nic.upperControlIn <-- appl.lowerControlOut;
-
         radioIN --> nic.radioIn;
 
 }
