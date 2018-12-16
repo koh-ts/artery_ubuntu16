@@ -15,12 +15,13 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "inet/applications/udpapp/UDPCamListener.h"
+#include "artery/application/UDPCamListener.h"
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
 
-namespace inet {
+namespace artery
+{
 
 Define_Module(UDPCamListener);
 
@@ -29,7 +30,7 @@ simsignal_t UDPCamListener::rcvdPkSignal = cComponent::registerSignal("campktrcv
 void UDPCamListener::initialize(int stage)
 {
     ApplicationBase::initialize(stage);
-
+    std::cout << "hello" << endl;
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
     }
@@ -84,5 +85,5 @@ void UDPCamListener::handleNodeCrash()
 {
 }
 
-} // namespace inet
+} // namespace artery
 

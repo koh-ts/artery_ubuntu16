@@ -15,40 +15,79 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef __INET_UDPCAMLISTENER_H
-#define __INET_UDPCAMLISTENER_H
+#ifndef ARTERY_UDPCAMSENDER_H
+#define ARTERY_UDPCAMSENDER_H
 
 #include "inet/common/INETDefs.h"
 
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/transportlayer/contract/udp/UDPSocket.h"
+#include "inet/applications/base/ApplicationPacket_m.h"
+#include <iostream>
+#include <fstream>
 
-namespace inet {
 
+namespace artery {
+
+using namespace inet;
 /**
  * UDP application. See NED for more info.
  */
-class INET_API UDPCamListener : public ApplicationBase
+class UDPCamSender : public ApplicationBase
 {
-  public:
-    static simsignal_t rcvdPkSignal;
   protected:
+    enum SelfMsgKinds { START = 1, SEND, STOP };
+
+    // parameters
+    std::vector<L3Address> destAddresses;
+    int localPort = -1, destPort = -1;
+    simtime_t startTime;
+    simtime_t stopTime;
+    const char *packetName = nullptr;
+
+    // state
     UDPSocket socket;
+    cMessage *selfMsg = nullptr;
+
+    // statistics
+    int numSent = 0;
+    int numReceived = 0;
+
+    static simsignal_t sentPkSignal;
+    static simsignal_t rcvdPkSignal;
 
   protected:
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
     virtual void initialize(int stage) override;
     virtual void handleMessageWhenUp(cMessage *msg) override;
     virtual void finish() override;
+    virtual void refreshDisplay() const override;
 
-    virtual void receiveCAM(cPacket *msg);
+    // chooses random destination address
+    virtual L3Address chooseDestAddr();
+    virtual void sendPacket();
+    virtual ApplicationPacket* makeCamPacket();
+//    virtual vanetza::asn1::Cam createCooperativeAwarenessMessage();
+    virtual void processPacket(cPacket *msg);
+    virtual void setSocketOptions();
+
+    virtual void processStart();
+    virtual void processSend();
+    virtual void processStop();
 
     virtual bool handleNodeStart(IDoneCallback *doneCallback) override;
     virtual bool handleNodeShutdown(IDoneCallback *doneCallback) override;
     virtual void handleNodeCrash() override;
+    std::ofstream ofs;
+
+
+  public:
+    UDPCamSender() {}
+    ~UDPCamSender();
+
 };
 
 } // namespace inet
 
-#endif // ifndef __INET_UDPCAMLISTENER_H
+#endif // ifndef __INET_UDPCAMSENDER_H
 

@@ -16,14 +16,14 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "inet/applications/udpapp/UDPCamSender.h"
+#include "artery/application/UDPCamSender.h"
 
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/lifecycle/NodeOperations.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
 
-namespace inet {
+namespace artery {
 
 Define_Module(UDPCamSender);
 

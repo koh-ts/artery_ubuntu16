@@ -4,7 +4,7 @@
 #include "artery/application/VehicleDataProvider.h"
 #include "artery/utility/simtime_cast.h"
 #include "veins/base/utils/Coord.h"
-#include "inet/applications/udpapp/UDPCamListener.h"
+#include "artery/application/UDPCamListener.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
 #include <omnetpp/cexception.h>
@@ -46,35 +46,13 @@ RSUCaService::RSUCaService() :
 
 void RSUCaService::initialize()
 {
-    std::cout << "hello" << endl;
     ItsG5BaseService::initialize();
-    std::cout << "hello again" << endl;
-//    mVehicleDataProvider = &getFacilities().get_const<VehicleDataProvider>();
-    std::cout << "hello again again" << endl;
     mTimer = &getFacilities().get_const<Timer>();
-    // avoid unreasonable high elapsed time values for newly inserted vehicles
-    mLastCamTimestamp = simTime();
-    // first generated CAM shall include the low frequency container
-    mLastLowCamTimestamp = mLastCamTimestamp - artery::simtime_cast(scLowFrequencyContainerInterval);
-//    mLocalDynamicMap = &getFacilities().get_mutable<artery::LocalDynamicMap>();
 
-    // generation rate boundaries
-    mGenCamMin = par("minInterval");
-    mGenCamMax = par("maxInterval");
-
-    // vehicle dynamics thresholds
-    mHeadingDelta = vanetza::units::Angle { par("headingDelta").doubleValue() * vanetza::units::degree };
-    mPositionDelta = par("positionDelta").doubleValue() * vanetza::units::si::meter;
-    mSpeedDelta = par("speedDelta").doubleValue() * vanetza::units::si::meter_per_second;
-    std::cout << "hello again again again" << endl;
-
-    mDccRestriction = par("withDccRestriction");
-    mFixedRate = par("fixedRate");
-    std::cout << "hello again again again again" << endl;
     const std::string output = "../../output/output_" + this-> getFullPath() + ".txt";
   ofs.open(output, std::ios::out);
     std::cout << "hello again again again again again" << endl;
-    findHost()->subscribe(inet::UDPCamListener::rcvdPkSignal,this);
+    findHost()->subscribe(artery::UDPCamListener::rcvdPkSignal,this);
 
 }
 
@@ -110,7 +88,7 @@ void RSUCaService::receiveSignal(cComponent* source, simsignal_t signal, cObject
 {
     Enter_Method_Silent();
     std::cout << simTime() << endl;
-    if (signal == inet::UDPCamListener::rcvdPkSignal) {
+    if (signal == artery::UDPCamListener::rcvdPkSignal) {
         std::cout << "cam packet get!!" << endl;
         sendCAMWithPacket((cPacket*)obj1);
     }

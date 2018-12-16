@@ -23,6 +23,8 @@ add_library(core SHARED
     application/den/TrafficJamUseCase.cc
     application/den/UseCase.cc
     application/RSUCaService.cc
+    application/UDPCamListener.cc
+    application/UDPCamSender.cc
     networking/AccessInterface.cc
     networking/DccEntityBase.cc
     networking/FsmDccEntity.cc

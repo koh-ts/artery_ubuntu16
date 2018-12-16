@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package inet.applications.udpapp;
+package artery.application;
 
 import inet.applications.contract.IUDPApp;
 
@@ -28,6 +28,7 @@ simple UDPCamListener like IUDPApp
         @display("i=block/app");
         @signal[pk](type=cPacket);
         @statistic[echoedPk](title="packets echoed"; source=pk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+        @class(UDPCamListener);
     gates:
         input udpIn @labels(UDPControlInfo/up);
         output udpOut @labels(UDPControlInfo/down);

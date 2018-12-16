@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package inet.applications.udpapp;
+package artery.application;
 
 import inet.applications.contract.IUDPApp;
 import inet.applications.udpapp.UDPBasicApp;
 
-module UDPCamSender like IUDPApp
+simple UDPCamSender like IUDPApp
 {
     parameters:
         string interfaceTableModule;   // The path to the InterfaceTable module
