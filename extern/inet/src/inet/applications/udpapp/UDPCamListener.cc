@@ -48,6 +48,7 @@ void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 void UDPCamListener::receiveCAM(cPacket *pk)
 {
     EV_INFO << "Video stream packet: " << UDPSocket::getReceivedPacketInfo(pk) << endl;
+    std::cout << simTime() << endl;
     emit(rcvdPkSignal, pk);
 
     // determine its source address/port
