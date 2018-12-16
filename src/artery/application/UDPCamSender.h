@@ -66,7 +66,8 @@ class UDPCamSender : public ApplicationBase
     // chooses random destination address
     virtual L3Address chooseDestAddr();
     virtual void sendPacket();
-    virtual ApplicationPacket* makeCamPacket();
+    virtual std::vector<ApplicationPacket*> searchAndMakeCamPacket();
+    virtual ApplicationPacket* getCamPayload(const VehicleDataProvider&);
 //    virtual vanetza::asn1::Cam createCooperativeAwarenessMessage();
     virtual void processPacket(cPacket *msg);
     virtual void setSocketOptions();

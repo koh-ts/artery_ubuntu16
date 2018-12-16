@@ -115,42 +115,71 @@ L3Address UDPCamSender::chooseDestAddr()
 
 void UDPCamSender::sendPacket()
 {
-    std::ostringstream str;
-    str << packetName << "-" << numSent;
+//    std::ostringstream str;
+//    str << packetName << "-" << numSent;
 
-    ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
-    payload->setByteLength(par("messageLength").longValue());
-    payload->setSequenceNumber(numSent);
+//    ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
+//    payload->setByteLength(par("messageLength").longValue());
+//    payload->setSequenceNumber(numSent);
 
-//    ApplicationPacket *payload = makeCamPacket();
+    ApplicationPacket **payloads = searchAndMakeCamPayloads();
 
     L3Address destAddr = chooseDestAddr();
 
-    emit(sentPkSignal, payload);
-    socket.sendTo(payload, destAddr, destPort);
-    numSent++;
+    for (int i = 0; i < sizeof(payloads); i++) {
+      emit(sentPkSignal, payload[i]);
+      socket.sendTo(payload[i], destAddr, destPort);
+      numSent++;
+    }
 }
 
-ApplicationPacket* UDPCamSender::makeCamPacket() {
+std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
   EV_INFO << "sending cam......" << endl;
-  // std::cout << "sending cam ........" << endl;
-//  ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
 
-//  auto cam = createCooperativeAwarenessMessage();
-//
-//  CaObject obj(std::move(cam));
-//  emit(scSignalCamSent, &obj);
-//
-//  using CamByteBuffer = convertible::byte_buffer_impl<asn1::Cam>;
-//  std::unique_ptr<geonet::DownPacket> payload { new geonet::DownPacket() };
-//  std::unique_ptr<convertible::byte_buffer> buffer { new CamByteBuffer(obj.shared_ptr()) };
-//  payload->layer(OsiLayer::Application) = std::move(buffer);
-//
-//  ApplicationPacket *appPayload = new ApplicationPacket(payload);
-//  appPayload->setByteLength(par("messageLength").longValue());
-//  appPayload->setSequenceNumber(numSent);
-//
-//  return appPayload;
+  std::vector<VehicleDataProvider> vdps;
+
+  auto mod = getSimulation()->getSystemModule();
+  for (cModule::SubmoduleIterator iter(mod); !iter.end(); iter++) {
+    cModule* submod = SUBMODULE_ITERATOR_TO_MODULE(iter);
+    if (submod->getName().size() >= "node".size() && std::equal(std::begin("node"), std::end("node"), std::begin(submod->getName()))) {
+      if(distance < ~~m) {
+        vdps.push_back(submod);
+      }
+    }
+  }
+
+  std::vector<ApplicationPacket *> payloads;
+  for (auto it = vdps.begin();it != vdps.end(); ++it) {
+    payloads.push_back(getCamPayload(it));
+  }
+
+  return payloads;
+}
+
+ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider& vdp) {
+  std::ostringstream str;
+  str << "1" << ","                             //header.protocolVersion
+      << ItsPduHeader__messageID_cam << ","     //header.messageId
+      << "0" << ","                             //header.stationID
+      << mTimer->getTimeFor(simTime()) << ","   //cam.generationDeltaTime
+      << StationType_passengerCar << ","
+      << AltitudeValue_unavailable << ","
+      << longitude << ","
+      << latitude << ","
+      << HeadingValue_unavailable << ","
+      << SemiAxisLength_unavailable << ","
+      << SemiAxisLength_unavailable << ","
+      << HighFrequencyContainer_PR_basicVehicleContainerHighFrequency << ","
+      << heading << ","
+      << HeadingConfidence_equalOrWithinOneDegree << ","
+      << speed << ","
+      << speedConfidence << ","
+
+  ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
+  payload->setByteLength(sizeof(str).longValue());
+  payload->setSequenceNumber(numSent);
+
+  return payload;
 }
 
 //vanetza::asn1::Cam
