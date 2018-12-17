@@ -17,13 +17,29 @@
 //
 
 #include "artery/application/UDPCamSender.h"
+#include <boost/units/cmath.hpp>
+#include <boost/units/systems/si/prefixes.hpp>
 
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/lifecycle/NodeOperations.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
+#include "artery/application/VehicleMiddleware.h"
+#include "veins/base/utils/MiXiMDefs.h"
+#include "artery/utility/Geometry.h"
+#include "artery/traci/VehicleController.h"
+#include "artery/veins/VeinsMobility.h"
 
 namespace artery {
+
+using namespace omnetpp;
+
+template<typename T, typename U>
+long round(const boost::units::quantity<T>& q, const U& u)
+{
+  boost::units::quantity<U> v { q };
+  return std::round(v.value());
+}
 
 Define_Module(UDPCamSender);
 
@@ -56,7 +72,7 @@ void UDPCamSender::initialize(int stage)
 
         const std::string output = "../../output/output_" + this->getFullPath() + "_sender.txt";
         ofs.open(output, std::ios::out);
-
+        mTimer.setTimebase(par("datetime"));
         selfMsg = new cMessage("sendTimer");
     }
 }
@@ -122,13 +138,13 @@ void UDPCamSender::sendPacket()
 //    payload->setByteLength(par("messageLength").longValue());
 //    payload->setSequenceNumber(numSent);
 
-    ApplicationPacket **payloads = searchAndMakeCamPayloads();
+    std::vector<ApplicationPacket*> payloads = searchAndMakeCamPayloads();
 
     L3Address destAddr = chooseDestAddr();
 
-    for (int i = 0; i < sizeof(payloads); i++) {
-      emit(sentPkSignal, payload[i]);
-      socket.sendTo(payload[i], destAddr, destPort);
+    for (auto it = payloads.begin();it != payloads.end(); ++it) {
+      emit(sentPkSignal, *it);
+      socket.sendTo(*it, destAddr, destPort);
       numSent++;
     }
 }
@@ -136,47 +152,92 @@ void UDPCamSender::sendPacket()
 std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
   EV_INFO << "sending cam......" << endl;
 
-  std::vector<VehicleDataProvider> vdps;
+  std::vector<const VehicleDataProvider *> vdps;
+
+  traci::VehicleController *controller = check_and_cast<traci::VehicleController*>(check_and_cast<VeinsMobility *>(this->getParentModule()->getParentModule()->getModuleByPath(".mobility"))->getVehicleController());
+  auto pos = controller->getPosition();
 
   auto mod = getSimulation()->getSystemModule();
+
   for (cModule::SubmoduleIterator iter(mod); !iter.end(); iter++) {
     cModule* submod = SUBMODULE_ITERATOR_TO_MODULE(iter);
-    if (submod->getName().size() >= "node".size() && std::equal(std::begin("node"), std::end("node"), std::begin(submod->getName()))) {
-      if(distance < ~~m) {
-        vdps.push_back(submod);
+    if (strstr(submod->getName(),"node")!=NULL) {
+      VehicleMiddleware* middleware = check_and_cast<VehicleMiddleware *>(submod->getModuleByPath(".appl.middleware"));
+      const VehicleDataProvider* vdp = &middleware->getFacilities().get_const<VehicleDataProvider>();
+      std::cout << (double)distance(vdp->position(), pos) << endl;
+      if (distance(vdp->position(), pos) < 30) {
+        vdps.push_back(vdp);
       }
     }
   }
 
   std::vector<ApplicationPacket *> payloads;
   for (auto it = vdps.begin();it != vdps.end(); ++it) {
-    payloads.push_back(getCamPayload(it));
+    payloads.push_back(getCamPayload(*it));
   }
 
   return payloads;
 }
 
-ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider& vdp) {
+ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider* vdp) {
+  auto microdegree = vanetza::units::degree * boost::units::si::micro;
+  auto decidegree = vanetza::units::degree * boost::units::si::deci;
+  auto degree_per_second = vanetza::units::degree / vanetza::units::si::second;
+  auto centimeter_per_second = vanetza::units::si::meter_per_second * boost::units::si::centi;
+
   std::ostringstream str;
   str << "1" << ","                             //header.protocolVersion
       << ItsPduHeader__messageID_cam << ","     //header.messageId
       << "0" << ","                             //header.stationID
-      << mTimer->getTimeFor(simTime()) << ","   //cam.generationDeltaTime
+      << countTaiMilliseconds(mTimer.getTimeFor(vdp->updated())) * GenerationDeltaTime_oneMilliSec << ","   //cam.generationDeltaTime
       << StationType_passengerCar << ","
       << AltitudeValue_unavailable << ","
-      << longitude << ","
-      << latitude << ","
+      << round(vdp->longitude(), microdegree) * Longitude_oneMicrodegreeEast << ","
+      << round(vdp->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
       << HeadingValue_unavailable << ","
       << SemiAxisLength_unavailable << ","
       << SemiAxisLength_unavailable << ","
       << HighFrequencyContainer_PR_basicVehicleContainerHighFrequency << ","
-      << heading << ","
+      << round(vdp->heading(), decidegree) << ","
       << HeadingConfidence_equalOrWithinOneDegree << ","
-      << speed << ","
-      << speedConfidence << ","
+      << round(vdp->speed(), centimeter_per_second) * SpeedValue_oneCentimeterPerSec << ","
+      << SpeedConfidence_equalOrWithinOneCentimeterPerSec * 3 << ",";
+
+  if (vdp->speed().value() >= 0.0) {
+    str << DriveDirection_forward << ",";
+  } else {
+    str << DriveDirection_backward << ",";
+  }
+
+  const double lonAccelValue = vdp->acceleration() / vanetza::units::si::meter_per_second_squared;
+  // extreme speed changes can occur when SUMO swaps vehicles between lanes (speed is swapped as well)
+  if (lonAccelValue >= -160.0 && lonAccelValue <= 161.0) {
+    str << lonAccelValue * LongitudinalAccelerationValue_pointOneMeterPerSecSquaredForward << ",";
+  } else {
+    str << LongitudinalAccelerationValue_unavailable << ",";
+  }
+
+  str << AccelerationConfidence_unavailable << ",";
+  if (abs(vdp->curvature() / vanetza::units::reciprocal_metre) * 10000.0 >= 1023) {
+    str << 1023 << ",";
+  } else {
+    str << abs(vdp->curvature() / vanetza::units::reciprocal_metre) * 10000.0 << ",";
+  }
+
+  str << CurvatureConfidence_unavailable << ","
+      << CurvatureCalculationMode_yawRateUsed << ",";
+  if (abs(round(vdp->yaw_rate(), degree_per_second) * YawRateValue_degSec_000_01ToLeft * 100.0) >= YawRateValue_unavailable) {
+    str << YawRateValue_unavailable << ",";
+  } else {
+    str << round(vdp->yaw_rate(), degree_per_second) * YawRateValue_degSec_000_01ToLeft * 100.0 << ",";
+  }
+
+  str << VehicleLengthValue_unavailable << ","
+      << VehicleLengthConfidenceIndication_noTrailerPresent << ","
+      << VehicleWidth_unavailable << endl;
 
   ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
-  payload->setByteLength(sizeof(str).longValue());
+  payload->setByteLength(sizeof(str));
   payload->setSequenceNumber(numSent);
 
   return payload;

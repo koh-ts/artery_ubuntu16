@@ -63,31 +63,78 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   // std::cout << "sending cam ........" << endl;
   ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
 
-//  auto cam = check_and_cast<vanetza::asn1::Cam>(pk->payload);
+  auto cam = getCamFromPacket(pk);
+
+  using namespace vanetza;
+  btp::DataRequestB request;
+  request.destination_port = btp::ports::CAM;
+  request.gn.its_aid = aid::CA;
+  request.gn.transport_type = geonet::TransportType::SHB;
+  request.gn.maximum_lifetime = geonet::Lifetime { geonet::Lifetime::Base::_1_S, 1 };
+  request.gn.traffic_class.tc_id(static_cast<unsigned>(dcc::Profile::DP2));
+  request.gn.communication_profile = geonet::CommunicationProfile::ITS_G5;
+
+  CaObject obj(std::move(cam));
+  emit(scSignalCamSent, &obj);
+
+  using CamByteBuffer = convertible::byte_buffer_impl<asn1::Cam>;
+  std::unique_ptr<geonet::DownPacket> payload { new geonet::DownPacket() };
+  std::unique_ptr<convertible::byte_buffer> buffer { new CamByteBuffer(obj.shared_ptr()) };
+  payload->layer(OsiLayer::Application) = std::move(buffer);
+  this->request(request, std::move(payload));
+}
+
+vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
+  vanetza::asn1::Cam message;
+//  ItsPduHeader_t& header = pcam[];
+//  header.protocolVersion = pcam[];
+//  header.messageID = pcam[];
+//  header.stationID = pcam[];
 //
-//  using namespace vanetza;
-//  btp::DataRequestB request;
-//  request.destination_port = btp::ports::CAM;
-//  request.gn.its_aid = aid::CA;
-//  request.gn.transport_type = geonet::TransportType::SHB;
-//  request.gn.maximum_lifetime = geonet::Lifetime { geonet::Lifetime::Base::_1_S, 1 };
-//  request.gn.traffic_class.tc_id(static_cast<unsigned>(dcc::Profile::DP2));
-//  request.gn.communication_profile = geonet::CommunicationProfile::ITS_G5;
+//  CoopAwareness_t& cam = (*message).cam;
+//  cam.generationDeltaTime = pcam[];
+//  BasicContainer_t& basic = cam.camParameters.basicContainer;
+//  HighFrequencyContainer_t& hfc = cam.camParameters.highFrequencyContainer;
 //
-//  CaObject obj(std::move(cam));
-//  emit(scSignalCamSent, &obj);
+//  basic.stationType = pcam[];
+//  basic.referencePosition.altitude.altitudeValue = pcam[];
+//  basic.referencePosition.altitude.altitudeConfidence = pcam[];
+//  basic.referencePosition.longitude = pcam[];
+//  basic.referencePosition.latitude = pcam[];
+//  basic.referencePosition.positionConfidenceEllipse.semiMajorOrientation = pcam[];
+//  basic.referencePosition.positionConfidenceEllipse.semiMajorConfidence = pcam[];
+//  basic.referencePosition.positionConfidenceEllipse.semiMinorConfidence = pcam[];
 //
-//  using CamByteBuffer = convertible::byte_buffer_impl<asn1::Cam>;
-//  std::unique_ptr<geonet::DownPacket> payload { new geonet::DownPacket() };
-//  std::unique_ptr<convertible::byte_buffer> buffer { new CamByteBuffer(obj.shared_ptr()) };
-//  payload->layer(OsiLayer::Application) = std::move(buffer);
-//  this->request(request, std::move(payload));
+//  hfc.present = pcam[];
+//  BasicVehicleContainerHighFrequency& bvc = hfc.choice.basicVehicleContainerHighFrequency;
+//  bvc.heading.headingValue = pcam[];
+//  bvc.heading.headingConfidence = pcam[];
+//  bvc.speed.speedValue = pcam[];
+//  bvc.speed.speedConfidence = pcam[];
+//  bvc.driveDirection = pcam[];
+//  bvc.longitudinalAcceleration.longitudinalAccelerationValue = pcam[];
+//  bvc.longitudinalAcceleration.longitudinalAccelerationConfidence = pcam[];
+//  bvc.curvature.curvatureValue = pcam[];
+//  bvc.curvature.curvatureConfidence = pcam[];
+//  bvc.curvatureCalculationMode = pcam[];
+//  bvc.yawRate.yawRateValue = pcam[];
+//  bvc.vehicleLength.vehicleLengthValue = pcam[];
+//  bvc.vehicleLength.vehicleLengthConfidenceIndication = pcam[];
+//  bvc.vehicleWidth = pcam[];
+
+  std::string error;
+  if (!message.validate(error)) {
+    throw cRuntimeError("Invalid High Frequency CAM: %s", error.c_str());
+  }
+
+  return message;
 }
 
 void RSUCaService::receiveSignal(cComponent* source, simsignal_t signal, cObject* obj1, cObject* obj2)
 {
     Enter_Method_Silent();
     std::cout << simTime() << endl;
+    std::cout << source << "," << obj1 << "," << obj2 << endl;
     if (signal == artery::UDPCamListener::rcvdPkSignal) {
         std::cout << "cam packet get!!" << endl;
         sendCAMWithPacket((cPacket*)obj1);
@@ -129,8 +176,8 @@ void RSUCaService::indicate(const vanetza::btp::DataIndication& ind, std::unique
         msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t" <<
         "dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << "," <<
         round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << "\t" << endl;
-        std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
-        std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
+        // std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
+        // std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
         // ofs << "\t src pos is: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "," << msg->cam.camParameters.basicContainer.referencePosition.latitude << endl;
         // ofs << "distance is: " << Position::distance(mVehicleDataProvider->position(),
 

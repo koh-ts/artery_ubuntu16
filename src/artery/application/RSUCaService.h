@@ -51,6 +51,7 @@ class RSUCaService : public ItsG5BaseService
         bool checkPositionDelta() const;
         bool checkSpeedDelta() const;
         void sendCAMWithPacket(omnetpp::cPacket* pk);
+        vanetza::asn1::Cam getCamFromPacket(omnetpp::cPacket* pk);
         void sendCam(const omnetpp::SimTime&);
         omnetpp::SimTime genCamDcc();
 

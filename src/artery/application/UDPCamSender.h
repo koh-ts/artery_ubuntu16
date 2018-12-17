@@ -23,6 +23,13 @@
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/transportlayer/contract/udp/UDPSocket.h"
 #include "inet/applications/base/ApplicationPacket_m.h"
+#include "artery/application/CaObject.h"
+#include "artery/application/VehicleDataProvider.h"
+#include "artery/application/Timer.h"
+#include <vanetza/asn1/cam.hpp>
+#include <vanetza/btp/data_interface.hpp>
+#include <vanetza/units/angle.hpp>
+#include <vanetza/units/velocity.hpp>
 #include <iostream>
 #include <fstream>
 
@@ -44,6 +51,7 @@ class UDPCamSender : public ApplicationBase
     simtime_t startTime;
     simtime_t stopTime;
     const char *packetName = nullptr;
+    Timer mTimer;
 
     // state
     UDPSocket socket;
@@ -66,8 +74,8 @@ class UDPCamSender : public ApplicationBase
     // chooses random destination address
     virtual L3Address chooseDestAddr();
     virtual void sendPacket();
-    virtual std::vector<ApplicationPacket*> searchAndMakeCamPacket();
-    virtual ApplicationPacket* getCamPayload(const VehicleDataProvider&);
+    virtual std::vector<ApplicationPacket*> searchAndMakeCamPayloads();
+    virtual ApplicationPacket* getCamPayload(const VehicleDataProvider*);
 //    virtual vanetza::asn1::Cam createCooperativeAwarenessMessage();
     virtual void processPacket(cPacket *msg);
     virtual void setSocketOptions();

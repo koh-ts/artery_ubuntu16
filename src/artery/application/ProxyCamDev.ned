@@ -19,9 +19,9 @@ import inet.node.inet.Router;
 import artery.application.Disseminator;
 import artery.application.Sensor;
 import ned.DatarateChannel;
-//import org.car2x.veins.base.modules.IMobility;
+import org.car2x.veins.base.modules.IMobility;
 import inet.visualizer.integrated.IntegratedVisualizer;
-import inet.mobility.contract.IMobility;
+//import inet.mobility.contract.IMobility;
 import inet.node.inet.StandardHost;
 import inet.node.ethernet.EtherSwitch;
 
@@ -29,7 +29,7 @@ import inet.node.ethernet.EtherSwitch;
 network ProxyCamDev
 {
     parameters:
-        string mobilityType = default("inet.mobility.static.StationaryMobility");
+        string mobilityType = default("artery.veins.Mobility");
         @networkNode;
     gates:
         inout ethg;

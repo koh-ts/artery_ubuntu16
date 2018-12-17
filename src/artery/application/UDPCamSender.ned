@@ -21,6 +21,7 @@ import inet.applications.udpapp.UDPBasicApp;
 simple UDPCamSender like IUDPApp
 {
     parameters:
+        string datetime;
         string interfaceTableModule;   // The path to the InterfaceTable module
         int localPort = default(-1);  // local port (-1: use ephemeral port)
         string destAddresses = default(""); // list of IP addresses, separated by spaces ("": don't send)
