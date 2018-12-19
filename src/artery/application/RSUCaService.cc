@@ -5,6 +5,7 @@
 #include "artery/utility/simtime_cast.h"
 #include "veins/base/utils/Coord.h"
 #include "artery/application/UDPCamListener.h"
+#include "inet/applications/base/ApplicationPacket_m.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
 #include <omnetpp/cexception.h>
@@ -50,8 +51,8 @@ void RSUCaService::initialize()
     mTimer = &getFacilities().get_const<Timer>();
 
     const std::string output = "../../output/output_" + this-> getFullPath() + ".txt";
-  ofs.open(output, std::ios::out);
-    std::cout << "hello again again again again again" << endl;
+    ofs.open(output, std::ios::out);
+
     findHost()->subscribe(artery::UDPCamListener::rcvdPkSignal,this);
 
 }
@@ -61,10 +62,9 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   std::cout << "sending cam with packet..." << endl;
   EV_INFO << "sending cam......" << endl;
   // std::cout << "sending cam ........" << endl;
-  ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
+//  ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
 
   auto cam = getCamFromPacket(pk);
-
   using namespace vanetza;
   btp::DataRequestB request;
   request.destination_port = btp::ports::CAM;
@@ -73,7 +73,6 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   request.gn.maximum_lifetime = geonet::Lifetime { geonet::Lifetime::Base::_1_S, 1 };
   request.gn.traffic_class.tc_id(static_cast<unsigned>(dcc::Profile::DP2));
   request.gn.communication_profile = geonet::CommunicationProfile::ITS_G5;
-
   CaObject obj(std::move(cam));
   emit(scSignalCamSent, &obj);
 
@@ -81,46 +80,61 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   std::unique_ptr<geonet::DownPacket> payload { new geonet::DownPacket() };
   std::unique_ptr<convertible::byte_buffer> buffer { new CamByteBuffer(obj.shared_ptr()) };
   payload->layer(OsiLayer::Application) = std::move(buffer);
+  ofs << "time: " << simTime() << "serialnum: " << ((ApplicationPacket *)pk) -> getSequenceNumber() << endl;
   this->request(request, std::move(payload));
 }
 
 vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
   vanetza::asn1::Cam message;
-//  ItsPduHeader_t& header = pcam[];
-//  header.protocolVersion = pcam[];
-//  header.messageID = pcam[];
-//  header.stationID = pcam[];
-//
-//  CoopAwareness_t& cam = (*message).cam;
-//  cam.generationDeltaTime = pcam[];
-//  BasicContainer_t& basic = cam.camParameters.basicContainer;
-//  HighFrequencyContainer_t& hfc = cam.camParameters.highFrequencyContainer;
-//
-//  basic.stationType = pcam[];
-//  basic.referencePosition.altitude.altitudeValue = pcam[];
-//  basic.referencePosition.altitude.altitudeConfidence = pcam[];
-//  basic.referencePosition.longitude = pcam[];
-//  basic.referencePosition.latitude = pcam[];
-//  basic.referencePosition.positionConfidenceEllipse.semiMajorOrientation = pcam[];
-//  basic.referencePosition.positionConfidenceEllipse.semiMajorConfidence = pcam[];
-//  basic.referencePosition.positionConfidenceEllipse.semiMinorConfidence = pcam[];
-//
-//  hfc.present = pcam[];
-//  BasicVehicleContainerHighFrequency& bvc = hfc.choice.basicVehicleContainerHighFrequency;
-//  bvc.heading.headingValue = pcam[];
-//  bvc.heading.headingConfidence = pcam[];
-//  bvc.speed.speedValue = pcam[];
-//  bvc.speed.speedConfidence = pcam[];
-//  bvc.driveDirection = pcam[];
-//  bvc.longitudinalAcceleration.longitudinalAccelerationValue = pcam[];
-//  bvc.longitudinalAcceleration.longitudinalAccelerationConfidence = pcam[];
-//  bvc.curvature.curvatureValue = pcam[];
-//  bvc.curvature.curvatureConfidence = pcam[];
-//  bvc.curvatureCalculationMode = pcam[];
-//  bvc.yawRate.yawRateValue = pcam[];
-//  bvc.vehicleLength.vehicleLengthValue = pcam[];
-//  bvc.vehicleLength.vehicleLengthConfidenceIndication = pcam[];
-//  bvc.vehicleWidth = pcam[];
+  std::vector<std::string> pcam;
+  if (pk->hasPar("data")) {
+    std::cout << (std::string)(pk->par("data")) << endl;
+    std::string s = (std::string)(pk->par("data"));
+    std::stringstream ss{s};
+    std::string buf;
+    while (std::getline(ss, buf, ',')) {
+      pcam.push_back(buf);
+    }
+  } else {
+    std::cout << "no data found" << endl;
+  }
+  auto itr_pcam = pcam.begin();
+  std::cout << *itr_pcam << endl;
+  ItsPduHeader_t& header = (*message).header;
+  header.protocolVersion = std::stol(*itr_pcam++);
+  header.messageID = std::stol(*itr_pcam++);
+  header.stationID = (StationID_t)std::stol(*itr_pcam++);
+
+  CoopAwareness_t& cam = (*message).cam;
+  cam.generationDeltaTime = (uint16_t)std::stol(*itr_pcam++) * GenerationDeltaTime_oneMilliSec;
+  BasicContainer_t& basic = cam.camParameters.basicContainer;
+  HighFrequencyContainer_t& hfc = cam.camParameters.highFrequencyContainer;
+
+  basic.stationType = (StationType_t)std::stol(*itr_pcam++);
+  basic.referencePosition.altitude.altitudeValue = (AltitudeValue_t)std::stol(*itr_pcam++);
+  basic.referencePosition.altitude.altitudeConfidence = (AltitudeConfidence_t)std::stol(*itr_pcam++);
+  basic.referencePosition.longitude = (Longitude_t)std::stol(*itr_pcam++);
+  basic.referencePosition.latitude = (Latitude_t)std::stol(*itr_pcam++);
+  basic.referencePosition.positionConfidenceEllipse.semiMajorOrientation = (HeadingValue_t)std::stol(*itr_pcam++);
+  basic.referencePosition.positionConfidenceEllipse.semiMajorConfidence = (SemiAxisLength_t)std::stol(*itr_pcam++);
+  basic.referencePosition.positionConfidenceEllipse.semiMinorConfidence = (SemiAxisLength_t)std::stol(*itr_pcam++);
+
+  hfc.present = (HighFrequencyContainer_PR)std::stol(*itr_pcam++);
+  BasicVehicleContainerHighFrequency& bvc = hfc.choice.basicVehicleContainerHighFrequency;
+  bvc.heading.headingValue = (HeadingValue_t)std::stol(*itr_pcam++);
+  bvc.heading.headingConfidence = (HeadingConfidence_t)std::stol(*itr_pcam++);
+  bvc.speed.speedValue = (SpeedValue_t)std::stol(*itr_pcam++);
+  bvc.speed.speedConfidence = (SpeedConfidence_t)std::stol(*itr_pcam++);
+  bvc.driveDirection = (DriveDirection_t)std::stol(*itr_pcam++);
+  bvc.longitudinalAcceleration.longitudinalAccelerationValue = (LongitudinalAccelerationValue_t)std::stol(*itr_pcam++);
+  bvc.longitudinalAcceleration.longitudinalAccelerationConfidence = (AccelerationConfidence_t)std::stol(*itr_pcam++);
+  bvc.curvature.curvatureValue = (CurvatureValue_t)std::stol(*itr_pcam++);
+  bvc.curvature.curvatureConfidence = (CurvatureConfidence_t)std::stol(*itr_pcam++);
+  bvc.curvatureCalculationMode = (CurvatureCalculationMode_t)std::stol(*itr_pcam++);
+  bvc.yawRate.yawRateValue = (YawRateValue_t)std::stol(*itr_pcam++);
+  bvc.vehicleLength.vehicleLengthValue = (VehicleLengthValue_t)std::stol(*itr_pcam++);
+  bvc.vehicleLength.vehicleLengthConfidenceIndication = (VehicleLengthConfidenceIndication_t)std::stol(*itr_pcam++);
+  bvc.vehicleWidth = (VehicleWidth_t)std::stol(*itr_pcam);
 
   std::string error;
   if (!message.validate(error)) {

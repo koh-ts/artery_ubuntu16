@@ -22,6 +22,9 @@
 
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/transportlayer/contract/udp/UDPSocket.h"
+#include <iostream>
+#include <fstream>
+
 
 namespace artery {
 
@@ -47,6 +50,8 @@ class UDPCamListener : public ApplicationBase
     virtual bool handleNodeStart(IDoneCallback *doneCallback) override;
     virtual bool handleNodeShutdown(IDoneCallback *doneCallback) override;
     virtual void handleNodeCrash() override;
+    std::ofstream ofs;
+
   public:
     UDPCamListener() {}
     ~UDPCamListener() {}

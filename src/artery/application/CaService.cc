@@ -3,6 +3,7 @@
 #include "artery/application/Asn1PacketVisitor.h"
 #include "artery/application/VehicleDataProvider.h"
 #include "artery/utility/simtime_cast.h"
+#include "artery/veins/VeinsMobility.h"
 #include "veins/base/utils/Coord.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
@@ -50,7 +51,6 @@ CaService::CaService() :
 void CaService::initialize()
 {
 	ItsG5BaseService::initialize();
-	mVehicleDataProvider = &getFacilities().get_const<VehicleDataProvider>();
 	mTimer = &getFacilities().get_const<Timer>();
 	// avoid unreasonable high elapsed time values for newly inserted vehicles
 	mLastCamTimestamp = simTime();
@@ -69,9 +69,16 @@ void CaService::initialize()
 
 	mDccRestriction = par("withDccRestriction");
 	mFixedRate = par("fixedRate");
-
-	const std::string output = "../../output/output_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
-  ofs.open(output, std::ios::out);
+	if (strstr(this->getFullPath().c_str(),"node")!=NULL) {
+	  isVehicle = true;
+    mVehicleDataProvider = &getFacilities().get_const<VehicleDataProvider>();
+    const std::string output = "../../output/output_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
+    ofs.open(output, std::ios::out);
+	} else {
+	  isVehicle = false;
+    const std::string output = "../../output/output_" + (std::string)this->getFullPath() + ".txt";
+    ofs.open(output, std::ios::out);
+	}
 }
 
 void CaService::trigger()
@@ -92,21 +99,21 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
 		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
 		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
-		// std::cout << tai << endl;
-		// fprintf(fp, "%d\t%s", (int)(msg->header.stationID), std::to_string(expiry));
-		// std::cout << "generationDeltaTime is: " << msg->cam.generationDeltaTime;
-		ofs << "time: " << omnetpp::simTime() << "\tsrc station id: " << msg->header.stationID << "\t" <<
-		// ofs << "recv pos is: " << mVehicleDataProvider->longitude() << endl;
-		"src cam time: " << timeStamp << "\t" <<
-		"src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "," <<
-		msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t" <<
-		"dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << "," <<
-		round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << "\t" << endl;
-		// std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
-		// std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
-		// ofs << "\t src pos is: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "," << msg->cam.camParameters.basicContainer.referencePosition.latitude << endl;
-		// ofs << "distance is: " << Position::distance(mVehicleDataProvider->position(),
-
+		ofs << "time: " << omnetpp::simTime() << "\t"
+		    << "src station id: " << msg->header.stationID << "\t"
+		    << "src cam time: " << timeStamp << "\t"
+		    << "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
+		    << msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t";
+		if (isVehicle){
+		  ofs << "dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
+	        << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
+	        << endl;
+		} else {
+		  Coord cpos = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.^.mobility"))->getCurrentPosition();
+		  ofs << "dst pos: " << cpos.x << ","
+		      << cpos.y
+		      << endl;
+		}
 		mLocalDynamicMap->updateAwareness(obj);
 	}
 }

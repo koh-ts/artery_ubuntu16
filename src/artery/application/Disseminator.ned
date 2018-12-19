@@ -33,7 +33,7 @@ module Disseminator extends StandardHost
         @display("i=block/wrxtx;is=vs");
         string applType = default("artery.veins.ApplicationLayer"); // type of application layer
         string nicType = default("org.car2x.veins.modules.nic.Nic80211p"); // type of network interface card
-        string mobilityType = default("artery.veins.Mobility");
+//        string mobilityType = default("artery.veins.Mobility");
 
     gates:
         input radioIN @directIn; // gate for sendDirect
@@ -45,7 +45,7 @@ module Disseminator extends StandardHost
                 middleware.typename = "StationaryMiddleware";
                 vanetza.position.typename = "StationaryPositionProvider";
                 vanetza.router.isMobile = false;
-                **.mobilityModule = absPath("^.mobility");
+                **.mobilityModule = absPath("^.^.mobility");
                 **.traciCoreModule = "traci.core";
         }
 
@@ -53,14 +53,14 @@ module Disseminator extends StandardHost
             @display("p=110,489");
         }
 
-        mobility: <mobilityType> like IMobility {
-          parameters:
-            @display("p=130,150");
-            x = 0.0; // overwritten by TraCI
-            y = 0.0; // overwritten by TraCI
-            z = default(1.5);
-            @display("p=130,150");
-        }
+//        mobility: <mobilityType> like IMobility {
+//          parameters:
+//            @display("p=130,150");
+//            x = 0.0; // overwritten by TraCI
+//            y = 0.0; // overwritten by TraCI
+//            z = default(1.5);
+//            @display("p=130,150");
+//        }
 
     connections:
         nic.upperLayerOut --> appl.lowerLayerIn;

@@ -17,6 +17,7 @@ package artery.application;
 
 import inet.node.inet.StandardHost;
 
+
 //
 // TODO auto-generated module
 //
@@ -24,5 +25,5 @@ module Sensor extends StandardHost
 {
     parameters:
         @display("i=block/app");
-        
+        string mobilityType = default("artery.veins.Mobility");        
 }

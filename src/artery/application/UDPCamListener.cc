@@ -19,6 +19,7 @@
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
+#include "inet/applications/base/ApplicationPacket_m.h"
 
 namespace artery
 {
@@ -30,16 +31,19 @@ simsignal_t UDPCamListener::rcvdPkSignal = cComponent::registerSignal("campktrcv
 void UDPCamListener::initialize(int stage)
 {
     ApplicationBase::initialize(stage);
-    std::cout << "hello" << endl;
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
+      const std::string output = "../../output/output_" + this->getFullPath() + "_listener.txt";
+      ofs.open(output, std::ios::out);
+
     }
 }
 
 void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 {
     if (msg->getKind() == UDP_I_DATA) {
-        receiveCAM(PK(msg));
+      ofs << "received Cam udp: time: " << simTime() << " serialnum: " << ((ApplicationPacket *)msg) -> getSequenceNumber() << endl;
+      receiveCAM(PK(msg));
     }
     else {
         throw cRuntimeError("Message received with unexpected message kind = %d", msg->getKind());
@@ -48,15 +52,14 @@ void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 
 void UDPCamListener::receiveCAM(cPacket *pk)
 {
-    EV_INFO << "Video stream packet: " << UDPSocket::getReceivedPacketInfo(pk) << endl;
-    std::cout << simTime() << endl;
     emit(rcvdPkSignal, pk);
 
     // determine its source address/port
     UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
     L3Address srcAddress = ctrl->getSrcAddr();
     std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
-//    std::cout << check_and_cast<artery::Disseminator>this->getParentModule()->handleMessage(pk) << endl;
+
+    //    std::cout << check_and_cast<artery::Disseminator>this->getParentModule()->handleMessage(pk) << endl;
 
     delete pk;
 }
@@ -86,4 +89,3 @@ void UDPCamListener::handleNodeCrash()
 }
 
 } // namespace artery
-

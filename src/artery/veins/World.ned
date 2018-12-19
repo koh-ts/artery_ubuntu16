@@ -3,7 +3,7 @@ package artery.veins;
 import artery.storyboard.Storyboard;
 import artery.veins.ObstacleControl;
 import artery.veins.ConnectionManager;
-import artery.veins.RSU;
+import artery.veins.Car;
 import org.car2x.veins.base.modules.BaseWorldUtility;
 import org.car2x.veins.modules.world.annotations.AnnotationManager;
 import traci.Manager;
@@ -20,6 +20,7 @@ network World
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
         int numProxyCamDevs = default(0);
+        int numRoadSideUnits = default(0);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
@@ -73,6 +74,9 @@ network World
 
         pcam[numProxyCamDevs]: ProxyCamDev {
             @display("p=330,218");
+        }
+        
+        rsu[numRoadSideUnits]: RSU {
         }
         
         configurator: IPv4NetworkConfigurator {

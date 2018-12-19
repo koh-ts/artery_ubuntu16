@@ -26,7 +26,7 @@
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
 #include "artery/application/VehicleMiddleware.h"
 #include "veins/base/utils/MiXiMDefs.h"
-#include "artery/utility/Geometry.h"
+//#include "artery/utility/Geometry.h"
 #include "artery/traci/VehicleController.h"
 #include "artery/veins/VeinsMobility.h"
 
@@ -126,6 +126,7 @@ L3Address UDPCamSender::chooseDestAddr()
             token = tokenizer.nextToken();
         destAddresses[k] = L3AddressResolver().resolve(token);
     }
+    std::cout << destAddresses[k] << endl;
     return destAddresses[k];
 }
 
@@ -145,6 +146,8 @@ void UDPCamSender::sendPacket()
     for (auto it = payloads.begin();it != payloads.end(); ++it) {
       emit(sentPkSignal, *it);
       socket.sendTo(*it, destAddr, destPort);
+      ofs << "time: " << simTime() << "\tserial num: " << numSent << endl;
+      std::cout << "udp packet sent" << endl;
       numSent++;
     }
 }
@@ -154,8 +157,11 @@ std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
 
   std::vector<const VehicleDataProvider *> vdps;
 
-  traci::VehicleController *controller = check_and_cast<traci::VehicleController*>(check_and_cast<VeinsMobility *>(this->getParentModule()->getParentModule()->getModuleByPath(".mobility"))->getVehicleController());
-  auto pos = controller->getPosition();
+  VeinsMobility* mobility = check_and_cast<VeinsMobility *>(this->getParentModule()->getParentModule()->getModuleByPath(".mobility"));
+  Coord cpos = mobility->getCurrentPosition();
+  //  traci::VehicleController* controller = (traci::VehicleController*)(mobility->getVehicleController());
+//  auto pos = controller->getPosition();
+  auto pos = Position(cpos.x, cpos.y);
 
   auto mod = getSimulation()->getSystemModule();
 
@@ -164,8 +170,8 @@ std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
     if (strstr(submod->getName(),"node")!=NULL) {
       VehicleMiddleware* middleware = check_and_cast<VehicleMiddleware *>(submod->getModuleByPath(".appl.middleware"));
       const VehicleDataProvider* vdp = &middleware->getFacilities().get_const<VehicleDataProvider>();
-      std::cout << (double)distance(vdp->position(), pos) << endl;
-      if (distance(vdp->position(), pos) < 30) {
+      std::cout << "distance is " << (double)boost::geometry::distance(vdp->position(), pos) << endl;
+      if (boost::geometry::distance(vdp->position(), pos) < 30) {
         vdps.push_back(vdp);
       }
     }
@@ -189,9 +195,10 @@ ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider* vdp) {
   str << "1" << ","                             //header.protocolVersion
       << ItsPduHeader__messageID_cam << ","     //header.messageId
       << "0" << ","                             //header.stationID
-      << countTaiMilliseconds(mTimer.getTimeFor(vdp->updated())) * GenerationDeltaTime_oneMilliSec << ","   //cam.generationDeltaTime
+      << countTaiMilliseconds(mTimer.getTimeFor(simTime())) << ","   //cam.generationDeltaTime
       << StationType_passengerCar << ","
       << AltitudeValue_unavailable << ","
+      << AltitudeConfidence_unavailable << ","
       << round(vdp->longitude(), microdegree) * Longitude_oneMicrodegreeEast << ","
       << round(vdp->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
       << HeadingValue_unavailable << ","
@@ -236,10 +243,10 @@ ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider* vdp) {
       << VehicleLengthConfidenceIndication_noTrailerPresent << ","
       << VehicleWidth_unavailable << endl;
 
-  ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
+  ApplicationPacket *payload = new ApplicationPacket("CamPacket");
   payload->setByteLength(sizeof(str));
   payload->setSequenceNumber(numSent);
-
+  payload->addPar("data") = str.str().c_str();
   return payload;
 }
 
