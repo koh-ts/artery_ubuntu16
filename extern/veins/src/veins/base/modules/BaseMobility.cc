@@ -99,7 +99,36 @@ void BaseMobility::initialize(int stage)
         double y = hasPar("y") ? par("y").doubleValue() : -1;
         double z = hasPar("z") ? par("z").doubleValue() : -1;
 
-        std::cout << "init pos " << x << "," << y << "," << z << endl;
+        if (strstr(this->getFullPath().c_str(),"pcam")!=NULL) {
+          int num = par("numProxyCamDevsParEdge");
+          int fPos = ((std::string)this->getFullPath()).find("[");
+          int lPos = ((std::string)this->getFullPath()).find("]");
+          int pcamnum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
+          if (pcamnum == 0)
+            x = 0;
+          else
+            x = 100 * (pcamnum % num);
+          if (pcamnum == 0)
+            y = 100 * (num - 1);
+          else
+            y = 100 * (num - 1 - (int)(pcamnum / num));
+          std::cout << x << "," << y << endl;
+        } else if (strstr(this->getFullPath().c_str(),"router")!=NULL) {
+          int num = par("numProxyCamDevsParEdge");
+          int fPos = ((std::string)this->getFullPath()).find("[");
+          int lPos = ((std::string)this->getFullPath()).find("]");
+          int routernum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
+          std::cout << routernum << endl;
+          if (routernum == 0)
+            x = 10;
+          else
+            x = 100 * (routernum % num) + 10;
+          if (routernum == 0)
+            y = 100 * (num - 1);
+          else
+            y = 100 * (num - 1 - (int)(routernum / num));
+        }
+
         //set position with values from parameters if available
         if(x > -1) pos.x = x;
         if(y > -1) pos.y = y;

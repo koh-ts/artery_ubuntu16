@@ -7,4 +7,6 @@ simple Mobility extends BaseMobility like artery.traci.Mobility
     parameters:
         @class(VeinsMobility);
         @signal[mobilityStateChanged];
+	    int numProxyCamDevsParEdge = default(0);
+        
 }

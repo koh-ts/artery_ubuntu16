@@ -24,7 +24,7 @@ network GridWorld
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
-        @display("bgb=506,483");
+        @display("bgb=800,800");
 
     types:
         channel ethline extends DatarateChannel
@@ -72,11 +72,10 @@ network GridWorld
         }
 
         router[numProxyCamDevsParEdge*numProxyCamDevsParEdge]: RIPRouter {
-            @display("p=233,325");
+            @display("p=298,341");
         }
 
         rsu[numRoadSideUnits]: RSU;
-
         configurator: IPv4NetworkConfigurator {
             @display("p=112,278");
         }
