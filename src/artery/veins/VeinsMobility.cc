@@ -8,7 +8,8 @@ Define_Module(VeinsMobility)
 
 void VeinsMobility::initialize(int stage)
 {
-    if (stage == 0) {
+  std::cout << "veinsmobility init " << stage << endl;
+  if (stage == 0) {
         WATCH(mVehicleId);
         WATCH(mPosition);
         WATCH(mDirection);
@@ -24,7 +25,9 @@ void VeinsMobility::initialize(int stage)
 
 void VeinsMobility::initialize(const Position& pos, Angle heading, double speed)
 {
-    using boost::units::si::meter;
+  using boost::units::si::meter;
+ std::cout << this->getFullPath() << " initializing" << endl;
+  std::cout << pos.x /meter<< "," << pos.y /meter<< endl;
     mPosition.x = pos.x / meter;
     mPosition.y = pos.y / meter;
     move.setStart(mPosition);
@@ -38,6 +41,7 @@ void VeinsMobility::initialize(const Position& pos, Angle heading, double speed)
 
 void VeinsMobility::update(const Position& pos, Angle heading, double speed)
 {
+    std::cout << this->getFullPath() << " updating" << endl;
     initialize(pos, heading, speed);
 
     BaseMobility::updatePosition(); // emits update signal for Veins

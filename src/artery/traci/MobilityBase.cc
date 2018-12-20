@@ -22,6 +22,7 @@ void MobilityBase::initializeSink(LiteAPI* api, const std::string& id, const Tra
 
 void MobilityBase::initializeVehicle(const TraCIPosition& traci_pos, TraCIAngle traci_heading, double traci_speed)
 {
+  std::cout << "init mobbase" << std::endl;
     const auto opp_pos = position_cast(mNetBoundary, traci_pos);
     const auto opp_angle = angle_cast(traci_heading);
     initialize(opp_pos, opp_angle, traci_speed);
@@ -29,6 +30,7 @@ void MobilityBase::initializeVehicle(const TraCIPosition& traci_pos, TraCIAngle 
 
 void MobilityBase::updateVehicle(const TraCIPosition& traci_pos, TraCIAngle traci_heading, double traci_speed)
 {
+    std::cout << "update mobbase" << "updatingVehicle" << std::endl;
     const auto opp_pos = position_cast(mNetBoundary, traci_pos);
     const auto opp_angle = angle_cast(traci_heading);
     update(opp_pos, opp_angle, traci_speed);

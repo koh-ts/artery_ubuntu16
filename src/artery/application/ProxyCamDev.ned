@@ -57,9 +57,6 @@ network ProxyCamDev
         mobility: <mobilityType> like IMobility {
             parameters:
                 @display("p=96,50");
-                x = 0.0; // overwritten by TraCI
-                y = 0.0; // overwritten by TraCI
-                z = default(1.5);
         }
 
 

@@ -61,7 +61,7 @@ void RSUCaService::initialize()
 
 
 void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
-  std::cout << "sending cam with packet..." << endl;
+//  std::cout << "sending cam with packet..." << endl;
   EV_INFO << "sending cam......" << endl;
   // std::cout << "sending cam ........" << endl;
 //  ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
@@ -98,7 +98,6 @@ vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
   vanetza::asn1::Cam message;
   std::vector<std::string> pcam;
   if (pk->hasPar("data")) {
-    std::cout << (std::string)(pk->par("data")) << endl;
     std::string s = (std::string)(pk->par("data"));
     std::stringstream ss{s};
     std::string buf;
@@ -109,7 +108,6 @@ vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
     std::cout << "no data found" << endl;
   }
   auto itr_pcam = pcam.begin();
-  std::cout << *itr_pcam << endl;
   ItsPduHeader_t& header = (*message).header;
   header.protocolVersion = std::stol(*itr_pcam++);
   header.messageID = std::stol(*itr_pcam++);
@@ -157,10 +155,8 @@ vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
 void RSUCaService::receiveSignal(cComponent* source, simsignal_t signal, cObject* obj1, cObject* obj2)
 {
     Enter_Method_Silent();
-    std::cout << simTime() << endl;
-    std::cout << source << "," << obj1 << "," << obj2 << endl;
+//    std::cout << simTime() << endl;
     if (signal == artery::UDPCamListener::rcvdPkSignal) {
-        std::cout << "cam packet get!!" << endl;
         sendCAMWithPacket((cPacket*)obj1);
     }
 }

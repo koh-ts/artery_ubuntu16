@@ -56,12 +56,10 @@ void UDPCamListener::receiveCAM(cPacket *pk)
 {
     emit(rcvdPkSignal, pk);
 
-    std::cout << "cam received" << endl;
-
     // determine its source address/port
     UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
     L3Address srcAddress = ctrl->getSrcAddr();
-    std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
+//    std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
 
     ofs << "received Cam udp: time: " << simTime()
         << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()

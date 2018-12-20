@@ -99,6 +99,7 @@ void BaseMobility::initialize(int stage)
         double y = hasPar("y") ? par("y").doubleValue() : -1;
         double z = hasPar("z") ? par("z").doubleValue() : -1;
 
+        std::cout << "init pos " << x << "," << y << "," << z << endl;
         //set position with values from parameters if available
         if(x > -1) pos.x = x;
         if(y > -1) pos.y = y;

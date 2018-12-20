@@ -126,7 +126,6 @@ L3Address UDPCamSender::chooseDestAddr()
             token = tokenizer.nextToken();
         destAddresses[k] = L3AddressResolver().resolve(token);
     }
-    std::cout << destAddresses[k] << endl;
     return destAddresses[k];
 }
 
@@ -152,7 +151,7 @@ void UDPCamSender::sendPacket()
             << "\tfrom: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
             << "\tto: " << destAddresses[i]
             << endl;
-        std::cout << "udp packet sent" << endl;
+        // std::cout << "udp packet sent" << endl;
         numSent++;
       }
       delete (*it);
@@ -177,7 +176,7 @@ std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
     if (strstr(submod->getName(),"node")!=NULL) {
       VehicleMiddleware* middleware = check_and_cast<VehicleMiddleware *>(submod->getModuleByPath(".appl.middleware"));
       const VehicleDataProvider* vdp = &middleware->getFacilities().get_const<VehicleDataProvider>();
-      std::cout << "distance is " << (double)boost::geometry::distance(vdp->position(), pos) << endl;
+      // std::cout << "distance is " << (double)boost::geometry::distance(vdp->position(), pos) << endl;
       if (boost::geometry::distance(vdp->position(), pos) < 30) {
         vdps.push_back(vdp);
       }
@@ -271,7 +270,7 @@ void UDPCamSender::processStart()
     if (strstr(destAddrs,"all")!= NULL) {
       int count = -1;
       for(cModule::SubmoduleIterator it(getSystemModule()); !it.end(); ++it){
-        std::cout << (*it)->getFullName() << endl;
+        // std::cout << (*it)->getFullName() << endl;
         if (strstr((*it)->getFullName(),"pcam")!= NULL) {
           count++;
           L3Address result;
