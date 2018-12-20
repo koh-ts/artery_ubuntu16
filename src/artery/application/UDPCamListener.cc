@@ -20,6 +20,9 @@
 #include "inet/common/ModuleAccess.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
 #include "inet/applications/base/ApplicationPacket_m.h"
+#include "inet/networklayer/contract/ipv4/IPv4ControlInfo.h"
+#include "inet/networklayer/common/L3AddressResolver.h"
+
 
 namespace artery
 {
@@ -42,7 +45,6 @@ void UDPCamListener::initialize(int stage)
 void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 {
     if (msg->getKind() == UDP_I_DATA) {
-      ofs << "received Cam udp: time: " << simTime() << " serialnum: " << ((ApplicationPacket *)msg) -> getSequenceNumber() << endl;
       receiveCAM(PK(msg));
     }
     else {
@@ -54,11 +56,18 @@ void UDPCamListener::receiveCAM(cPacket *pk)
 {
     emit(rcvdPkSignal, pk);
 
+    std::cout << "cam received" << endl;
+
     // determine its source address/port
     UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
     L3Address srcAddress = ctrl->getSrcAddr();
     std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
 
+    ofs << "received Cam udp: time: " << simTime()
+        << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()
+        << "\tfrom: " << srcAddress
+        << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
+        << endl;
     //    std::cout << check_and_cast<artery::Disseminator>this->getParentModule()->handleMessage(pk) << endl;
 
     delete pk;

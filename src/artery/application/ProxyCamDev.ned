@@ -30,31 +30,28 @@ network ProxyCamDev
 {
     parameters:
         string mobilityType = default("artery.veins.Mobility");
-        @networkNode;
+//        @networkNode;
     gates:
         inout ethg;
 
     types:
         channel ethline extends DatarateChannel
         {
-            delay = 500ns;
-            datarate = 10Mbps;
-        }
-    submodules:
-        router: Router {
-            @display("p=77,138");
+            datarate = 10Gbps;
         }
 
+    submodules:
+
         switch: EtherSwitch {
-            @display("p=184,137");
+            @display("p=77,141");
         }
 
         disseminator: Disseminator {
-            @display("p=374,81");
+            @display("p=228,62");
         }
 
         sensor: Sensor {
-            @display("p=374,191");
+            @display("p=228,174");
         }
 
         mobility: <mobilityType> like IMobility {
@@ -62,13 +59,12 @@ network ProxyCamDev
                 @display("p=96,50");
                 x = 0.0; // overwritten by TraCI
                 y = 0.0; // overwritten by TraCI
-                z = default(1.5);                
+                z = default(1.5);
         }
 
 
     connections:
-        router.ethg++ <--> ethline <--> switch.ethg++;
+        ethg <--> switch.ethg++;
         sensor.ethg++ <--> ethline <--> switch.ethg++;
         disseminator.ethg++ <--> ethline <--> switch.ethg++;
-        router.ethg++ <--> ethg;
 }

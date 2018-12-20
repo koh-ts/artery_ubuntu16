@@ -144,11 +144,18 @@ void UDPCamSender::sendPacket()
     L3Address destAddr = chooseDestAddr();
 
     for (auto it = payloads.begin();it != payloads.end(); ++it) {
-      emit(sentPkSignal, *it);
-      socket.sendTo(*it, destAddr, destPort);
-      ofs << "time: " << simTime() << "\tserial num: " << numSent << endl;
-      std::cout << "udp packet sent" << endl;
-      numSent++;
+      for (int i = 0 ; i < destAddresses.size(); i++) {
+        emit(sentPkSignal, *it);
+        socket.sendTo((*it)->dup(), destAddresses[i], destPort);
+        ofs << "time: " << simTime()
+            << "\tserial num: " << numSent
+            << "\tfrom: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
+            << "\tto: " << destAddresses[i]
+            << endl;
+        std::cout << "udp packet sent" << endl;
+        numSent++;
+      }
+      delete (*it);
     }
 }
 
@@ -260,16 +267,35 @@ void UDPCamSender::processStart()
     setSocketOptions();
 
     const char *destAddrs = par("destAddresses");
-    cStringTokenizer tokenizer(destAddrs);
-    const char *token;
 
-    while ((token = tokenizer.nextToken()) != nullptr) {
-        L3Address result;
-        L3AddressResolver().tryResolve(token, result);
-        if (result.isUnspecified())
-            EV_ERROR << "cannot resolve destination address: " << token << endl;
-        else
+    if (strstr(destAddrs,"all")!= NULL) {
+      int count = -1;
+      for(cModule::SubmoduleIterator it(getSystemModule()); !it.end(); ++it){
+        std::cout << (*it)->getFullName() << endl;
+        if (strstr((*it)->getFullName(),"pcam")!= NULL) {
+          count++;
+          L3Address result;
+          L3AddressResolver().tryResolve(
+              ((std::string)"pcam[" + std::to_string(count) + (std::string)"].disseminator").c_str()
+              , result);
+          if (result.isUnspecified())
+            std::cout << "resolve address error" << endl;
+          else
             destAddresses.push_back(result);
+        }
+      }
+    } else {
+      cStringTokenizer tokenizer(destAddrs);
+      const char *token;
+
+      while ((token = tokenizer.nextToken()) != nullptr) {
+          L3Address result;
+          L3AddressResolver().tryResolve(token, result);
+          if (result.isUnspecified())
+              EV_ERROR << "cannot resolve destination address: " << token << endl;
+          else
+              destAddresses.push_back(result);
+      }
     }
 
     if (!destAddresses.empty()) {
@@ -377,4 +403,3 @@ void UDPCamSender::handleNodeCrash()
 }
 
 } // namespace inet
-

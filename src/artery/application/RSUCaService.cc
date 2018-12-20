@@ -6,6 +6,8 @@
 #include "veins/base/utils/Coord.h"
 #include "artery/application/UDPCamListener.h"
 #include "inet/applications/base/ApplicationPacket_m.h"
+#include "inet/networklayer/contract/ipv4/IPv4ControlInfo.h"
+#include "inet/networklayer/common/L3AddressResolver.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
 #include <omnetpp/cexception.h>
@@ -80,7 +82,15 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   std::unique_ptr<geonet::DownPacket> payload { new geonet::DownPacket() };
   std::unique_ptr<convertible::byte_buffer> buffer { new CamByteBuffer(obj.shared_ptr()) };
   payload->layer(OsiLayer::Application) = std::move(buffer);
-  ofs << "time: " << simTime() << "serialnum: " << ((ApplicationPacket *)pk) -> getSequenceNumber() << endl;
+
+  UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
+  L3Address srcAddress = ctrl->getSrcAddr();
+
+  ofs << "time: " << simTime()
+      << "\tserialnum: " << ((ApplicationPacket *)pk) -> getSequenceNumber()
+      << "\tfrom: " << srcAddress
+      << "\tto: " << L3AddressResolver().resolve(this->getModuleByPath("^.^.^")->getFullPath().c_str())
+      << endl;
   this->request(request, std::move(payload));
 }
 
@@ -183,13 +193,15 @@ void RSUCaService::indicate(const vanetza::btp::DataIndication& ind, std::unique
         // std::cout << tai << endl;
         // fprintf(fp, "%d\t%s", (int)(msg->header.stationID), std::to_string(expiry));
         // std::cout << "generationDeltaTime is: " << msg->cam.generationDeltaTime;
-        ofs << "time: " << omnetpp::simTime() << "\tsrc station id: " << msg->header.stationID << "\t" <<
+        ofs << "time: " << omnetpp::simTime()
+        << "\tsrc station id: " << msg->header.stationID
         // ofs << "recv pos is: " << mVehicleDataProvider->longitude() << endl;
-        "src cam time: " << timeStamp << "\t" <<
-        "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "," <<
-        msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t" <<
-        "dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << "," <<
-        round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << "\t" << endl;
+        << "\tsrc cam time: " << timeStamp
+        << "\tsrc pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
+        << msg->cam.camParameters.basicContainer.referencePosition.longitude
+        << "\tdst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
+        << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
+        << endl;
         // std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
         // std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
         // ofs << "\t src pos is: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "," << msg->cam.camParameters.basicContainer.referencePosition.latitude << endl;
@@ -283,92 +295,5 @@ SimTime RSUCaService::genCamDcc()
     SimTime dcc { std::chrono::duration_cast<std::chrono::milliseconds>(delay).count(), SIMTIME_MS };
     return std::min(mGenCamMax, std::max(mGenCamMin, dcc));
 }
-
-//vanetza::asn1::Cam createCooperativeAwarenessMessage(const VehicleDataProvider& vdp, uint16_t genDeltaTime)
-//{
-//    auto microdegree = vanetza::units::degree * boost::units::si::micro;
-//    auto decidegree = vanetza::units::degree * boost::units::si::deci;
-//    auto degree_per_second = vanetza::units::degree / vanetza::units::si::second;
-//    auto centimeter_per_second = vanetza::units::si::meter_per_second * boost::units::si::centi;
-//    vanetza::asn1::Cam message;
-//
-//    ItsPduHeader_t& header = (*message).header;
-//    header.protocolVersion = 1;
-//    header.messageID = ItsPduHeader__messageID_cam;
-//    header.stationID = vdp.station_id();
-//
-//    CoopAwareness_t& cam = (*message).cam;
-//    cam.generationDeltaTime = genDeltaTime * GenerationDeltaTime_oneMilliSec;
-//    BasicContainer_t& basic = cam.camParameters.basicContainer;
-//    HighFrequencyContainer_t& hfc = cam.camParameters.highFrequencyContainer;
-//
-//    basic.stationType = StationType_passengerCar;
-//    basic.referencePosition.altitude.altitudeValue = AltitudeValue_unavailable;
-//    basic.referencePosition.altitude.altitudeConfidence = AltitudeConfidence_unavailable;
-//    basic.referencePosition.longitude = round(vdp.longitude(), microdegree) * Longitude_oneMicrodegreeEast;
-//    basic.referencePosition.latitude = round(vdp.latitude(), microdegree) * Latitude_oneMicrodegreeNorth;
-//    basic.referencePosition.positionConfidenceEllipse.semiMajorOrientation = HeadingValue_unavailable;
-//    basic.referencePosition.positionConfidenceEllipse.semiMajorConfidence =
-//            SemiAxisLength_unavailable;
-//    basic.referencePosition.positionConfidenceEllipse.semiMinorConfidence =
-//            SemiAxisLength_unavailable;
-//
-//    hfc.present = HighFrequencyContainer_PR_basicVehicleContainerHighFrequency;
-//    BasicVehicleContainerHighFrequency& bvc = hfc.choice.basicVehicleContainerHighFrequency;
-//    bvc.heading.headingValue = round(vdp.heading(), decidegree);
-//    bvc.heading.headingConfidence = HeadingConfidence_equalOrWithinOneDegree;
-//    bvc.speed.speedValue = round(vdp.speed(), centimeter_per_second) * SpeedValue_oneCentimeterPerSec;
-//    bvc.speed.speedConfidence = SpeedConfidence_equalOrWithinOneCentimeterPerSec * 3;
-//    bvc.driveDirection = vdp.speed().value() >= 0.0 ?
-//            DriveDirection_forward : DriveDirection_backward;
-//    const double lonAccelValue = vdp.acceleration() / vanetza::units::si::meter_per_second_squared;
-//    // extreme speed changes can occur when SUMO swaps vehicles between lanes (speed is swapped as well)
-//    if (lonAccelValue >= -160.0 && lonAccelValue <= 161.0) {
-//        bvc.longitudinalAcceleration.longitudinalAccelerationValue = lonAccelValue * LongitudinalAccelerationValue_pointOneMeterPerSecSquaredForward;
-//    } else {
-//        bvc.longitudinalAcceleration.longitudinalAccelerationValue = LongitudinalAccelerationValue_unavailable;
-//    }
-//    bvc.longitudinalAcceleration.longitudinalAccelerationConfidence = AccelerationConfidence_unavailable;
-//    bvc.curvature.curvatureValue = abs(vdp.curvature() / vanetza::units::reciprocal_metre) * 10000.0;
-//    if (bvc.curvature.curvatureValue >= 1023) {
-//        bvc.curvature.curvatureValue = 1023;
-//    }
-//    bvc.curvature.curvatureConfidence = CurvatureConfidence_unavailable;
-//    bvc.curvatureCalculationMode = CurvatureCalculationMode_yawRateUsed;
-//    bvc.yawRate.yawRateValue = round(vdp.yaw_rate(), degree_per_second) * YawRateValue_degSec_000_01ToLeft * 100.0;
-//    if (abs(bvc.yawRate.yawRateValue) >= YawRateValue_unavailable) {
-//        bvc.yawRate.yawRateValue = YawRateValue_unavailable;
-//    }
-//    bvc.vehicleLength.vehicleLengthValue = VehicleLengthValue_unavailable;
-//    bvc.vehicleLength.vehicleLengthConfidenceIndication =
-//            VehicleLengthConfidenceIndication_noTrailerPresent;
-//    bvc.vehicleWidth = VehicleWidth_unavailable;
-//
-//    std::string error;
-//    if (!message.validate(error)) {
-//        throw cRuntimeError("Invalid High Frequency CAM: %s", error.c_str());
-//    }
-//
-//    return message;
-//}
-//
-//void addLowFrequencyContainer(vanetza::asn1::Cam& message)
-//{
-//    LowFrequencyContainer_t*& lfc = message->cam.camParameters.lowFrequencyContainer;
-//    lfc = vanetza::asn1::allocate<LowFrequencyContainer_t>();
-//    lfc->present = LowFrequencyContainer_PR_basicVehicleContainerLowFrequency;
-//    BasicVehicleContainerLowFrequency& bvc = lfc->choice.basicVehicleContainerLowFrequency;
-//    bvc.vehicleRole = VehicleRole_default;
-//    bvc.exteriorLights.buf = static_cast<uint8_t*>(vanetza::asn1::allocate(1));
-//    assert(nullptr != bvc.exteriorLights.buf);
-//    bvc.exteriorLights.size = 1;
-//    bvc.exteriorLights.buf[0] |= 1 << (7 - ExteriorLights_daytimeRunningLightsOn);
-//    // TODO: add pathHistory
-//
-//    std::string error;
-//    if (!message.validate(error)) {
-//        throw cRuntimeError("Invalid Low Frequency CAM: %s", error.c_str());
-//    }
-//}
 
 } // namespace artery

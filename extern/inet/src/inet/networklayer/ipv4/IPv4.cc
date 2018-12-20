@@ -96,6 +96,8 @@ void IPv4::initialize(int stage)
         WATCH(numUnroutable);
         WATCH(numForwarded);
         WATCH_MAP(pendingPackets);
+        if (strstr(this->getFullPath().c_str(),"router")!=NULL)
+          ttlThreshold = (int)par("ttl") + 1;
     }
     else if (stage == INITSTAGE_NETWORK_LAYER) {
         isUp = isNodeUp();
@@ -184,9 +186,12 @@ void IPv4::handleIncomingDatagram(IPv4Datagram *datagram, const InterfaceEntry *
         }
     }
 
-    // hop counter decrement
-    datagram->setTimeToLive(datagram->getTimeToLive() - 1);
-
+    if(datagram->getTimeToLive() > ttlThreshold) {
+      datagram->setTimeToLive(ttlThreshold);
+    } else {
+      // hop counter decrement
+      datagram->setTimeToLive(datagram->getTimeToLive() - 1);
+    }
     EV_DETAIL << "Received datagram `" << datagram->getName() << "' with dest=" << datagram->getDestAddress() << "\n";
 
     const InterfaceEntry *destIE = nullptr;
@@ -1187,4 +1192,3 @@ void IPv4::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj,
 }
 
 } // namespace inet
-

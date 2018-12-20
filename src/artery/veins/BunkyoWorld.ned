@@ -8,13 +8,12 @@ import org.car2x.veins.base.modules.BaseWorldUtility;
 import org.car2x.veins.modules.world.annotations.AnnotationManager;
 import traci.Manager;
 import artery.application.ProxyCamDev;
-import inet.node.inet.Router;
 import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
 import ned.DatarateChannel;
 import inet.visualizer.integrated.IntegratedVisualizer;
 
 
-network World
+network BunkyoWorld
 {
     parameters:
         bool withObstacles = default(true);
@@ -29,8 +28,7 @@ network World
     types:
         channel ethline extends DatarateChannel
         {
-            delay = 500ns;
-            datarate = 10Mbps;
+            datarate = 10Gbps;
         }
 
     submodules:
@@ -68,10 +66,6 @@ network World
                 @display("p=100,20");
         }
 
-        router: Router {
-            @display("p=200,147");
-        }
-
         pcam[numProxyCamDevs]: ProxyCamDev {
             @display("p=330,218");
         }
@@ -87,7 +81,7 @@ network World
 //        }
 
     connections:
-        pcam[0].ethg <--> ethline <--> router.ethg++;
-        pcam[1].ethg <--> ethline <--> router.ethg++;
-
+        for i=0..sizeof(pcam)-2 {
+        	pcam[i].ethg <--> ethline <--> pcam[i+1].ethg;
+        }
 }
