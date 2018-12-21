@@ -109,9 +109,9 @@ void BaseMobility::initialize(int stage)
           else
             x = 100 * (pcamnum % num);
           if (pcamnum == 0)
-            y = 100 * (num - 1);
+            y = 0;
           else
-            y = 100 * (num - 1 - (int)(pcamnum / num));
+            y = 100 * ((int)(pcamnum / num));
           // std::cout << x << "," << y << endl;
           par("x").setDoubleValue(x);
           par("y").setDoubleValue(y);
@@ -125,9 +125,9 @@ void BaseMobility::initialize(int stage)
           else
             x = 100 * (routernum % num) + 10;
           if (routernum == 0)
-            y = 100 * (num - 1);
+            y = 0;
           else
-            y = 100 * (num - 1 - (int)(routernum / num));
+            y = 100 * ((int)(routernum / num));
           // std::cout << x << "," << y << endl;
           par("x").setDoubleValue(x);
           par("y").setDoubleValue(y);

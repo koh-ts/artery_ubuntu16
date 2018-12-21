@@ -53,6 +53,7 @@ class UDPCamSender : public ApplicationBase
     const char *packetName = nullptr;
     Timer mTimer;
 
+    int maxHopNum = 0;
     // state
     UDPSocket socket;
     cMessage *selfMsg = nullptr;

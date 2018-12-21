@@ -21,6 +21,8 @@ import inet.applications.udpapp.UDPBasicApp;
 simple UDPCamSender like IUDPApp
 {
     parameters:
+    	int maxHopNum = default(0);
+    	int numProxyCamDevsParEdge = default(0);
         string datetime;
         string interfaceTableModule;   // The path to the InterfaceTable module
         int localPort = default(-1);  // local port (-1: use ephemeral port)

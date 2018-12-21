@@ -96,8 +96,6 @@ void IPv4::initialize(int stage)
         WATCH(numUnroutable);
         WATCH(numForwarded);
         WATCH_MAP(pendingPackets);
-        if (strstr(this->getFullPath().c_str(),"router")!=NULL)
-          ttlThreshold = (int)par("ttl") + 1;
     }
     else if (stage == INITSTAGE_NETWORK_LAYER) {
         isUp = isNodeUp();

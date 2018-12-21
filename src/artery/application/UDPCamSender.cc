@@ -67,6 +67,7 @@ void UDPCamSender::initialize(int stage)
         startTime = simTime() + uniform(0,par("sendInterval").doubleValue());
         stopTime = par("stopTime").doubleValue();
         packetName = par("packetName");
+        maxHopNum = par("maxHopNum");
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             throw cRuntimeError("Invalid startTime/stopTime parameters");
 
@@ -266,23 +267,84 @@ void UDPCamSender::processStart()
     setSocketOptions();
 
     const char *destAddrs = par("destAddresses");
-
+    std::cout << "processStart" << endl;
     if (strstr(destAddrs,"all")!= NULL) {
-      int count = -1;
-      for(cModule::SubmoduleIterator it(getSystemModule()); !it.end(); ++it){
-        // std::cout << (*it)->getFullName() << endl;
-        if (strstr((*it)->getFullName(),"pcam")!= NULL) {
-          count++;
-          L3Address result;
-          L3AddressResolver().tryResolve(
-              ((std::string)"pcam[" + std::to_string(count) + (std::string)"].disseminator").c_str()
-              , result);
-          if (result.isUnspecified())
-            std::cout << "resolve address error" << endl;
-          else
-            destAddresses.push_back(result);
+      int num = par("numProxyCamDevsParEdge");
+      int fPos = ((std::string)this->getFullPath()).find("[");
+      int lPos = ((std::string)this->getFullPath()).find("]");
+      int pcamnum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
+//      std::cout << "udp cam sender init: " << this->getFullPath() << "," << pcamnum << endl;
+      int row = (pcamnum - pcamnum % num) / num;
+      int col = pcamnum % num;
+
+      for (int hop = 0; hop <= maxHopNum; hop++) {
+        for (int row_hop = 0; row_hop <= hop; row_hop++) {
+          int col_hop = hop - row_hop;
+          if (row - row_hop >= 0 && col - col_hop >= 0) {
+            L3Address result;
+            L3AddressResolver().tryResolve(
+                ((std::string)"pcam[" + std::to_string((row - row_hop) * num + (col - col_hop)) + (std::string)"].disseminator").c_str()
+                , result);
+            if (result.isUnspecified())
+              std::cout << "resolve address error" << endl;
+            else
+              destAddresses.push_back(result);
+          }
+          if (row - row_hop >= 0 && col + col_hop < num) {
+            L3Address result;
+            L3AddressResolver().tryResolve(
+                ((std::string)"pcam[" + std::to_string((row - row_hop) * num + (col + col_hop)) + (std::string)"].disseminator").c_str()
+                , result);
+            if (result.isUnspecified())
+              std::cout << "resolve address error" << endl;
+            else
+              destAddresses.push_back(result);
+          }
+          if (row + row_hop < num && col - col_hop >= 0 ) {
+            L3Address result;
+            L3AddressResolver().tryResolve(
+                ((std::string)"pcam[" + std::to_string((row + row_hop) * num + (col - col_hop)) + (std::string)"].disseminator").c_str()
+                , result);
+            if (result.isUnspecified())
+              std::cout << "resolve address error" << endl;
+            else
+              destAddresses.push_back(result);
+          }
+          if (row + row_hop < num && col + col_hop < num) {
+            L3Address result;
+            L3AddressResolver().tryResolve(
+                ((std::string)"pcam[" + std::to_string((row + row_hop) * num + (col + col_hop)) + (std::string)"].disseminator").c_str()
+                , result);
+            if (result.isUnspecified())
+              std::cout << "resolve address error" << endl;
+            else
+              destAddresses.push_back(result);
+          }
         }
       }
+
+      // 重複している要素を削除
+      sort(destAddresses.begin(), destAddresses.end());
+      destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
+//      for (std::vector<L3Address>::iterator itr = destAddresses.begin(); itr != destAddresses.end(); itr++) {
+//        std::cout << *itr <<endl;
+//      }
+
+//      int count = -1;
+//      for(cModule::SubmoduleIterator it(getSystemModule()); !it.end(); ++it){
+//        // std::cout << (*it)->getFullName() << endl;
+//        if (strstr((*it)->getFullName(),"pcam")!= NULL) {
+//          count++;
+//          L3Address result;
+//          L3AddressResolver().tryResolve(
+//              ((std::string)"pcam[" + std::to_string(count) + (std::string)"].disseminator").c_str()
+//              , result);
+//          if (result.isUnspecified())
+//            std::cout << "resolve address error" << endl;
+//          else
+//            destAddresses.push_back(result);
+//        }
+//      }
     } else {
       cStringTokenizer tokenizer(destAddrs);
       const char *token;

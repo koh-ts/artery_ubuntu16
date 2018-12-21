@@ -24,7 +24,7 @@ network GridWorld
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
-        @display("bgb=800,800");
+        @display("bgb=1000,1000");
 
     types:
         channel ethline extends DatarateChannel
@@ -34,7 +34,7 @@ network GridWorld
 
     submodules:
         connectionManager: ConnectionManager {
-            @display("p=69,131");
+            @display("p=950,784.704");
         }
 
         world: BaseWorldUtility {
@@ -42,29 +42,29 @@ network GridWorld
                 playgroundSizeX = playgroundSizeX;
                 playgroundSizeY = playgroundSizeY;
                 playgroundSizeZ = playgroundSizeZ;
-                @display("p=40,199");
+                @display("p=948.72003,538.68");
         }
 
         obstacles: ObstacleControl if withObstacles {
             parameters:
                 traciCoreModule = "^.traci.core";
-                @display("p=40,254");
+                @display("p=948.72003,697.872");
         }
         annotations: AnnotationManager {
-            @display("p=260,50");
+            @display("p=950,940.68");
         }
 
         traci: Manager {
             parameters:
                 mapper.vehicleType = default("artery.veins.Car");
                 nodes.vehicleSinkModule = default(".mobility");
-                @display("p=20,20");
+                @display("p=950,865.104");
         }
 
         storyboard: Storyboard if withStoryboard {
             parameters:
                 middlewareModule = default(".appl.middleware");
-                @display("p=100,20");
+                @display("p=948.72003,451.848");
         }
 
         pcam[numProxyCamDevsParEdge*numProxyCamDevsParEdge]: ProxyCamDev {
@@ -77,7 +77,7 @@ network GridWorld
 
         rsu[numRoadSideUnits]: RSU;
         configurator: IPv4NetworkConfigurator {
-            @display("p=112,278");
+            @display("p=948.72003,617.472");
         }
 //        visualizer: IntegratedVisualizer {
 //            @display("p=282,31");
