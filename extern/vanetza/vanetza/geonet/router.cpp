@@ -135,7 +135,10 @@ Router::Router(Runtime& rt, const MIB& mib) :
     } else {
         // defer initial BEACON transmission slightly
         std::uniform_real_distribution<double> dist(0.0, 1.0);
-        const auto first_beacon = dist(m_random_gen) * m_mib.itsGnBeaconServiceRetransmitTimer;
+        std::random_device seed_gen;
+        std::mt19937 engine(seed_gen());
+        const auto first_beacon = dist(engine) * m_mib.itsGnBeaconServiceRetransmitTimer;
+        // std::cout << (const std::string)first_beacon << std::endl;
         reset_beacon_timer(clock_cast(first_beacon));
     }
 }
