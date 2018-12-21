@@ -68,6 +68,10 @@ void UDPCamSender::initialize(int stage)
         stopTime = par("stopTime").doubleValue();
         packetName = par("packetName");
         maxHopNum = par("maxHopNum");
+        pcamRange = par("pcamRange");
+        fakeCam = par("fakeCam");
+        fakeCamNum = par("fakeCamNum");
+        simStartTime = par("simStartTime");
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             throw cRuntimeError("Invalid startTime/stopTime parameters");
 
@@ -132,28 +136,20 @@ L3Address UDPCamSender::chooseDestAddr()
 
 void UDPCamSender::sendPacket()
 {
-//    std::ostringstream str;
-//    str << packetName << "-" << numSent;
-
-//    ApplicationPacket *payload = new ApplicationPacket(str.str().c_str());
-//    payload->setByteLength(par("messageLength").longValue());
-//    payload->setSequenceNumber(numSent);
-
     std::vector<ApplicationPacket*> payloads = searchAndMakeCamPayloads();
 
-    L3Address destAddr = chooseDestAddr();
+//    L3Address destAddr = chooseDestAddr();
 
     for (auto it = payloads.begin();it != payloads.end(); ++it) {
       for (int i = 0 ; i < destAddresses.size(); i++) {
         emit(sentPkSignal, *it);
         socket.sendTo((*it)->dup(), destAddresses[i], destPort);
         ofs << "time: " << simTime()
-            << "\tserial num: " << numSent
+            << "\tserial num: " << (*it)->getSequenceNumber()
             << "\tfrom: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
             << "\tto: " << destAddresses[i]
             << endl;
         // std::cout << "udp packet sent" << endl;
-        numSent++;
       }
       delete (*it);
     }
@@ -161,6 +157,15 @@ void UDPCamSender::sendPacket()
 
 std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
   EV_INFO << "sending cam......" << endl;
+
+  if (fakeCam) {
+    if (simTime() > simStartTime) {
+      return makeFakeCamPayloads();
+    } else {
+      std::vector<ApplicationPacket *> payloads;
+      return payloads;
+    }
+  }
 
   std::vector<const VehicleDataProvider *> vdps;
 
@@ -178,7 +183,7 @@ std::vector<ApplicationPacket*> UDPCamSender::searchAndMakeCamPayloads() {
       VehicleMiddleware* middleware = check_and_cast<VehicleMiddleware *>(submod->getModuleByPath(".appl.middleware"));
       const VehicleDataProvider* vdp = &middleware->getFacilities().get_const<VehicleDataProvider>();
       // std::cout << "distance is " << (double)boost::geometry::distance(vdp->position(), pos) << endl;
-      if (boost::geometry::distance(vdp->position(), pos) < 30) {
+      if (boost::geometry::distance(vdp->position(), pos) < pcamRange) {
         vdps.push_back(vdp);
       }
     }
@@ -253,8 +258,67 @@ ApplicationPacket* UDPCamSender::getCamPayload(const VehicleDataProvider* vdp) {
   ApplicationPacket *payload = new ApplicationPacket("CamPacket");
   payload->setByteLength(sizeof(str));
   payload->setSequenceNumber(numSent);
+  numSent++;
   payload->addPar("data") = str.str().c_str();
   return payload;
+}
+
+std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
+  auto microdegree = vanetza::units::degree * boost::units::si::micro;
+  auto decidegree = vanetza::units::degree * boost::units::si::deci;
+  auto degree_per_second = vanetza::units::degree / vanetza::units::si::second;
+  auto centimeter_per_second = vanetza::units::si::meter_per_second * boost::units::si::centi;
+
+  int fPos = ((std::string)this->getFullPath()).find("[");
+  int lPos = ((std::string)this->getFullPath()).find("]");
+  int pcamnum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
+
+  long double st = (long double) omnetpp::simTime().dbl();
+
+  std::ostringstream str;
+  str << "1" << ","                             //header.protocolVersion
+      << ItsPduHeader__messageID_cam << ","     //header.messageId
+      << pcamnum << ","                         //header.stationID
+//      << countTaiMilliseconds(mTimer.getTimeFor(simTime())) << ","   //cam.generationDeltaTime
+      << (long int)(st * 100000)<< ","   //cam.generationDeltaTime
+      << StationType_passengerCar << ","
+      << AltitudeValue_unavailable << ","
+      << AltitudeConfidence_unavailable << ","
+      << 0 << ","
+      << 0 << ","
+      << HeadingValue_unavailable << ","
+      << SemiAxisLength_unavailable << ","
+      << SemiAxisLength_unavailable << ","
+      << HighFrequencyContainer_PR_basicVehicleContainerHighFrequency << ","
+      << 0 << ","
+      << HeadingConfidence_equalOrWithinOneDegree << ","
+      << 0 << ","
+      << SpeedConfidence_equalOrWithinOneCentimeterPerSec * 3 << ",";
+  str << DriveDirection_forward << ",";
+  str << LongitudinalAccelerationValue_unavailable << ",";
+  str << AccelerationConfidence_unavailable << ",";
+  str << 1023 << ",";
+  str << CurvatureConfidence_unavailable << ","
+      << CurvatureCalculationMode_yawRateUsed << ",";
+  str << YawRateValue_unavailable << ",";
+  str << VehicleLengthValue_unavailable << ","
+      << VehicleLengthConfidenceIndication_noTrailerPresent << ","
+      << VehicleWidth_unavailable << endl;
+
+//  std::cout << str.str() << endl;
+  ApplicationPacket *payload = new ApplicationPacket("CamPacket");
+  payload->setByteLength(sizeof(str));
+  payload->addPar("data") = str.str().c_str();
+
+  std::vector<ApplicationPacket *> payloads;
+  for (int i = 0; i < fakeCamNum; i++) {
+    ApplicationPacket *p = payload->dup();
+    p->setSequenceNumber(numSent);
+    payloads.push_back(p);
+    numSent++;
+  }
+
+  return payloads;
 }
 
 //vanetza::asn1::Cam
@@ -267,7 +331,7 @@ void UDPCamSender::processStart()
     setSocketOptions();
 
     const char *destAddrs = par("destAddresses");
-    std::cout << "processStart" << endl;
+    // std::cout << "processStart" << endl;
     if (strstr(destAddrs,"all")!= NULL) {
       int num = par("numProxyCamDevsParEdge");
       int fPos = ((std::string)this->getFullPath()).find("[");

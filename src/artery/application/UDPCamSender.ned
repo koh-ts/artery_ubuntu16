@@ -22,6 +22,10 @@ simple UDPCamSender like IUDPApp
 {
     parameters:
     	int maxHopNum = default(0);
+    	double pcamRange = default(0);
+    	bool fakeCam = default(false);
+    	int fakeCamNum = default(0);
+    	int simStartTime = default(200);
     	int numProxyCamDevsParEdge = default(0);
         string datetime;
         string interfaceTableModule;   // The path to the InterfaceTable module

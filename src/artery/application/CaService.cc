@@ -96,25 +96,27 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		emit(scSignalCamReceived, &obj);
 		const vanetza::asn1::Cam& msg = obj.asn1();
 
-		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
-		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
-		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
+//		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
+//		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
+//		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
 		ofs << "time: " << omnetpp::simTime() << "\t"
 		    << "src station id: " << msg->header.stationID << "\t"
-		    << "src cam time: " << timeStamp << "\t"
-		    << "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
-		    << msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t";
-		if (isVehicle){
-		  ofs << "dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
-	        << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
-	        << endl;
-		} else {
-		  Coord cpos = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.^.mobility"))->getCurrentPosition();
-		  ofs << "dst pos: " << cpos.x << ","
-		      << cpos.y
-		      << endl;
-		}
-		mLocalDynamicMap->updateAwareness(obj);
+		    << "src cam time: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "\t"
+		    << "src cam serial num: " << msg->cam.camParameters.basicContainer.referencePosition.longitude
+		    << endl;
+//		    << "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
+//		    << msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t";
+//		if (isVehicle){
+//		  ofs << "dst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
+//	        << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
+//	        << endl;
+//		} else {
+//		  Coord cpos = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.^.mobility"))->getCurrentPosition();
+//		  ofs << "dst pos: " << cpos.x << ","
+//		      << cpos.y
+//		      << endl;
+//		}
+//		mLocalDynamicMap->updateAwareness(obj);
 	}
 }
 
@@ -163,7 +165,8 @@ void CaService::sendCam(const SimTime& T_now)
 	EV_INFO << "sending cam......" << endl;
 	// std::cout << "sending cam ........" << endl;
 	ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
-	uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
+//  uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
+  uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getCurrentTime());
 	auto cam = createCooperativeAwarenessMessage(*mVehicleDataProvider, genDeltaTimeMod);
 
 	mLastCamPosition = mVehicleDataProvider->position();

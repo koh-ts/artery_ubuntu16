@@ -54,6 +54,11 @@ class UDPCamSender : public ApplicationBase
     Timer mTimer;
 
     int maxHopNum = 0;
+    double pcamRange = 0;
+    bool fakeCam = false;
+    int fakeCamNum = 0;
+    int simStartTime = 0;
+
     // state
     UDPSocket socket;
     cMessage *selfMsg = nullptr;
@@ -77,6 +82,7 @@ class UDPCamSender : public ApplicationBase
     virtual void sendPacket();
     virtual std::vector<ApplicationPacket*> searchAndMakeCamPayloads();
     virtual ApplicationPacket* getCamPayload(const VehicleDataProvider*);
+    virtual std::vector<ApplicationPacket*> makeFakeCamPayloads();
 //    virtual vanetza::asn1::Cam createCooperativeAwarenessMessage();
     virtual void processPacket(cPacket *msg);
     virtual void setSocketOptions();
