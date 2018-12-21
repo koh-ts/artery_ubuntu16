@@ -107,7 +107,7 @@ double Obstacle::calculateAttenuation(const Coord& senderPos, const Coord& recei
 		Coord c2 = *j;
 
 		double i = segmentsIntersectAt(senderPos, receiverPos, c1, c2);
-		if (i != -1) {
+		if (i != -1 && !std::isnan(i)) {
 			doesIntersect = true;
 			intersectAt.insert(i);
 		}

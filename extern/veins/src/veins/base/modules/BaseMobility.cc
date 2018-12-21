@@ -112,13 +112,14 @@ void BaseMobility::initialize(int stage)
             y = 100 * (num - 1);
           else
             y = 100 * (num - 1 - (int)(pcamnum / num));
-          std::cout << x << "," << y << endl;
+          // std::cout << x << "," << y << endl;
+          par("x").setDoubleValue(x);
+          par("y").setDoubleValue(y);
         } else if (strstr(this->getFullPath().c_str(),"router")!=NULL) {
           int num = par("numProxyCamDevsParEdge");
           int fPos = ((std::string)this->getFullPath()).find("[");
           int lPos = ((std::string)this->getFullPath()).find("]");
           int routernum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
-          std::cout << routernum << endl;
           if (routernum == 0)
             x = 10;
           else
@@ -127,6 +128,9 @@ void BaseMobility::initialize(int stage)
             y = 100 * (num - 1);
           else
             y = 100 * (num - 1 - (int)(routernum / num));
+          // std::cout << x << "," << y << endl;
+          par("x").setDoubleValue(x);
+          par("y").setDoubleValue(y);
         }
 
         //set position with values from parameters if available
@@ -818,4 +822,3 @@ bool BaseMobility::handleIfOutside(BorderPolicy policy, Coord& stepTarget,
 
     return true;
 }
-

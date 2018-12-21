@@ -20,6 +20,7 @@ void VeinsMobility::initialize(int stage)
         move.setStart(mPosition);
         move.setSpeed(mSpeed);
         move.setDirectionByVector(mDirection);
+//        update(Position(mPosition.x, mPosition.y),Angle(1) ,mSpeed);
     }
     BaseMobility::initialize(stage);
 }
