@@ -280,7 +280,7 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
       << ItsPduHeader__messageID_cam << ","     //header.messageId
       << pcamnum << ","                         //header.stationID
 //      << countTaiMilliseconds(mTimer.getTimeFor(simTime())) << ","   //cam.generationDeltaTime
-      << (long int)(st * 100000)<< ","   //cam.generationDeltaTime
+      << (long int)(st * 1000000)<< ","   //cam.generationDeltaTime
       << StationType_passengerCar << ","
       << AltitudeValue_unavailable << ","
       << AltitudeConfidence_unavailable << ","

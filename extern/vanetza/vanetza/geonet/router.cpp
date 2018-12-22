@@ -672,6 +672,7 @@ void Router::pass_down(const dcc::DataRequest& request, PduPtr pdu, DownPacketPt
     (*payload)[OsiLayer::Network] = ByteBufferConvertible(std::move(pdu));
     assert(m_request_interface);
     m_request_interface->request(request, std::move(payload));
+    // m_request_interfaceはどうやらvanetza/dcc/FlowControlにつながってる
 }
 
 void Router::pass_down(const MacAddress& addr, PduPtr pdu, DownPacketPtr payload)

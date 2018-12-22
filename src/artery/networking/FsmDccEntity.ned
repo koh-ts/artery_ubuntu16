@@ -14,7 +14,7 @@ simple FsmDccEntity like IDccEntity
         string NetworkEntity = default("");
 
         double targetCbr = default(0.59);
-        int queueLength = default(2);
+        int queueLength = default(0);
 
     gates:
         output radioDriverOut;

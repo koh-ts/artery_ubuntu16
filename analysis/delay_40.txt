@@ -1,0 +1,2 @@
+simTime	delay_avg(ms)	delay_variance(ms)
+200	nan	nan

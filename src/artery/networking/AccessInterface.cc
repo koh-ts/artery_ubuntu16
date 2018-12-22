@@ -21,6 +21,7 @@ AccessInterface::AccessInterface(omnetpp::cGate* gate) :
 void AccessInterface::request(const DataRequest& request, std::unique_ptr<ChunkPacket> payload)
 {
     // Enter_Method on steroids...
+    // ctx.methodCall("request")はartery/veins/VeinsRadioDriverのrequest
     omnetpp::cMethodCallContextSwitcher ctx(mModuleOut);
     ctx.methodCall("request");
 
