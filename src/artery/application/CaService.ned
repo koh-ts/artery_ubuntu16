@@ -42,4 +42,6 @@ simple CaService like ItsG5Service
 
         // change in speed triggering CAM generation (in meter/second)
         double speedDelta @unit(mps) = default(0.5mps);
+		
+		double simStartTime = default(200);
 }

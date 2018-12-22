@@ -71,6 +71,7 @@ class CaService : public ItsG5BaseService
 		bool mFixedRate;
 		std::ofstream ofs;
 		bool isVehicle;
+		double simStartTime;
 };
 
 vanetza::asn1::Cam createCooperativeAwarenessMessage(const VehicleDataProvider&, uint16_t genDeltaTime);

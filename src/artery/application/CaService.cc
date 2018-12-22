@@ -79,6 +79,7 @@ void CaService::initialize()
     const std::string output = "../../output/output_" + (std::string)this->getFullPath() + ".txt";
     ofs.open(output, std::ios::out);
 	}
+	simStartTime = par("simStartTime");
 }
 
 void CaService::trigger()
@@ -162,6 +163,9 @@ bool CaService::checkSpeedDelta() const
 
 void CaService::sendCam(const SimTime& T_now)
 {
+  if (T_now < simStartTime) {
+    return;
+  }
 	EV_INFO << "sending cam......" << endl;
 	// std::cout << "sending cam ........" << endl;
 	ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
