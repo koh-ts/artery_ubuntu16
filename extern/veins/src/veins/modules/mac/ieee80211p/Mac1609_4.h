@@ -311,6 +311,8 @@ class Mac1609_4 : public BaseMacLayer,
 		simsignal_t sigCollision;
 
     std::ofstream ofs;
+    double simStartTime;
+    double simEndTime;
 };
 
 #endif /* ___MAC1609_4_H_*/
