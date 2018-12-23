@@ -44,4 +44,5 @@ simple CaService like ItsG5Service
         double speedDelta @unit(mps) = default(0.5mps);
 		
 		double simStartTime = default(200);
+		double simEndTime = default(300);
 }

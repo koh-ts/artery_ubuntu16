@@ -80,6 +80,7 @@ void CaService::initialize()
     ofs.open(output, std::ios::out);
 	}
 	simStartTime = par("simStartTime");
+	simEndTime = par("simEndTime");
 }
 
 void CaService::trigger()
@@ -163,7 +164,7 @@ bool CaService::checkSpeedDelta() const
 
 void CaService::sendCam(const SimTime& T_now)
 {
-  if (T_now < simStartTime) {
+  if (T_now < simStartTime || T_now > simEndTime) {
     return;
   }
 	EV_INFO << "sending cam......" << endl;
