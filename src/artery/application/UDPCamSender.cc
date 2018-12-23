@@ -75,7 +75,8 @@ void UDPCamSender::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             throw cRuntimeError("Invalid startTime/stopTime parameters");
 
-        const std::string output = "../../output/output_" + this->getFullPath() + "_sender.txt";
+        std::string output = par("outputDir");
+        output += "output_" + this->getFullPath() + "_sender.txt";
         ofs.open(output, std::ios::out);
         mTimer.setTimebase(par("datetime"));
         selfMsg = new cMessage("sendTimer");

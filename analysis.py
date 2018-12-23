@@ -96,14 +96,19 @@ for s_line in sensor_lines:
         send_counts[str(targetTime)] = 1
 
     sn = int(objs[1].split(":")[1])
-    for i, r_line in enumerate(rsu_lines[start_pos:]):
+    for r_line in rsu_lines[start_pos:]:
         objs = r_line.split("\t")
-        if sn == int(objs[3].split(":")[1]):
+        if srcTime > float(objs[0].split(":")[1]):
+            start_pos += 1
+        if float(objs[0].split(":")[1]) > srcTime + 3:
+            # 遅延が3秒以上のパケットはpdrにカウントしない
+            print("search aborted!")
+            break
+        if sn == int(objs[3].split(":")[1]) and pcamNo == int(objs[1].split(":")[1]):
             if str(targetTime) in rcvd_counts:
                 rcvd_counts[str(targetTime)] += 1
             else:
                 rcvd_counts[str(targetTime)] = 1
-            start_pos += i
             break
     lastSn = sn
 

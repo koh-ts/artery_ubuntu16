@@ -36,7 +36,8 @@ void UDPCamListener::initialize(int stage)
     ApplicationBase::initialize(stage);
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
-      const std::string output = "../../output/output_" + this->getFullPath() + "_listener.txt";
+      std::string output = par("outputDir");
+      output += "output_" + this->getFullPath() + "_listener.txt";
       ofs.open(output, std::ios::out);
 
     }

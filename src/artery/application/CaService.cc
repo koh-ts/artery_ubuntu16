@@ -72,11 +72,13 @@ void CaService::initialize()
 	if (strstr(this->getFullPath().c_str(),"node")!=NULL) {
 	  isVehicle = true;
     mVehicleDataProvider = &getFacilities().get_const<VehicleDataProvider>();
-    const std::string output = "../../output/output_" + (std::string)this->getFullPath() + "_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
+    std::string output = par("outputDir");
+		output += "output_" + (std::string)this->getFullPath() + "_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
     ofs.open(output, std::ios::out);
 	} else {
 	  isVehicle = false;
-    const std::string output = "../../output/output_" + (std::string)this->getFullPath() + ".txt";
+    std::string output = par("outputDir");
+		output += "output_" + (std::string)this->getFullPath() + ".txt";
     ofs.open(output, std::ios::out);
 	}
 	simStartTime = par("simStartTime");

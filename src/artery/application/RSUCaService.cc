@@ -52,7 +52,8 @@ void RSUCaService::initialize()
     ItsG5BaseService::initialize();
     mTimer = &getFacilities().get_const<Timer>();
 
-    const std::string output = "../../output/output_" + this-> getFullPath() + ".txt";
+    std::string output = par("outputDir");
+    output += "output_" + this-> getFullPath() + ".txt";
     ofs.open(output, std::ios::out);
 
     findHost()->subscribe(artery::UDPCamListener::rcvdPkSignal,this);

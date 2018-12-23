@@ -161,6 +161,13 @@ void Mac1609_4::initialize(int stage) {
 		idleChannel = true;
 		lastBusy = simTime();
 		channelIdle(true);
+
+		std::string output = par("outputDir");
+		output += "output_" + (std::string)this->getFullPath() + ".txt";
+    ofs.open(output, std::ios::out);
+
+		simStartTime = par("simStartTime");
+		simEndTime = par("simEndTime");
 	}
 }
 
@@ -318,7 +325,16 @@ void Mac1609_4::handleUpperMsg(cMessage* msg) {
 
 	//if this packet is not at the front of a new queue we dont have to reevaluate times
 	DBG_MAC << "sorted packet into queue of EDCA " << chan << " this packet is now at position: " << num << std::endl;
-
+	if (simTime() > simStartTime && simTime() < simEndTime) {
+	  int queueSize = par("queueSize");
+	  ofs << "time: "
+	      << simTime()
+	      << " queue rate: "
+	      << (num * 1.0) / queueSize
+	      << endl;
+	}
+//  if (strstr(this->getFullPath().c_str(), "pcam[24]") != NULL)
+//    std::cout << "queue size is " << num << std::endl;
 	if (chan == activeChannel) {
 		DBG_MAC << "this packet is for the currently active channel" << std::endl;
 	}

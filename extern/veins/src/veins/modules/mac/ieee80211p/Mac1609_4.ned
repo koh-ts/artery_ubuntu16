@@ -68,6 +68,8 @@ simple Mac1609_4 extends BaseMacLayer
         int ackLength @unit(bit) = default(112bit);
         bool useAcks = default(false);
         double ackErrorRate = default(0.20);
+        
+        string outputDir = default("../../output/");
 
         // signal informing interested application about channel busy state
         @signal[sigChannelBusy](type=bool);

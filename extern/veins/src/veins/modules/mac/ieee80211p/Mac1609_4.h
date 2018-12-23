@@ -40,6 +40,9 @@
 
 #include "veins/modules/utility/ConstsPhy.h"
 
+#include <iostream>
+#include <fstream>
+
 /**
  * @brief
  * Manages timeslots for CCH and SCH listening and sending.
@@ -306,6 +309,8 @@ class Mac1609_4 : public BaseMacLayer,
 		simsignal_t sigChannelBusy;
 		//tell to anybody which is interested when a collision occurred
 		simsignal_t sigCollision;
+
+    std::ofstream ofs;
 };
 
 #endif /* ___MAC1609_4_H_*/
