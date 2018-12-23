@@ -318,6 +318,8 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
     numSent++;
   }
 
+  delete payload;
+
   return payloads;
 }
 
