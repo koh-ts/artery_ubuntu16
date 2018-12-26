@@ -54,6 +54,7 @@ void Mac1609_4::initialize(int stage) {
 
 		sigChannelBusy = registerSignal("sigChannelBusy");
 		sigCollision = registerSignal("sigCollision");
+		queueRatioChgd = registerSignal("queueRatioChgd");
 
 		txPower = par("txPower").doubleValue();
 		bitrate = par("bitrate").longValue();
@@ -323,16 +324,24 @@ void Mac1609_4::handleUpperMsg(cMessage* msg) {
 		return;
 	}
 
+  if (simTime() > simStartTime && simTime() < simEndTime) {
+    int queueSize = par("queueSize");
+    ofs << "time: "
+        << simTime()
+        << " queue rate: "
+        << (num * 1.0) / queueSize
+        << endl;
+
+    if (!(num * 1.0 / queueSize > queueRatioThreshold && num * 1.0 / queueSize < (queueRatioThreshold + 0.1))) {
+      queueRatioThreshold = ((int)((num * 1.0 / queueSize) * 10)) / 10.0;
+      emit(queueRatioChgd, queueRatioThreshold);
+    }
+
+  }
+
 	//if this packet is not at the front of a new queue we dont have to reevaluate times
 	DBG_MAC << "sorted packet into queue of EDCA " << chan << " this packet is now at position: " << num << std::endl;
-	if (simTime() > simStartTime && simTime() < simEndTime) {
-	  int queueSize = par("queueSize");
-	  ofs << "time: "
-	      << simTime()
-	      << " queue rate: "
-	      << (num * 1.0) / queueSize
-	      << endl;
-	}
+
 //  if (strstr(this->getFullPath().c_str(), "pcam[24]") != NULL)
 //    std::cout << "queue size is " << num << std::endl;
 	if (chan == activeChannel) {

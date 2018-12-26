@@ -26,6 +26,7 @@ simple UDPCamListener like IUDPApp
         string interfaceTableModule;   // The path to the InterfaceTable module
         int localPort;  // local port to listen on
         string outputDir = default("../../output/");
+        int stageNum = default(0);
         @display("i=block/app");
         @signal[pk](type=cPacket);
         @statistic[echoedPk](title="packets echoed"; source=pk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
