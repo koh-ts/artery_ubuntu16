@@ -16,8 +16,8 @@ sns.set_palette('Set1')
 args = sys.argv
 method = args[1]
 
-sim_from = 205
-sim_to = 210
+sim_from = 505
+sim_to = 510
 
 cam_nums = ["num_5", "num_10", "num_15"]
 pcam_pos_slants = [24, 16, 8, 0]
