@@ -76,7 +76,8 @@ void UDPCamListener::receiveCAM(cPacket *pk)
     ofs << "received Cam udp: time: " << simTime()
         << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()
         << "\tfrom: " << srcAddress
-        << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str());
+        << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
+        << "\tttl: " << ctrl->getTtl();
     if (!checkTtl(ctrl->getTtl())) {
       ofs << "\t dropped";
     }
