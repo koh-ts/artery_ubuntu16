@@ -20,8 +20,8 @@ sim_from = 205
 sim_to = 210
 
 cam_nums = ["num_5", "num_10", "num_15"]
-pcam_pos_slants = [0,8,16,24]
-pcam_pos_crosses = [21,22,23,24]
+pcam_pos_slants = [24, 16, 8, 0]
+pcam_pos_crosses = [24, 23, 22, 21]
 
 if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "passive_grid_pcam"):
     print("error unknown method")

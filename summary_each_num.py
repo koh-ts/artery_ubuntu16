@@ -20,8 +20,8 @@ sim_from = 205
 sim_to = 210
 
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
-pcam_pos_slants = [0,8,16,24]
-pcam_pos_crosses = [21,22,23,24]
+pcam_pos_slants = [24, 16, 8, 0]
+pcam_pos_crosses = [24, 23, 22, 21]
 
 if not (cam_num == 5 or cam_num == 10 or cam_num == 15):
     print("error unknown cam_num")
