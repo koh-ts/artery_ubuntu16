@@ -3,16 +3,17 @@ from collections import OrderedDict
 
 import sys
 args = sys.argv
-pcamNo = int(args[1])
+cam_num = int(args[1])
+pcamNo = int(args[2])
 
 simStartTime = 200
 timeDiff = 0.5
 
-results_sensor_path = "output/output_GridWorld.pcam[" + str(pcamNo) + "].sensor.udpApp[0]_sender.txt"
-results_rsu_path = "output/output_GridWorld.rsu[0].appl.middleware.CaService.txt"
+results_sensor_path = "output/passive_grid_pcam/num_" + cam_num + "/output_GridWorld.pcam[" + str(pcamNo) + "].sensor.udpApp[0]_sender.txt"
+results_rsu_path = "output/passive_grid_pcam/num_" + cam_num + "/output_GridWorld.rsu[0].appl.middleware.CaService.txt"
 
-analysis_pdr_path = "analysis/pdr_" + str(pcamNo) + ".txt"
-analysis_delay_path = "analysis/delay_" + str(pcamNo) + ".txt"
+analysis_pdr_path = "analysis/passive_grid_pcam/num_" + cam_num + "/pdr_" + str(pcamNo) + ".txt"
+analysis_delay_path = "analysis/passive_grid_pcam/num_" + cam_num + "/delay_" + str(pcamNo) + ".txt"
 
 delayf = open(analysis_delay_path, mode="w")
 pdrf = open(analysis_pdr_path, mode="w")
