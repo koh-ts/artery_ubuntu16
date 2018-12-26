@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import sys
 
+nan = np.nan
+
 plt.style.use('default')
 sns.set()
 sns.set_style('whitegrid')
@@ -36,15 +38,18 @@ all_pdrs_crosses = []
 all_delays_crosses = []
 all_delay_errors_crosses = []
 
-pdrs = []
-delays = []
-delay_errors = []
+
+print("entering slants")
 
 for method in methods:
+    print("entering method: ", method)
     pdrs_slants = []
     delays_slants = []
     delay_errors_slants = []
     for pos in pcam_pos_slants:
+        pdrs = []
+        delays = []
+        delay_errors = []
         with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
@@ -53,24 +58,39 @@ for method in methods:
         with open(analysis_root_path + method + "/num_" + str(cam_num) + "/delay_" + str(pos) + ".txt") as f:
             delaylines = f.readlines()
         for delayline in delaylines[1:]:
-            print(delayline)
             if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
-        print(pos, mean(pdrs), mean(delays), mean(delay_errors))
-        pdrs_slants.append(mean(pdrs))
-        delays_slants.append(mean(delays))
-        delay_errors_slants.append(mean(delay_errors))
+        if len(pdrs) < 2:
+            avg_pdr = nan
+        else:
+            avg_pdr = mean(pdrs)
+        if len(delays) < 2:
+            avg_delay = nan
+            avg_delay_error = nan
+        else:
+            avg_delay = mean(delays)
+            avg_delay_error = mean(delay_errors)
+        print(pos, avg_pdr, avg_delay, avg_delay_error)
+        pdrs_slants.append(avg_pdr)
+        delays_slants.append(avg_delay)
+        delay_errors_slants.append(avg_delay_error)
 
     all_pdrs_slants.append(pdrs_slants)
     all_delays_slants.append(delays_slants)
     all_delay_errors_slants.append(delay_errors_slants)
 
-for cam_num in method:
+print("entering crosses")
+
+for method in methods:
+    print("entering method: ", method)
     pdrs_crosses = []
     delays_crosses = []
     delay_errors_crosses = []
     for pos in pcam_pos_crosses:
+        pdrs = []
+        delays = []
+        delay_errors = []
         with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
@@ -82,10 +102,20 @@ for cam_num in method:
             if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
-        print(pos, mean(pdrs), mean(delays))
-        pdrs_crosses.append(mean(pdrs))
-        delays_crosses.append(mean(delays))
-        delay_errors_crosses.append(mean(delay_errors))
+        if len(pdrs) < 2:
+            avg_pdr = nan
+        else:
+            avg_pdr = mean(pdrs)
+        if len(delays) < 2:
+            avg_delay = nan
+            avg_delay_error = nan
+        else:
+            avg_delay = mean(delays)
+            avg_delay_error = mean(delay_errors)
+        print(pos, avg_pdr, avg_delay, avg_delay_error)
+        pdrs_crosses.append(avg_pdr)
+        delays_crosses.append(avg_delay)
+        delay_errors_crosses.append(avg_delay_error)
     all_pdrs_crosses.append(pdrs_crosses)
     all_delays_crosses.append(delays_crosses)
     all_delay_errors_crosses.append(delay_errors_crosses)
@@ -97,12 +127,12 @@ ax = fig_pdr.add_subplot(1, 1, 1)
 x = np.array(range(1, len(all_pdrs_slants[0]) + 1))
 
 df = pd.DataFrame({
-    "x": x, method[0]: all_pdrs_slants[0], method[1]: all_pdrs_slants[1], method[2]: all_pdrs_slants[2]
+    "x": x, methods[0]: all_pdrs_slants[0], methods[1]: all_pdrs_slants[1], methods[2]: all_pdrs_slants[2]
 })
 
-ax.plot('x', method[0], data=df, label='PPS 5', marker='o')
-ax.plot('x', method[1], data=df, label='PPS 10', marker='o')
-ax.plot('x', method[2], data=df, label='PPS 15', marker='o')
+ax.plot('x', methods[0], data=df, label='original pcam', marker='o')
+ax.plot('x', methods[1], data=df, label='naive grid pcam', marker='o')
+ax.plot('x', methods[2], data=df, label='passive grid pcam', marker='o')
 
 ax.legend()
 ax.set_xlabel("hop num")
@@ -121,9 +151,9 @@ ax = fig_delay.add_subplot(1, 1, 1)
 
 x = np.array(range(1, len(all_delays_slants[0]) + 1))
 
-ax.errorbar(x, all_delays_slants[0], yerr=all_delay_errors_slants[0], marker='o', label='PPS 5', capthick=1, capsize=8, lw=1)
-ax.errorbar(x, all_delays_slants[1], yerr=all_delay_errors_slants[1], marker='o', label='PPS 10', capthick=1, capsize=8, lw=1)
-ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o', label='PPS 15', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_slants[0], yerr=all_delay_errors_slants[0], marker='o', label='original pcam', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_slants[1], yerr=all_delay_errors_slants[1], marker='o', label='naive grid pcam', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o', label='passive grid pcam', capthick=1, capsize=8, lw=1)
 
 ax.legend()
 ax.set_xlabel("hop num")
@@ -144,12 +174,12 @@ ax = fig_pdr.add_subplot(1, 1, 1)
 x = np.array(range(1, len(all_pdrs_crosses[0]) + 1))
 
 df = pd.DataFrame({
-    "x": x, method[0]: all_pdrs_crosses[0], method[1]: all_pdrs_crosses[1], method[2]: all_pdrs_crosses[2]
+    "x": x, methods[0]: all_pdrs_crosses[0], methods[1]: all_pdrs_crosses[1], methods[2]: all_pdrs_crosses[2]
 })
 
-ax.plot('x', method[0], data=df, label='PPS 5', marker='o')
-ax.plot('x', method[1], data=df, label='PPS 10', marker='o')
-ax.plot('x', method[2], data=df, label='PPS 15', marker='o')
+ax.plot('x', methods[0], data=df, label='original pcam', marker='o')
+ax.plot('x', methods[1], data=df, label='naive grid pcam', marker='o')
+ax.plot('x', methods[2], data=df, label='passive grid pcam', marker='o')
 
 ax.legend()
 ax.set_xlabel("hop num")
@@ -169,9 +199,9 @@ ax = fig_delay.add_subplot(1, 1, 1)
 
 x = np.array(range(1, len(all_delays_crosses[0]) + 1))
 
-ax.errorbar(x, all_delays_crosses[0], yerr=all_delay_errors_crosses[0], marker='o', label='PPS 5', capthick=1, capsize=8, lw=1)
-ax.errorbar(x, all_delays_crosses[1], yerr=all_delay_errors_crosses[1], marker='o', label='PPS 10', capthick=1, capsize=8, lw=1)
-ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='o', label='PPS 15', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_crosses[0], yerr=all_delay_errors_crosses[0], marker='o', label='original pcam', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_crosses[1], yerr=all_delay_errors_crosses[1], marker='o', label='naive grid pcam', capthick=1, capsize=8, lw=1)
+ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='o', label='passive grid pcam', capthick=1, capsize=8, lw=1)
 
 ax.legend()
 ax.set_xlabel("hop num")

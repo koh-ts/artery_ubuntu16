@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import sys
 
+nan = np.nan
+
 plt.style.use('default')
 sns.set()
 sns.set_style('whitegrid')
@@ -36,15 +38,17 @@ all_pdrs_crosses = []
 all_delays_crosses = []
 all_delay_errors_crosses = []
 
-pdrs = []
-delays = []
-delay_errors = []
+print("entering slants")
 
 for cam_num in cam_nums:
+    print("entering cam_num: ", cam_num)
     pdrs_slants = []
     delays_slants = []
     delay_errors_slants = []
     for pos in pcam_pos_slants:
+        pdrs = []
+        delays = []
+        delay_errors = []
         with open(analysis_root_path + cam_num + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
@@ -53,24 +57,39 @@ for cam_num in cam_nums:
         with open(analysis_root_path + cam_num + "/delay_" + str(pos) + ".txt") as f:
             delaylines = f.readlines()
         for delayline in delaylines[1:]:
-            print(delayline)
             if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
-        print(pos, mean(pdrs), mean(delays), mean(delay_errors))
-        pdrs_slants.append(mean(pdrs))
-        delays_slants.append(mean(delays))
-        delay_errors_slants.append(mean(delay_errors))
+        if len(pdrs) < 2:
+            avg_pdr = nan
+        else:
+            avg_pdr = mean(pdrs)
+        if len(delays) < 2:
+            avg_delay = nan
+            avg_delay_error = nan
+        else:
+            avg_delay = mean(delays)
+            avg_delay_error = mean(delay_errors)
+        print(pos, avg_pdr, avg_delay, avg_delay_error)
+        pdrs_slants.append(avg_pdr)
+        delays_slants.append(avg_delay)
+        delay_errors_slants.append(avg_delay_error)
 
     all_pdrs_slants.append(pdrs_slants)
     all_delays_slants.append(delays_slants)
     all_delay_errors_slants.append(delay_errors_slants)
 
+print("entering crosses")
+
 for cam_num in cam_nums:
+    print("entering cam_num: ", cam_num)
     pdrs_crosses = []
     delays_crosses = []
     delay_errors_crosses = []
     for pos in pcam_pos_crosses:
+        pdrs = []
+        delays = []
+        delay_errors = []
         with open(analysis_root_path + cam_num + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
@@ -82,10 +101,20 @@ for cam_num in cam_nums:
             if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
-        print(pos, mean(pdrs), mean(delays))
-        pdrs_crosses.append(mean(pdrs))
-        delays_crosses.append(mean(delays))
-        delay_errors_crosses.append(mean(delay_errors))
+        if len(pdrs) < 2:
+            avg_pdr = nan
+        else:
+            avg_pdr = mean(pdrs)
+        if len(delays) < 2:
+            avg_delay = nan
+            avg_delay_error = nan
+        else:
+            avg_delay = mean(delays)
+            avg_delay_error = mean(delay_errors)
+        print(pos, avg_pdr, avg_delay, avg_delay_error)
+        pdrs_crosses.append(avg_pdr)
+        delays_crosses.append(avg_delay)
+        delay_errors_crosses.append(avg_delay_error)
     all_pdrs_crosses.append(pdrs_crosses)
     all_delays_crosses.append(delays_crosses)
     all_delay_errors_crosses.append(delay_errors_crosses)
