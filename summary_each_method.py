@@ -64,7 +64,7 @@ for cam_num in cam_nums:
 
     all_pdrs_slants.append(pdrs_slants)
     all_delays_slants.append(delays_slants)
-    all_delay_errors_slants.appne(delay_errors_slants)
+    all_delay_errors_slants.append(delay_errors_slants)
 
 for cam_num in cam_nums:
     pdrs_crosses = []
@@ -85,7 +85,7 @@ for cam_num in cam_nums:
         print(pos, mean(pdrs), mean(delays))
         pdrs_crosses.append(mean(pdrs))
         delays_crosses.append(mean(delays))
-        delay_errors_crosses.appen(mean(delay_errors))
+        delay_errors_crosses.append(mean(delay_errors))
     all_pdrs_crosses.append(pdrs_crosses)
     all_delays_crosses.append(delays_crosses)
     all_delay_errors_crosses.append(delay_errors_crosses)
@@ -111,7 +111,7 @@ ax.set_ylim(0, 1)
 plt.title("method: " + method + " slant")
 
 pp = PdfPages("summary/method_" + method + "_pdr_slant.pdf")
-pp.savefig(fig)
+pp.savefig(fig_pdr)
 pp.close()
 
 
@@ -130,11 +130,11 @@ ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o'
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.setylim(0,100)
+ax.set_ylim(0,100)
 plt.title("method: " + method + " slant")
 
 pp = PdfPages("summary/method_" + method + "_delay_slant.pdf")
-pp.savefig(fig)
+pp.savefig(fig_delay)
 pp.close()
 
 
@@ -160,7 +160,7 @@ ax.set_ylim(0, 1)
 plt.title("method: " + method + " cross")
 
 pp = PdfPages("summary/method_" + method + "_pdr_cross.pdf")
-pp.savefig(fig)
+pp.savefig(fig_pdr)
 pp.close()
 
 
@@ -179,9 +179,9 @@ ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.setylim(0,100)
+ax.set_ylim(0,100)
 plt.title("method: " + method + " cross")
 
 pp = PdfPages("summary/method_" + method + "_delay_cross.pdf")
-pp.savefig(fig)
+pp.savefig(fig_delay)
 pp.close()

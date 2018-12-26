@@ -45,12 +45,12 @@ for method in methods:
     delays_slants = []
     delay_errors_slants = []
     for pos in pcam_pos_slants:
-        with open(analysis_root_path + method + "/" + cam_num + "/pdr_" + str(pos) + ".txt") as f:
+        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
             if float(pdrline.split("\t")[0]) > sim_from and float(pdrline.split("\t")[0]) < sim_to:
                 pdrs.append(float(pdrline.split("\t")[1]))
-        with open(analysis_root_path + method + "/" + cam_num + "/delay_" + str(pos) + ".txt") as f:
+        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/delay_" + str(pos) + ".txt") as f:
             delaylines = f.readlines()
         for delayline in delaylines[1:]:
             print(delayline)
@@ -64,19 +64,19 @@ for method in methods:
 
     all_pdrs_slants.append(pdrs_slants)
     all_delays_slants.append(delays_slants)
-    all_delay_errors_slants.appne(delay_errors_slants)
+    all_delay_errors_slants.append(delay_errors_slants)
 
 for cam_num in method:
     pdrs_crosses = []
     delays_crosses = []
     delay_errors_crosses = []
     for pos in pcam_pos_crosses:
-        with open(analysis_root_path + method + "/" + cam_num + "/pdr_" + str(pos) + ".txt") as f:
+        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
             pdrlines = f.readlines()
         for pdrline in pdrlines[1:]:
             if float(pdrline.split("\t")[0]) > sim_from and float(pdrline.split("\t")[0]) < sim_to:
                 pdrs.append(float(pdrline.split("\t")[1]))
-        with open(analysis_root_path + method + "/" + cam_num + "/delay_" + str(pos) + ".txt") as f:
+        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/delay_" + str(pos) + ".txt") as f:
             delaylines = f.readlines()
         for delayline in delaylines[1:]:
             if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
@@ -85,7 +85,7 @@ for cam_num in method:
         print(pos, mean(pdrs), mean(delays))
         pdrs_crosses.append(mean(pdrs))
         delays_crosses.append(mean(delays))
-        delay_errors_crosses.appen(mean(delay_errors))
+        delay_errors_crosses.append(mean(delay_errors))
     all_pdrs_crosses.append(pdrs_crosses)
     all_delays_crosses.append(delays_crosses)
     all_delay_errors_crosses.append(delay_errors_crosses)
@@ -111,7 +111,7 @@ ax.set_ylim(0, 1)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_slant.pdf")
-pp.savefig(fig)
+pp.savefig(fig_pdr)
 pp.close()
 
 
@@ -128,11 +128,11 @@ ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o'
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.setylim(0,100)
+ax.set_ylim(0,100)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_slant.pdf")
-pp.savefig(fig)
+pp.savefig(fig_delay)
 pp.close()
 
 
@@ -158,7 +158,7 @@ ax.set_ylim(0, 1)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_cross.pdf")
-pp.savefig(fig)
+pp.savefig(fig_pdr)
 pp.close()
 
 
@@ -176,9 +176,9 @@ ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.setylim(0,100)
+ax.set_ylim(0,100)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_cross.pdf")
-pp.savefig(fig)
+pp.savefig(fig_delay)
 pp.close()
