@@ -123,7 +123,13 @@ vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
   basic.referencePosition.altitude.altitudeValue = (AltitudeValue_t)std::stol(*itr_pcam++);
   basic.referencePosition.altitude.altitudeConfidence = (AltitudeConfidence_t)std::stol(*itr_pcam++);
   basic.referencePosition.longitude = (Longitude_t)std::stol(*itr_pcam++);
+  //analysisのための便宜上の値変更(udp sequencenum)
+  basic.referencePosition.longitude = (Longitude_t)((ApplicationPacket *)pk) -> getSequenceNumber();
+
   basic.referencePosition.latitude = (Latitude_t)std::stol(*itr_pcam++);
+  //analysisのための便宜上の値変更(udp src time マイクロ秒まで取得したかったのでここに入れる)
+  basic.referencePosition.latitude = (Latitude_t)std::stol(srcTime);
+
   basic.referencePosition.positionConfidenceEllipse.semiMajorOrientation = (HeadingValue_t)std::stol(*itr_pcam++);
   basic.referencePosition.positionConfidenceEllipse.semiMajorConfidence = (SemiAxisLength_t)std::stol(*itr_pcam++);
   basic.referencePosition.positionConfidenceEllipse.semiMinorConfidence = (SemiAxisLength_t)std::stol(*itr_pcam++);
