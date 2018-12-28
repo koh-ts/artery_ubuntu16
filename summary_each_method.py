@@ -61,12 +61,12 @@ for cam_num in cam_nums:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
-            avg_pdr = nan
+            avg_pdr = 0
         else:
             avg_pdr = mean(pdrs)
         if len(delays) < 2:
-            avg_delay = nan
-            avg_delay_error = nan
+            avg_delay = -100
+            avg_delay_error = 0
         else:
             avg_delay = mean(delays)
             avg_delay_error = mean(delay_errors)
@@ -102,12 +102,12 @@ for cam_num in cam_nums:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
-            avg_pdr = nan
+            avg_pdr = 0
         else:
             avg_pdr = mean(pdrs)
         if len(delays) < 2:
-            avg_delay = nan
-            avg_delay_error = nan
+            avg_delay = -100
+            avg_delay_error = 0
         else:
             avg_delay = mean(delays)
             avg_delay_error = mean(delay_errors)
@@ -136,7 +136,7 @@ ax.plot('x', cam_nums[2], data=df, label='PPS 15', marker='o')
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("PDR")
-ax.set_ylim(0, 1)
+ax.set_ylim(-0.1, 1.1)
 plt.title("method: " + method + " slant")
 
 pp = PdfPages("summary/method_" + method + "_pdr_slant.pdf")
@@ -159,7 +159,7 @@ ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o'
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.set_ylim(0,100)
+ax.set_ylim(-150,400)
 plt.title("method: " + method + " slant")
 
 pp = PdfPages("summary/method_" + method + "_delay_slant.pdf")
@@ -185,7 +185,7 @@ ax.plot('x', cam_nums[2], data=df, label='PPS 15', marker='o')
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("PDR")
-ax.set_ylim(0, 1)
+ax.set_ylim(-0.1, 1.1)
 plt.title("method: " + method + " cross")
 
 pp = PdfPages("summary/method_" + method + "_pdr_cross.pdf")
@@ -208,7 +208,7 @@ ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.set_ylim(0,100)
+ax.set_ylim(-150,400)
 plt.title("method: " + method + " cross")
 
 pp = PdfPages("summary/method_" + method + "_delay_cross.pdf")

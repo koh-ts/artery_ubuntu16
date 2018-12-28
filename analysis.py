@@ -89,6 +89,15 @@ for pcamNo in range(49):
 
     rcvd_counts = OrderedDict()
 
+
+    # rsu_linesにおいて必要のない行を削除
+    remove_lines = []
+    for r_line in rsu_lines:
+        if int(r_line.split("\t")[1].split(":")[1]) != pcamNo:
+            remove_lines.append(r_line)
+    for remove_line in remove_lines:
+        rsu_lines.remove(remove_line)
+
     # pcamのtransmissionの範囲を100m以上にした時は考慮していないので注意
     # rsuの受信したパケットのsnの順序が正しくない可能性、同じsnを持つパケットの可能性を考慮する必要がある
 
@@ -115,7 +124,7 @@ for pcamNo in range(49):
                 start_pos += 1
             if float(objs[0].split(":")[1]) > srcTime + 3:
                 # 遅延が3秒以上のパケットはpdrにカウントしない
-                print("search aborted!")
+                print("search aborted for", r_line)
                 break
             if sn == int(objs[3].split(":")[1]) and pcamNo == int(objs[1].split(":")[1]):
                 if str(targetTime) in rcvd_counts:

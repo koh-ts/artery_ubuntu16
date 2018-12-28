@@ -62,12 +62,12 @@ for method in methods:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
-            avg_pdr = nan
+            avg_pdr = 0
         else:
             avg_pdr = mean(pdrs)
         if len(delays) < 2:
-            avg_delay = nan
-            avg_delay_error = nan
+            avg_delay = -100
+            avg_delay_error = 0
         else:
             avg_delay = mean(delays)
             avg_delay_error = mean(delay_errors)
@@ -103,12 +103,12 @@ for method in methods:
                 delays.append(float(delayline.split("\t")[1]))
                 delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
-            avg_pdr = nan
+            avg_pdr = 0
         else:
             avg_pdr = mean(pdrs)
         if len(delays) < 2:
-            avg_delay = nan
-            avg_delay_error = nan
+            avg_delay = -100
+            avg_delay_error = 0
         else:
             avg_delay = mean(delays)
             avg_delay_error = mean(delay_errors)
@@ -137,7 +137,7 @@ ax.plot('x', methods[2], data=df, label='passive grid pcam', marker='o')
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("PDR")
-ax.set_ylim(0, 1)
+ax.set_ylim(-0.1, 1.1)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_slant.pdf")
@@ -158,7 +158,7 @@ ax.errorbar(x, all_delays_slants[2], yerr=all_delay_errors_slants[2], marker='o'
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.set_ylim(0,100)
+ax.set_ylim(-150,400)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_slant.pdf")
@@ -184,7 +184,7 @@ ax.plot('x', methods[2], data=df, label='passive grid pcam', marker='o')
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("PDR")
-ax.set_ylim(0, 1)
+ax.set_ylim(-0.1, 1.1)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_cross.pdf")
@@ -206,7 +206,7 @@ ax.errorbar(x, all_delays_crosses[2], yerr=all_delay_errors_crosses[2], marker='
 ax.legend()
 ax.set_xlabel("hop num")
 ax.set_ylabel("delay")
-ax.set_ylim(0,100)
+ax.set_ylim(-150,400)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
 pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_cross.pdf")
