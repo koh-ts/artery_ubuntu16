@@ -166,6 +166,8 @@ class Mac1609_4 : public BaseMacLayer,
 		 */
 		void setCCAThreshold(double ccaThreshold_dBm);
 
+    double getQueueRatio();
+
 	protected:
 		/** @brief States of the channel selecting operation.*/
 
@@ -310,11 +312,10 @@ class Mac1609_4 : public BaseMacLayer,
 		//tell to anybody which is interested when a collision occurred
 		simsignal_t sigCollision;
 
-		simsignal_t queueRatioChgd;
     std::ofstream ofs;
     double simStartTime;
     double simEndTime;
-    double queueRatioThreshold = 0;
+    int currentQueueSize = 0;
 };
 
 #endif /* ___MAC1609_4_H_*/

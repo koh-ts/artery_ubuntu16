@@ -78,7 +78,5 @@ simple Mac1609_4 extends BaseMacLayer
         @signal[sigChannelBusy](type=bool);
         // signal informing interested application about a collision
         @signal[sigCollision](type=bool);
-        
-        @signal[queueRatioChgd](type=double);
 
 }

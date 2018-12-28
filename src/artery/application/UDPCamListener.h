@@ -32,7 +32,7 @@ using namespace inet;
 /**
  * UDP application. See NED for more info.
  */
-class UDPCamListener : public ApplicationBase, public cListener
+class UDPCamListener : public ApplicationBase
 {
   public:
     static simsignal_t rcvdPkSignal;
@@ -50,16 +50,12 @@ class UDPCamListener : public ApplicationBase, public cListener
     virtual bool handleNodeStart(IDoneCallback *doneCallback) override;
     virtual bool handleNodeShutdown(IDoneCallback *doneCallback) override;
     virtual void handleNodeCrash() override;
-    bool checkTtl(int);
+    bool checkDistance(cPacket*);
     std::ofstream ofs;
-    omnetpp::cModule* mHost = nullptr;
     double queueRT = 0;
-    int stages = 0;
   public:
     UDPCamListener() {}
     ~UDPCamListener() {}
-    void receiveSignal(cComponent *src, simsignal_t id, double value, cObject *details) override;
-
 };
 
 } // namespace inet

@@ -16,8 +16,8 @@ sns.set_palette('Set1')
 args = sys.argv
 cam_num = int(args[1])
 
-sim_from = 505
-sim_to = 510
+sim_from = 205
+sim_to = 210
 
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
 pcam_pos_slants = [24, 16, 8, 0]

@@ -17,12 +17,16 @@
 
 #include "artery/application/UDPCamListener.h"
 
+#include <boost/geometry/algorithms/distance.hpp>
 #include "inet/common/ModuleAccess.h"
 #include "inet/transportlayer/contract/udp/UDPControlInfo_m.h"
 #include "inet/applications/base/ApplicationPacket_m.h"
 #include "inet/networklayer/contract/ipv4/IPv4ControlInfo.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
-#include "veins/base/utils/FindModule.h"
+#include "artery/veins/VeinsMobility.h"
+#include "veins/modules/mac/ieee80211p/Mac1609_4.h"
+#include "veins/base/utils/Coord.h"
+#include <string.h>
 
 
 namespace artery
@@ -32,11 +36,6 @@ Define_Module(UDPCamListener);
 
 simsignal_t UDPCamListener::rcvdPkSignal = cComponent::registerSignal("campktrcv");
 
-namespace {
-  const simsignal_t queueRatioChgd = cComponent::registerSignal("queueRatioChgd");
-}
-
-
 void UDPCamListener::initialize(int stage)
 {
     ApplicationBase::initialize(stage);
@@ -45,9 +44,7 @@ void UDPCamListener::initialize(int stage)
       std::string output = par("outputDir");
       output += "output_" + this->getFullPath() + "_listener.txt";
       ofs.open(output, std::ios::out);
-      mHost = FindModule<>::findHost(this);
-      mHost->subscribe(queueRatioChgd,this);
-      stages = par("stageNum");
+
     }
 }
 
@@ -63,22 +60,22 @@ void UDPCamListener::handleMessageWhenUp(cMessage *msg)
 
 void UDPCamListener::receiveCAM(cPacket *pk)
 {
+
     // determine its source address/port
     UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
     L3Address srcAddress = ctrl->getSrcAddr();
 //    std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
 
-
-    if (checkTtl(ctrl->getTtl())) {
-      emit(rcvdPkSignal, pk);
-    }
-
-    ofs << "received Cam udp: time: " << simTime()
+    ofs << "time: " << simTime()
         << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()
         << "\tfrom: " << srcAddress
         << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
         << "\tttl: " << ctrl->getTtl();
-    if (!checkTtl(ctrl->getTtl())) {
+
+
+    if (checkDistance(pk)) {
+      emit(rcvdPkSignal, pk);
+    } else {
       ofs << "\t dropped";
     }
     ofs << endl;
@@ -88,24 +85,44 @@ void UDPCamListener::receiveCAM(cPacket *pk)
 }
 
 
-bool UDPCamListener::checkTtl(int ttl) {
-  double min = 0.3;
-  double max = 1;
+bool UDPCamListener::checkDistance(cPacket *pk) {
+  if (pk->hasPar("data")) {
+    std::string s = (std::string)(pk->par("data"));
+    std::stringstream ss{s};
+    std::string buf;
+    int count = 0;
+    double x,y;
+    while (std::getline(ss, buf, ',')) {
+      if(count == 7) {
+        x = std::stod(buf);
+      } else if (count == 8) {
+        y = std::stod(buf);
+      } else if (count >= 9) {
+        break;
+      }
+      count++;
+    }
+    Position src_pos = Position(x,y);
 
-  if (!((queueRT - min) < (max - min) / stages * ttl)) {
-    std::cout << "ttl is: " << ttl << "\tqueue ratio is: " << queueRT << endl;
+    Coord pcam_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
+    Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
+    double distance = boost::geometry::distance(src_pos, pcam_pos);
+
+    double min_dist = 0;
+    double max_dist = 1000;
+
+    double queueRT = check_and_cast<Mac1609_4 *>(this->getModuleByPath("^.nic.mac1609_4"))->getQueueRatio();
+//    if (std::strstr(this->getFullPath().c_str(),"pcam[24]") != NULL) {
+//      std::cout << "src_pos is: " << x << "," << y << endl;
+//      std::cout << "pcam_pos is: " << pcam_coord.x << "," << pcam_coord.y << endl;
+//      std::cout << "distance is: " << distance << " queueRT is: " << queueRT << " check is: " << (queueRT < 1 - (distance - min_dist) / (max_dist - min_dist)) << endl;
+//    }
+    return queueRT < 1 - (distance - min_dist) / (max_dist - min_dist);
+  } else {
+    std::cout << "no data found" << endl;
+    return false;
   }
-
-  return (queueRT - min) < (max - min) / stages * ttl;
 }
-
-
-void UDPCamListener::receiveSignal(cComponent *src, simsignal_t signal, double queueRatioThreshold, cObject *details) {
-  if (signal == queueRatioChgd) {
-    queueRT = queueRatioThreshold;
-  }
-}
-
 
 
 void UDPCamListener::finish()

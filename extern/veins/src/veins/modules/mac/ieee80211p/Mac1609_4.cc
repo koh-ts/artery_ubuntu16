@@ -54,7 +54,6 @@ void Mac1609_4::initialize(int stage) {
 
 		sigChannelBusy = registerSignal("sigChannelBusy");
 		sigCollision = registerSignal("sigCollision");
-		queueRatioChgd = registerSignal("queueRatioChgd");
 
 		txPower = par("txPower").doubleValue();
 		bitrate = par("bitrate").longValue();
@@ -322,6 +321,8 @@ void Mac1609_4::handleUpperMsg(cMessage* msg) {
 	if (num == -1) {
 		statsDroppedPackets++;
 		return;
+	} else {
+	  currentQueueSize = num;
 	}
 
   if (simTime() > simStartTime && simTime() < simEndTime) {
@@ -331,11 +332,6 @@ void Mac1609_4::handleUpperMsg(cMessage* msg) {
         << " queue rate: "
         << (num * 1.0) / queueSize
         << endl;
-
-    if (!(num * 1.0 / queueSize > queueRatioThreshold && num * 1.0 / queueSize < (queueRatioThreshold + 0.1))) {
-      queueRatioThreshold = ((int)((num * 1.0 / queueSize) * 10)) / 10.0;
-      emit(queueRatioChgd, queueRatioThreshold);
-    }
 
   }
 
@@ -1166,6 +1162,16 @@ void Mac1609_4::handleRetransmit(t_access_category ac) {
 		scheduleAt(nextEvent, nextMacEvent);
 	}
 }
+
+double Mac1609_4::getQueueRatio() {
+  int queueSize = par("queueSize");
+  if (queueSize == 0)
+    return 0;
+  else {
+    return currentQueueSize * 1.0 / queueSize;
+  }
+}
+
 
 Mac1609_4::EDCA::EDCAQueue::EDCAQueue(int aifsn,int cwMin, int cwMax, t_access_category ac)
 	: aifsn(aifsn),

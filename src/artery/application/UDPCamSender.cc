@@ -19,6 +19,7 @@
 #include "artery/application/UDPCamSender.h"
 #include <boost/units/cmath.hpp>
 #include <boost/units/systems/si/prefixes.hpp>
+#include <random>
 
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/common/ModuleAccess.h"
@@ -276,6 +277,28 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
 
   long double st = (long double) omnetpp::simTime().dbl();
 
+  // make random position
+  VeinsMobility* mobility = check_and_cast<VeinsMobility *>(this->getParentModule()->getParentModule()->getModuleByPath(".mobility"));
+  Coord pcam_pos = mobility->getCurrentPosition();
+
+  std::random_device rnd1;     // 非決定的な乱数生成器を生成
+  std::mt19937 mt1(rnd1());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
+  std::uniform_real_distribution<> real_rand(0, 1);        // [0, 1] 範囲の一様乱数
+
+  std::random_device rnd2;     // 非決定的な乱数生成器を生成
+      std::mt19937 mt2(rnd2());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
+      std::uniform_real_distribution<> pos_rand(0, pcamRange*2);        // [0, pcamRange*2] 範囲の一様乱数 あとでpcamRange分マイナスする
+
+  // 十字路の中心にPCAM装置があり、道路上に車両がいなければならないので、車両の(x,y)はPCAM装置の(X,Y) + (0, 0~pcamRange) or (0~pcamRange,0)
+
+  if (real_rand(mt1) > 0.5) {
+    pcam_pos += Coord(0,pos_rand(mt2) - pcamRange);
+  } else {
+    pcam_pos += Coord(pos_rand(mt2) - pcamRange, 0);
+  }
+
+  std::cout << pcam_pos.x << "," << pcam_pos.y << endl;
+
   std::ostringstream str;
   str << "1" << ","                             //header.protocolVersion
       << ItsPduHeader__messageID_cam << ","     //header.messageId
@@ -285,8 +308,8 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
       << StationType_passengerCar << ","
       << AltitudeValue_unavailable << ","
       << AltitudeConfidence_unavailable << ","
-      << 0 << ","
-      << 0 << ","
+      << pcam_pos.x << ","
+      << pcam_pos.y << ","
       << HeadingValue_unavailable << ","
       << SemiAxisLength_unavailable << ","
       << SemiAxisLength_unavailable << ","
