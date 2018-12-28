@@ -297,8 +297,6 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
     pcam_pos += Coord(pos_rand(mt2) - pcamRange, 0);
   }
 
-  std::cout << pcam_pos.x << "," << pcam_pos.y << endl;
-
   std::ostringstream str;
   str << "1" << ","                             //header.protocolVersion
       << ItsPduHeader__messageID_cam << ","     //header.messageId
