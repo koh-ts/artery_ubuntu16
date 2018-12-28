@@ -65,7 +65,11 @@ void UDPCamSender::initialize(int stage)
 
         localPort = par("localPort");
         destPort = par("destPort");
-        startTime = simTime() + uniform(0,par("sendInterval").doubleValue());
+
+        std::random_device rnd;     // 非決定的な乱数生成器を生成
+        std::mt19937 mt(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
+        std::uniform_real_distribution<> real_rand(0, par("sendInterval").doubleValue());        // [0, 1] 範囲の一様乱数
+        startTime = simTime() + uniform(0,real_rand(mt));
         stopTime = par("stopTime").doubleValue();
         packetName = par("packetName");
         maxHopNum = par("maxHopNum");
