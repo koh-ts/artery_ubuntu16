@@ -51,9 +51,11 @@ void RSUCaService::initialize()
     ItsG5BaseService::initialize();
     mTimer = &getFacilities().get_const<Timer>();
 
-    std::string output = par("outputDir");
-    output += "output_" + this-> getFullPath() + ".txt";
-    ofs.open(output, std::ios::out);
+    if (std::strstr(this->getFullPath().c_str(), "pcam[24]")) {
+      std::string output = par("outputDir");
+      output += "output_" + this-> getFullPath() + ".txt";
+      ofs.open(output, std::ios::out);
+    }
 
     findHost()->subscribe(artery::UDPCamListener::rcvdPkSignal,this);
 
@@ -86,11 +88,13 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   UDPDataIndication *ctrl = check_and_cast<UDPDataIndication *>(pk->getControlInfo());
   L3Address srcAddress = ctrl->getSrcAddr();
 
-  ofs << "time: " << simTime()
-      << "\tserialnum: " << ((ApplicationPacket *)pk) -> getSequenceNumber()
-      << "\tfrom: " << srcAddress
-      << "\tto: " << L3AddressResolver().resolve(this->getModuleByPath("^.^.^")->getFullPath().c_str())
-      << endl;
+  if (ofs) {
+    ofs << "time: " << simTime()
+        << "\tserialnum: " << ((ApplicationPacket *)pk) -> getSequenceNumber()
+        << "\tfrom: " << srcAddress
+        << "\tto: " << L3AddressResolver().resolve(this->getModuleByPath("^.^.^")->getFullPath().c_str())
+        << endl;
+  }
   this->request(request, std::move(payload));
 }
 
@@ -196,15 +200,17 @@ void RSUCaService::indicate(const vanetza::btp::DataIndication& ind, std::unique
         // std::cout << tai << endl;
         // fprintf(fp, "%d\t%s", (int)(msg->header.stationID), std::to_string(expiry));
         // std::cout << "generationDeltaTime is: " << msg->cam.generationDeltaTime;
-        ofs << "time: " << omnetpp::simTime()
-        << "\tsrc station id: " << msg->header.stationID
-        // ofs << "recv pos is: " << mVehicleDataProvider->longitude() << endl;
-        << "\tsrc cam time: " << timeStamp
-        << "\tsrc pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
-        << msg->cam.camParameters.basicContainer.referencePosition.longitude
-        << "\tdst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
-        << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
-        << endl;
+        if(ofs) {
+          ofs << "time: " << omnetpp::simTime()
+          << "\tsrc station id: " << msg->header.stationID
+          // ofs << "recv pos is: " << mVehicleDataProvider->longitude() << endl;
+          << "\tsrc cam time: " << timeStamp
+          << "\tsrc pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
+          << msg->cam.camParameters.basicContainer.referencePosition.longitude
+          << "\tdst pos: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << ","
+          << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast
+          << endl;
+        }
         // std::cout << "before: " << round(mVehicleDataProvider->latitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->latitude(), microdegree) * Latitude_oneMicrodegreeNorth << endl;
         // std::cout << "before: " << round(mVehicleDataProvider->longitude(), vanetza::units::degree) << " after: " << round(mVehicleDataProvider->longitude(), microdegree) * Longitude_oneMicrodegreeEast << endl;
         // ofs << "\t src pos is: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "," << msg->cam.camParameters.basicContainer.referencePosition.latitude << endl;
@@ -258,7 +264,9 @@ void RSUCaService::sendCam(const SimTime& T_now)
 {
     EV_INFO << "sending cam......" << endl;
     // std::cout << "sending cam ........" << endl;
-    ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
+    if (ofs) {
+      ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
+    }
     uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
     auto cam = createCooperativeAwarenessMessage(*mVehicleDataProvider, genDeltaTimeMod);
 

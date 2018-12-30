@@ -41,10 +41,11 @@ void UDPCamListener::initialize(int stage)
     ApplicationBase::initialize(stage);
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
-      std::string output = par("outputDir");
-      output += "output_" + this->getFullPath() + "_listener.txt";
-      ofs.open(output, std::ios::out);
-
+      if (std::strstr(this->getFullPath().c_str(), "pcam[24]")) {
+        std::string output = par("outputDir");
+        output += "output_" + this->getFullPath() + "_listener.txt";
+        ofs.open(output, std::ios::out);
+      }
     }
 }
 
@@ -66,18 +67,21 @@ void UDPCamListener::receiveCAM(cPacket *pk)
     L3Address srcAddress = ctrl->getSrcAddr();
 //    std::cout << "cam received" << UDPSocket::getReceivedPacketInfo(pk) << " from:" << srcAddress << endl;
 
-    ofs << "time: " << simTime()
-        << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()
-        << "\tfrom: " << srcAddress
-        << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
-        << "\tttl: " << ctrl->getTtl();
-
+    if(ofs) {
+      ofs << "time: " << simTime()
+          << "\tserialnum: " << ((ApplicationPacket *)pk)->getSequenceNumber()
+          << "\tfrom: " << srcAddress
+          << "\tto: " << L3AddressResolver().resolve(this->getParentModule()->getFullPath().c_str())
+          << "\tttl: " << ctrl->getTtl();
+    }
 
     if (checkDistance(pk)) {
       emit(rcvdPkSignal, pk);
     } else {
+      if(ofs)
       ofs << "\t dropped";
     }
+    if(ofs)
     ofs << endl;
     //    std::cout << check_and_cast<artery::Disseminator>this->getParentModule()->handleMessage(pk) << endl;
 

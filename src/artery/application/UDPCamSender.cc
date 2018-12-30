@@ -70,13 +70,15 @@ void UDPCamSender::initialize(int stage)
         std::mt19937 mt(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
         std::uniform_real_distribution<> real_rand(0, par("sendInterval").doubleValue());        // [0, 1] 範囲の一様乱数
         startTime = simTime() + uniform(0,real_rand(mt));
-        stopTime = par("stopTime").doubleValue();
+        simInterval = par("simInterval").doubleValue();
+        simStartTime = par("simStartTime");
+        simEndTime = par("simEndTime");
+        stopTime = simStartTime + simInterval;
         packetName = par("packetName");
         maxHopNum = par("maxHopNum");
         pcamRange = par("pcamRange");
         fakeCam = par("fakeCam");
         fakeCamNum = par("fakeCamNum");
-        simStartTime = par("simStartTime");
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             throw cRuntimeError("Invalid startTime/stopTime parameters");
 
@@ -480,6 +482,15 @@ void UDPCamSender::processSend()
 void UDPCamSender::processStop()
 {
     socket.close();
+    if (stopTime < simEndTime) {
+      std::random_device rnd;     // 非決定的な乱数生成器を生成
+      std::mt19937 mt(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
+      std::uniform_real_distribution<> real_rand(0, par("sendInterval").doubleValue());        // [0, 1] 範囲の一様乱数
+      startTime = stopTime + 5 + uniform(0,real_rand(mt));
+      stopTime += 15;
+      selfMsg->setKind(START);
+      scheduleAt(startTime, selfMsg);
+    }
 }
 
 void UDPCamSender::handleMessageWhenUp(cMessage *msg)

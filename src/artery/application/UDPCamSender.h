@@ -50,6 +50,7 @@ class UDPCamSender : public ApplicationBase
     int localPort = -1, destPort = -1;
     simtime_t startTime;
     simtime_t stopTime;
+    double simInterval;
     const char *packetName = nullptr;
     Timer mTimer;
 
@@ -57,7 +58,8 @@ class UDPCamSender : public ApplicationBase
     double pcamRange = 0;
     bool fakeCam = false;
     int fakeCamNum = 0;
-    int simStartTime = 0;
+    double simStartTime = 0;
+    double simEndTime = 0;
 
     // state
     UDPSocket socket;

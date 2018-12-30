@@ -25,9 +25,10 @@ simple UDPCamSender like IUDPApp
     	double pcamRange = default(0);
     	bool fakeCam = default(false);
     	int fakeCamNum = default(0);
-    	int simStartTime = default(200);
+    	double simStartTime = default(200);
+    	double simEndTime = default(1700);
     	int numProxyCamDevsParEdge = default(0);
-      string outputDir = default("../../output/");
+        string outputDir = default("../../output/");
         string datetime;
         string interfaceTableModule;   // The path to the InterfaceTable module
         int localPort = default(-1);  // local port (-1: use ephemeral port)
@@ -38,6 +39,7 @@ simple UDPCamSender like IUDPApp
         volatile int messageLength @unit(B); // length of messages to generate, in bytes
         double startTime @unit(s) = default(this.sendInterval); // application start time (start of the first packet)
         double stopTime @unit(s) = default(-1s);  // time of finishing sending, -1s means forever
+        double simInterval = default(10);
         volatile double sendInterval @unit(s); // should usually be a random value, e.g. exponential(1)
         int timeToLive = default(-1); // if not -1, set the TTL (IPv4) or Hop Limit (IPv6) field of sent packets to this value
         int typeOfService = default(-1); // if not -1, set the ToS (IPv4) or Traffic Class (IPv6) field of sent packets to this value
