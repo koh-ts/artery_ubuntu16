@@ -137,3 +137,5 @@ for sim_num in range(100):
         for i,key in enumerate(rcvd_counts):
             print(key, float(rcvd_counts[key])/float(send_counts[key]))
             pdrf.write(str(simStartTime + timeDiff * i) + "\t" + str(float(rcvd_counts[key])/float(send_counts[key])) + "\n")
+
+        pdrf.close()
