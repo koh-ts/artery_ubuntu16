@@ -13,10 +13,12 @@ if not (int(cam_num) >= 0 and int(cam_num) <= 48):
     print("error unknown pcam pos num")
     sys.exit()
 
+simTotalInterval = 15
+
 for sim_num in range(100):
     for pcamNo in range(49):
 
-        simStartTime = 200
+        simStartTime = 200 + simTotalInterval * sim_num
         timeDiff = 0.5
 
         results_sensor_path = "output/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/output_GridWorld.pcam[" + str(pcamNo) + "].sensor.udpApp[0]_sender.txt"
