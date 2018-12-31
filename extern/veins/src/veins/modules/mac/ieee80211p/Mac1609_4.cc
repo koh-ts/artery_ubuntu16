@@ -335,7 +335,7 @@ void Mac1609_4::handleUpperMsg(cMessage* msg) {
       int queueSize = par("queueSize");
       ofs << "time: "
       << simTime()
-      << " queue rate: "
+      << "\tqueue rate: "
       << (num * 1.0) / queueSize
       << endl;
     }
