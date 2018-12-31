@@ -16,12 +16,11 @@ sns.set_palette('Set1')
 args = sys.argv
 cam_num = int(args[1])
 
-sim_from = 205
-sim_to = 210
-
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
 pcam_pos_slants = [24, 16, 8, 0]
 pcam_pos_crosses = [24, 23, 22, 21]
+
+simTotalInterval = 15
 
 if not (cam_num == 5 or cam_num == 10 or cam_num == 15):
     print("error unknown cam_num")
@@ -50,17 +49,20 @@ for method in methods:
         pdrs = []
         delays = []
         delay_errors = []
-        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
-            pdrlines = f.readlines()
-        for pdrline in pdrlines[1:]:
-            if float(pdrline.split("\t")[0]) > sim_from and float(pdrline.split("\t")[0]) < sim_to:
-                pdrs.append(float(pdrline.split("\t")[1]))
-        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/delay_" + str(pos) + ".txt") as f:
-            delaylines = f.readlines()
-        for delayline in delaylines[1:]:
-            if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
-                delays.append(float(delayline.split("\t")[1]))
-                delay_errors.append(float(delayline.split("\t")[2]))
+        sim_from = 205
+        sim_to = 210
+        for sim_num in range(100):
+            with open(analysis_root_path + method + "/num_" + str(cam_num) + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
+                pdrlines = f.readlines()
+            for pdrline in pdrlines[1:]:
+                if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                    pdrs.append(float(pdrline.split("\t")[1]))
+            with open(analysis_root_path + method + "/num_" + str(cam_num) + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
+                delaylines = f.readlines()
+            for delayline in delaylines[1:]:
+                if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                    delays.append(float(delayline.split("\t")[1]))
+                    delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
             avg_pdr = 0
         else:
@@ -91,17 +93,20 @@ for method in methods:
         pdrs = []
         delays = []
         delay_errors = []
-        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/pdr_" + str(pos) + ".txt") as f:
-            pdrlines = f.readlines()
-        for pdrline in pdrlines[1:]:
-            if float(pdrline.split("\t")[0]) > sim_from and float(pdrline.split("\t")[0]) < sim_to:
-                pdrs.append(float(pdrline.split("\t")[1]))
-        with open(analysis_root_path + method + "/num_" + str(cam_num) + "/delay_" + str(pos) + ".txt") as f:
-            delaylines = f.readlines()
-        for delayline in delaylines[1:]:
-            if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
-                delays.append(float(delayline.split("\t")[1]))
-                delay_errors.append(float(delayline.split("\t")[2]))
+        sim_from = 205
+        sim_to = 210
+        for sim_num in range(100):
+            with open(analysis_root_path + method + "/num_" + str(cam_num) + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
+                pdrlines = f.readlines()
+            for pdrline in pdrlines[1:]:
+                if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                    pdrs.append(float(pdrline.split("\t")[1]))
+            with open(analysis_root_path + method + "/num_" + str(cam_num) + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
+                delaylines = f.readlines()
+            for delayline in delaylines[1:]:
+                if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                    delays.append(float(delayline.split("\t")[1]))
+                    delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
             avg_pdr = 0
         else:
@@ -140,7 +145,7 @@ ax.set_ylabel("PDR")
 ax.set_ylim(-0.1, 1.1)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
-pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_slant.pdf")
+pp = PdfPages("summary/sim_all/cam_num_" + str(cam_num) + "_pdr_slant.pdf")
 pp.savefig(fig_pdr)
 pp.close()
 
@@ -161,7 +166,7 @@ ax.set_ylabel("delay")
 ax.set_ylim(-150,400)
 plt.title("cam_num: " + str(cam_num) + " slant")
 
-pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_slant.pdf")
+pp = PdfPages("summary/sim_all/cam_num_" + str(cam_num) + "_delay_slant.pdf")
 pp.savefig(fig_delay)
 pp.close()
 
@@ -187,7 +192,7 @@ ax.set_ylabel("PDR")
 ax.set_ylim(-0.1, 1.1)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
-pp = PdfPages("summary/cam_num_" + str(cam_num) + "_pdr_cross.pdf")
+pp = PdfPages("summary/sim_all/cam_num_" + str(cam_num) + "_pdr_cross.pdf")
 pp.savefig(fig_pdr)
 pp.close()
 
@@ -209,6 +214,6 @@ ax.set_ylabel("delay")
 ax.set_ylim(-150,400)
 plt.title("cam_num: " + str(cam_num) + " cross")
 
-pp = PdfPages("summary/cam_num_" + str(cam_num) + "_delay_cross.pdf")
+pp = PdfPages("summary/sim_all/cam_num_" + str(cam_num) + "_delay_cross.pdf")
 pp.savefig(fig_delay)
 pp.close()
