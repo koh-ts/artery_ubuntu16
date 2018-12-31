@@ -1,7 +1,7 @@
 from pathlib import Path
 
-methods = ["naive_grid_pcam"]#, "naive_grid_pcam", "passive_grid_pcam"]
-pcam_nums = ["num_5"]#, "num_10", "num_15"]
+methods = ["original_pcam"] #, "naive_grid_pcam", "passive_grid_pcam"]
+pcam_nums = ["num_5", "num_10", "num_15"]
 
 simStartTime = 200
 simTotalInterval = 15
@@ -12,6 +12,9 @@ for method in methods:
         files = outputDir.glob("*")
         for file in files:
             print(file)
+            if "node" in str(file):
+                print("passed")
+                continue
             with file.open() as f:
                 lines = f.readlines()
             if len(lines) == 0:
