@@ -4,3 +4,5 @@ output/
 results/
 analysis/
 summary/
+.settings/
+.cproject
