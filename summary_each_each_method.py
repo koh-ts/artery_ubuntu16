@@ -16,12 +16,11 @@ sns.set_palette('Set1')
 args = sys.argv
 method = args[1]
 
-sim_from = 205
-sim_to = 210
-
 cam_nums = ["num_5", "num_10", "num_15"]
 pcam_pos_slants = [24, 16, 8, 0]
 pcam_pos_crosses = [24, 23, 22, 21]
+
+simTotalInterval = 15
 
 if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "passive_grid_pcam"):
     print("error unknown method")
@@ -38,6 +37,9 @@ for sim_num in range(100):
     all_pdrs_crosses = []
     all_delays_crosses = []
     all_delay_errors_crosses = []
+
+    sim_from = 205 + simTotalInterval * sim_num
+    sim_to = 210 + simTotalInterval * sim_num
 
     print("entering slants")
 
