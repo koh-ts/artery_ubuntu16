@@ -8,7 +8,7 @@ simTotalInterval = 15
 
 for method in methods:
     for pcam_num in pcam_nums:
-        outputDir = Path("output/" + method + "/" + pcam_num + "/sim_all_1/")
+        outputDir = Path("output/" + method + "/" + pcam_num + "/sim_all_2/")
         files = outputDir.glob("*")
         for file in files:
             print(file)
@@ -25,8 +25,8 @@ for method in methods:
                         f = open(str(path) + "/" + file.name, mode="w")
                         f.close()
             else:
-                count = 0
-                # count = 47
+                # count = 0
+                count = 47
                 startPos = 0
                 for i,line in enumerate(lines):
                     objs = line.split("\t")
@@ -34,9 +34,9 @@ for method in methods:
                         of_path = str(outputDir.parent) + "/sim_" + str(count) + "/" + file.name
                         of = open(of_path,mode="w")
                         for oline in lines[startPos:i]:
-                            # objs = oline.split("\t")
-                            # objs[0] = objs[0].split(":")[0] + ": " + str(float(objs[0].split(":")[1]) + 705)
-                            # oline = "\t".join(objs)
+                            objs = oline.split("\t")
+                            objs[0] = objs[0].split(":")[0] + ": " + str(float(objs[0].split(":")[1]) + 705)
+                            oline = "\t".join(objs)
                             of.write(oline)
                         startPos = i
                         count += 1

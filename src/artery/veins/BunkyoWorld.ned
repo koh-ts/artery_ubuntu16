@@ -24,7 +24,7 @@ network BunkyoWorld
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
-        @display("bgb=6000,6000");
+        @display("bgb=1717.73,1945.15");
 
     types:
         channel ethline extends DatarateChannel
