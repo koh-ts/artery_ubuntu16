@@ -1,0 +1,1 @@
+python3 analysis.py original_pcam 5&python3 analysis.py original_pcam 10&python3 analysis.py original_pcam 15&python3 analysis.py naive_grid_pcam 5&python3 analysis.py naive_grid_pcam 10&python3 analysis.py naive_grid_pcam 15&python3 analysis.py passive_grid_pcam 5&python3 analysis.py passive_grid_pcam 10&python3 analysis.py passive_grid_pcam 15;

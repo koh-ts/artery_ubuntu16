@@ -61,8 +61,10 @@ for sim_num in range(100):
                 delaylines = f.readlines()
             for delayline in delaylines[1:]:
                 if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
-                    delays.append(float(delayline.split("\t")[1]))
-                    delay_errors.append(float(delayline.split("\t")[2]))
+                    if not np.isnan(float(delayline.split("\t")[1])):
+                        delays.append(float(delayline.split("\t")[1]))
+                    if not np.isnan(float(delayline.split("\t")[2])):
+                        delay_errors.append(float(delayline.split("\t")[2]))
             if len(pdrs) < 2:
                 avg_pdr = 0
             else:
@@ -102,8 +104,10 @@ for sim_num in range(100):
                 delaylines = f.readlines()
             for delayline in delaylines[1:]:
                 if float(delayline.split("\t")[0]) > sim_from and float(delayline.split("\t")[0]) < sim_to:
-                    delays.append(float(delayline.split("\t")[1]))
-                    delay_errors.append(float(delayline.split("\t")[2]))
+                    if not np.isnan(float(delayline.split("\t")[1])):
+                        delays.append(float(delayline.split("\t")[1]))
+                    if not np.isnan(float(delayline.split("\t")[2])):
+                        delay_errors.append(float(delayline.split("\t")[2]))
             if len(pdrs) < 2:
                 avg_pdr = 0
             else:

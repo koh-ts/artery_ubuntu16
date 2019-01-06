@@ -19,7 +19,7 @@ network BunkyoWorld
     parameters:
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
-        int numProxyCamDevsParEdge = default(0);
+        int numProxyCamDev = default(0);
         int numRoadSideUnits = default(0);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
@@ -67,7 +67,7 @@ network BunkyoWorld
                 @display("p=156.624,138.552");
         }
 
-        pcam[numProxyCamDevsParEdge*numProxyCamDevsParEdge]: ProxyCamDev {
+        pcam[numProxyCamDev]: ProxyCamDev {
             @display("p=891.552,377.504");
         }
 
@@ -86,17 +86,7 @@ network BunkyoWorld
 //        }
 
     connections:
-        for i=0..numProxyCamDevsParEdge * numProxyCamDevsParEdge - 1 {
+        for i=0..numProxyCamDev - 1 {
             router[i].ethg++ <--> ethline <--> pcam[i].ethg;
-        }
-        for i=0..numProxyCamDevsParEdge-2, for j=0..numProxyCamDevsParEdge-2 {
-            router[numProxyCamDevsParEdge * i + j].ethg++ <--> ethline <--> router[numProxyCamDevsParEdge * i + j + 1].ethg++;
-            router[numProxyCamDevsParEdge * i + j].ethg++ <--> ethline <--> router[numProxyCamDevsParEdge * (i+1) + j].ethg++;
-        }
-        for i=0..numProxyCamDevsParEdge-2 {
-            router[numProxyCamDevsParEdge * (i+1) - 1].ethg++ <--> ethline <--> router[numProxyCamDevsParEdge * (i+2) - 1].ethg++;
-        }
-        for j=0..numProxyCamDevsParEdge-2 {
-            router[numProxyCamDevsParEdge * (numProxyCamDevsParEdge - 1) + j].ethg++ <--> ethline <--> router[numProxyCamDevsParEdge * (numProxyCamDevsParEdge - 1) + j + 1].ethg++;
         }
 }

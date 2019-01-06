@@ -6,8 +6,6 @@ import numpy as np
 import pandas as pd
 import sys
 
-nan = np.nan
-
 plt.style.use('default')
 sns.set()
 sns.set_style('whitegrid')
@@ -27,6 +25,8 @@ if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "p
     sys.exit()
 
 analysis_root_path = "analysis/" + method + "/"
+
+print("this is summary of ", method + "\n")
 
 # ここにはnum_*のslants,crossesが入る
 all_pdrs_slants = []
@@ -60,8 +60,10 @@ for cam_num in cam_nums:
                 delaylines = f.readlines()
             for delayline in delaylines[1:]:
                 if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-                    delays.append(float(delayline.split("\t")[1]))
-                    delay_errors.append(float(delayline.split("\t")[2]))
+                    if not np.isnan(float(delayline.split("\t")[1])):
+                        delays.append(float(delayline.split("\t")[1]))
+                    if not np.isnan(float(delayline.split("\t")[2])):
+                        delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
             avg_pdr = 0
         else:
@@ -104,8 +106,10 @@ for cam_num in cam_nums:
                 delaylines = f.readlines()
             for delayline in delaylines[1:]:
                 if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-                    delays.append(float(delayline.split("\t")[1]))
-                    delay_errors.append(float(delayline.split("\t")[2]))
+                    if not np.isnan(float(delayline.split("\t")[1])):
+                        delays.append(float(delayline.split("\t")[1]))
+                    if not np.isnan(float(delayline.split("\t")[2])):
+                        delay_errors.append(float(delayline.split("\t")[2]))
         if len(pdrs) < 2:
             avg_pdr = 0
         else:
