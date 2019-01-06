@@ -15,6 +15,7 @@ sns.set_palette('Set1')
 
 args = sys.argv
 method = args[1]
+map_type = "grid"
 
 cam_nums = ["num_5", "num_10", "num_15"]
 pcam_pos_slants = [24, 16, 8, 0]
@@ -26,7 +27,7 @@ if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "p
     print("error unknown method")
     sys.exit()
 
-analysis_root_path = "analysis/" + method + "/"
+analysis_root_path = "analysis/" + map_type + "/" + method + "/"
 
 for sim_num in range(100):
     # ここにはnum_*のslants,crossesが入る
@@ -144,9 +145,10 @@ for sim_num in range(100):
     ax.set_xlabel("hop num")
     ax.set_ylabel("PDR")
     ax.set_ylim(-0.1, 1.1)
+    plt.xticks(np.arange(1,x.size + 1))
     plt.title("method: " + method + " slant")
 
-    pp = PdfPages("summary" + "/sim_" + str(sim_num) + "/method_" + method + "_pdr_slant.pdf")
+    pp = PdfPages("summary/" + map_type + "/sim_" + str(sim_num) + "/method_" + method + "_pdr_slant.pdf")
     pp.savefig(fig_pdr)
     pp.close()
 
@@ -169,7 +171,7 @@ for sim_num in range(100):
     ax.set_ylim(-150,400)
     plt.title("method: " + method + " slant")
 
-    pp = PdfPages("summary" + "/sim_" + str(sim_num) + "/method_" + method + "_delay_slant.pdf")
+    pp = PdfPages("summary/" + map_type + "/sim_" + str(sim_num) + "/method_" + method + "_delay_slant.pdf")
     pp.savefig(fig_delay)
     pp.close()
 
@@ -195,7 +197,7 @@ for sim_num in range(100):
     ax.set_ylim(-0.1, 1.1)
     plt.title("method: " + method + " cross")
 
-    pp = PdfPages("summary" + "/sim_" + str(sim_num) + "/method_" + method + "_pdr_cross.pdf")
+    pp = PdfPages("summary/" + map_type + "/sim_" + str(sim_num) + "/method_" + method + "_pdr_cross.pdf")
     pp.savefig(fig_pdr)
     pp.close()
 
@@ -218,6 +220,6 @@ for sim_num in range(100):
     ax.set_ylim(-150,400)
     plt.title("method: " + method + " cross")
 
-    pp = PdfPages("summary" + "/sim_" + str(sim_num) + "/method_" + method + "_delay_cross.pdf")
+    pp = PdfPages("summary/" + map_type + "/sim_" + str(sim_num) + "/method_" + method + "_delay_cross.pdf")
     pp.savefig(fig_delay)
     pp.close()
