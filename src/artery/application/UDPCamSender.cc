@@ -361,13 +361,11 @@ void UDPCamSender::processStart()
     setSocketOptions();
 
     const char *destAddrs = par("destAddresses");
-    // std::cout << "processStart" << endl;
     if (strstr(destAddrs,"all")!= NULL) {
       int num = par("numProxyCamDevsParEdge");
       int fPos = ((std::string)this->getFullPath()).find("[");
       int lPos = ((std::string)this->getFullPath()).find("]");
       int pcamnum = std::stoi(((std::string)this->getFullPath()).substr(fPos + 1, lPos-fPos - 1));
-//      std::cout << "udp cam sender init: " << this->getFullPath() << "," << pcamnum << endl;
       int row = (pcamnum - pcamnum % num) / num;
       int col = pcamnum % num;
 

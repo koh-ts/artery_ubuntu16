@@ -99,7 +99,7 @@ void BaseMobility::initialize(int stage)
         double y = hasPar("y") ? par("y").doubleValue() : -1;
         double z = hasPar("z") ? par("z").doubleValue() : -1;
 
-        if (strstr(this->getFullPath().c_str(),"pcam")!=NULL) {
+        if (strstr(this->getFullPath().c_str(),"pcam")!=NULL && strstr(this->getFullPath().c_str(),"GridWorld")!=NULL) {
           int num = par("numProxyCamDevsParEdge");
           int fPos = ((std::string)this->getFullPath()).find("[");
           int lPos = ((std::string)this->getFullPath()).find("]");
@@ -115,7 +115,7 @@ void BaseMobility::initialize(int stage)
           // std::cout << x << "," << y << endl;
           par("x").setDoubleValue(x);
           par("y").setDoubleValue(y);
-        } else if (strstr(this->getFullPath().c_str(),"router")!=NULL) {
+        } else if (strstr(this->getFullPath().c_str(),"router")!=NULL && strstr(this->getFullPath().c_str(),"GridWorld")!=NULL) {
           int num = par("numProxyCamDevsParEdge");
           int fPos = ((std::string)this->getFullPath()).find("[");
           int lPos = ((std::string)this->getFullPath()).find("]");

@@ -71,7 +71,7 @@ network BunkyoWorld
             @display("p=891.552,377.504");
         }
 
-        router[numProxyCamDevsParEdge*numProxyCamDevsParEdge]: RIPRouter {
+        router[numProxyCamDev]: RIPRouter {
             @display("p=761.032,257.024");
         }
 
