@@ -19,7 +19,7 @@ network BunkyoWorld
     parameters:
         bool withObstacles = default(true);
         bool withStoryboard = default(false);
-        int numProxyCamDev = default(0);
+        int numProxyCamDevs = default(0);
         int numRoadSideUnits = default(0);
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
@@ -34,7 +34,7 @@ network BunkyoWorld
 
     submodules:
         connectionManager: ConnectionManager {
-            @display("p=54.216,154.616");
+            @display("p=69,131");
         }
 
         world: BaseWorldUtility {
@@ -42,36 +42,36 @@ network BunkyoWorld
                 playgroundSizeX = playgroundSizeX;
                 playgroundSizeY = playgroundSizeY;
                 playgroundSizeZ = playgroundSizeZ;
-                @display("p=54.216,48.191998");
+                @display("p=40,199");
         }
 
         obstacles: ObstacleControl if withObstacles {
             parameters:
                 traciCoreModule = "^.traci.core";
-                @display("p=251,48.191998");
+                @display("p=40,254");
         }
         annotations: AnnotationManager {
-            @display("p=54.216,345.37598");
+            @display("p=260,50");
         }
 
         traci: Manager {
             parameters:
                 mapper.vehicleType = default("artery.veins.Car");
                 nodes.vehicleSinkModule = default(".mobility");
-                @display("p=54.216,248.99199");
+                @display("p=20,20");
         }
 
         storyboard: Storyboard if withStoryboard {
             parameters:
                 middlewareModule = default(".appl.middleware");
-                @display("p=156.624,138.552");
+                @display("p=100,20");
         }
 
-        pcam[numProxyCamDev]: ProxyCamDev {
-            @display("p=891.552,377.504");
+        pcam[numProxyCamDevs]: ProxyCamDev {
+            @display("p=330,218");
         }
 
-        router[numProxyCamDev]: RIPRouter {
+        router[numProxyCamDevs]: RIPRouter {
             @display("p=761.032,257.024");
         }
 
@@ -79,17 +79,17 @@ network BunkyoWorld
             @display("p=891.552,929.704");
         }
         configurator: IPv4NetworkConfigurator {
-            @display("p=156.624,48.191998");
+            @display("p=112,278");
         }
 //        visualizer: IntegratedVisualizer {
 //            @display("p=282,31");
 //        }
 
     connections:
-        for i=0..numProxyCamDev - 1 {
+        for i=0..numProxyCamDevs - 1 {
             router[i].ethg++ <--> ethline <--> pcam[i].ethg;
         }
-        
+
         router[0].ethg++ <--> ethline <--> router[13].ethg++;
         router[0].ethg++ <--> ethline <--> router[22].ethg++;
         router[0].ethg++ <--> ethline <--> router[27].ethg++;
