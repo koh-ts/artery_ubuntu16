@@ -76,6 +76,7 @@ network BunkyoWorld
 
         rsu[numRoadSideUnits]: RSU {
         }
+
         configurator: IPv4NetworkConfigurator {
             @display("p=112,278");
         }
