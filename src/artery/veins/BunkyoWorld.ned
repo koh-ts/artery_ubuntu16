@@ -72,11 +72,9 @@ network BunkyoWorld
         }
 
         router[numProxyCamDevs]: RIPRouter {
-            @display("p=761.032,257.024");
         }
 
         rsu[numRoadSideUnits]: RSU {
-            @display("p=891.552,929.704");
         }
         configurator: IPv4NetworkConfigurator {
             @display("p=112,278");
