@@ -24,7 +24,7 @@ network GridWorld
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
-        @display("bgb=600,600");
+        @display("bgb=620,620");
 
     types:
         channel ethline extends DatarateChannel
