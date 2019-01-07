@@ -9,7 +9,7 @@ cam_num = args[2]
 if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "passive_grid_pcam"):
     print("error unknown method")
     sys.exit()
-if not (int(cam_num) >= 0 and int(cam_num) <= 48):
+if not (int(cam_num) == 5 or int(cam_num) == 10 or int(cam_num) == 15):
     print("error unknown pcam pos num")
     sys.exit()
 
