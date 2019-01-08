@@ -506,6 +506,8 @@ void UDPCamSender::processStart()
             destAddresses.push_back(result);
           }
         }
+        sort(destAddresses.begin(), destAddresses.end());
+        destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
       }
       // std::cout << "this is " << this->getFullPath() << endl;
       // for (auto itr = destAddresses.begin();itr != destAddresses.end(); ++itr) {
