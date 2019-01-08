@@ -497,7 +497,7 @@ void UDPCamSender::processStart()
         }
 
         for(auto itr = dstPcamNums.begin(); itr != dstPcamNums.end(); ++itr) {
-          cStringTokenizer tokenizer(("10.0." + std::to_string(*itr) + ".2").c_str());
+          cStringTokenizer tokenizer(("10.0." + std::to_string(*itr) + ".3").c_str());
           const char *token;
 
           while ((token = tokenizer.nextToken()) != nullptr) {
