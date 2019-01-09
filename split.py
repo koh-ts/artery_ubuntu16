@@ -6,12 +6,14 @@ pcam_nums = ["num_5", "num_10", "num_15"]
 simStartTime = 200
 simTotalInterval = 15
 
-offset = 94
+map_type = "bunkyo-ku"
+
+offset = 0
 
 
 for method in methods:
     for pcam_num in pcam_nums:
-        outputDir = Path("output/" + method + "/" + pcam_num + "/sim_all/")
+        outputDir = Path("output/" + map_type + "/" + method + "/" + pcam_num + "/sim_all_1/")
         files = outputDir.glob("*")
         for file in files:
             print(file)

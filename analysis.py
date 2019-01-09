@@ -1,10 +1,12 @@
-from statistics import mean, median,variance,stdev
+from statistics import mean, median,stdev
 from collections import OrderedDict
 
 import sys
 args = sys.argv
 method = args[1]
 cam_num = args[2]
+map_type = "bunkyo-ku"
+world_name = "BunkyoWorld"
 
 if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "passive_grid_pcam"):
     print("error unknown method")
@@ -21,11 +23,11 @@ for sim_num in range(100):
         simStartTime = 200 + simTotalInterval * sim_num
         timeDiff = 0.5
 
-        results_sensor_path = "output/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/output_GridWorld.pcam[" + str(pcamNo) + "].sensor.udpApp[0]_sender.txt"
-        results_rsu_path = "output/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/output_GridWorld.rsu[0].appl.middleware.CaService.txt"
+        results_sensor_path = "output/" + map_type + "/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/output_" + world_name + ".pcam[" + str(pcamNo) + "].sensor.udpApp[0]_sender.txt"
+        results_rsu_path = "output/" + map_type + "/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/output_" + world_name + ".rsu[0].appl.middleware.CaService.txt"
 
-        analysis_pdr_path = "analysis/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pcamNo) + ".txt"
-        analysis_delay_path = "analysis/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pcamNo) + ".txt"
+        analysis_pdr_path = "analysis/" + map_type + "/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pcamNo) + ".txt"
+        analysis_delay_path = "analysis/" + map_type + "/" + method + "/num_" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pcamNo) + ".txt"
 
         delayf = open(analysis_delay_path, mode="w")
         pdrf = open(analysis_pdr_path, mode="w")
@@ -40,7 +42,7 @@ for sim_num in range(100):
         # rsu の rsu_linesをpdrで再利用するのでrsu_linesに変更は加えてはいけない
 
         # analysis of delay
-        delayf.write("simTime\tdelay_avg(ms)\tdelay_variance(ms)\n")
+        delayf.write("simTime\tdelay_avg(ms)\tdelay_stdev(ms)\n")
         time = simStartTime
         delays = []
         for line in rsu_lines:
@@ -53,18 +55,18 @@ for sim_num in range(100):
                 delays.append(dstTime - srcTime)
             else:
                 if len(delays) == 0:
-                    print(str(time),"mean","nan","variance","nan", "\n")
+                    print(str(time),"mean","nan","stdev","nan", "\n")
                     delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
                 elif len(delays) == 1:
-                    print(str(time),"mean",str(mean(delays) * 1000),"variance","nan","\n")
+                    print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan","\n")
                     delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\n")
                 else:
-                    print(str(time),"mean",str(mean(delays) * 1000),"variance",str(variance(delays) * 1000), "\n")
-                    delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(variance(delays)* 1000) + "\n")
+                    print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
+                    delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\n")
 
                 time += timeDiff
                 while srcTime > time + timeDiff:
-                    print(str(time),"mean","nan","variance","nan", "\n")
+                    print(str(time),"mean","nan","stdev","nan", "\n")
                     delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
                     time += timeDiff
                 delays = []
@@ -73,14 +75,14 @@ for sim_num in range(100):
 
 
         if len(delays) == 0:
-            print(str(time),"mean","nan","variance","nan", "\n")
+            print(str(time),"mean","nan","stdev","nan", "\n")
             delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
         elif len(delays) == 1:
-            print(str(time),"mean",str(mean(delays) * 1000),"variance","nan", "\n")
+            print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan", "\n")
             delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\n")
         else:
-            print(str(time),"mean",str(mean(delays) * 1000),"variance",str(variance(delays) * 1000), "\n")
-            delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(variance(delays)* 1000) + "\n")
+            print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
+            delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\n")
 
 
         delayf.close()
