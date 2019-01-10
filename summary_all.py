@@ -152,7 +152,7 @@ pp.close()
 # losのpdr
 fig_pdr = plt.figure(figsize=(10,5), dpi= 300)
 ax = fig_pdr.add_subplot(1, 1, 1)
-x = np.array(['0', '141', '283', '424'])
+x = np.array(['0', '100', '200', '300'])
 plt.subplots_adjust(right=0.6)
 
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_los[0]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_los[0]], marker='D', label='Original PCAM (PPS: 50)', capthick=1, capsize=8, lw=2, color="indigo")
@@ -179,7 +179,7 @@ pp.close()
 # losのdelay
 fig_delay = plt.figure(figsize=(10,5), dpi= 300)
 ax = fig_delay.add_subplot(1, 1, 1)
-x = np.array(['0', '141', '283', '424'])
+x = np.array(['0', '100', '200', '300'])
 plt.subplots_adjust(right=0.6)
 
 ax.errorbar(x, [mean(delays) if len(delays) >= 2 else -100 for delays in all_delays_los[0]] , yerr= [stdev(delays) if len(delays) >= 2 else 0 for delays in all_delays_los[0]], marker='D', label='Original PCAM (PPS: 50)', capthick=1, capsize=8, lw=2, color="indigo")
