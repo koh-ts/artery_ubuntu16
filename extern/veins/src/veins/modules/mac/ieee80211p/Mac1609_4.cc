@@ -162,7 +162,11 @@ void Mac1609_4::initialize(int stage) {
 		lastBusy = simTime();
 		channelIdle(true);
 
-    if (std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
+    if (std::strstr(this->getFullPath().c_str(),"GridWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
+      std::string output = par("outputDir");
+      output += "output_" + (std::string)this->getFullPath() + ".txt";
+      ofs.open(output, std::ios::out);
+    } else if (std::strstr(this->getFullPath().c_str(),"BunkyoWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[0]") != NULL) {
       std::string output = par("outputDir");
       output += "output_" + (std::string)this->getFullPath() + ".txt";
       ofs.open(output, std::ios::out);

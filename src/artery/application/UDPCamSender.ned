@@ -28,6 +28,9 @@ simple UDPCamSender like IUDPApp
     	double simStartTime = default(200);
     	double simEndTime = default(1700);
     	int numProxyCamDevsParEdge = default(0);
+    	int numProxyCamDevs = default(0);
+    	double dest_min_dist = default(0);
+    	double dest_max_dist = default(1000);
         string outputDir = default("../../output/");
         string datetime;
         string interfaceTableModule;   // The path to the InterfaceTable module

@@ -51,9 +51,13 @@ void RSUCaService::initialize()
     ItsG5BaseService::initialize();
     mTimer = &getFacilities().get_const<Timer>();
 
-    if (std::strstr(this->getFullPath().c_str(), "pcam[24]")) {
+    if (std::strstr(this->getFullPath().c_str(),"GridWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
       std::string output = par("outputDir");
-      output += "output_" + this-> getFullPath() + ".txt";
+      output += "output_" + (std::string)this->getFullPath() + ".txt";
+      ofs.open(output, std::ios::out);
+    } else if (std::strstr(this->getFullPath().c_str(),"BunkyoWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[0]") != NULL) {
+      std::string output = par("outputDir");
+      output += "output_" + (std::string)this->getFullPath() + ".txt";
       ofs.open(output, std::ios::out);
     }
 

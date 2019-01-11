@@ -16,8 +16,7 @@ methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
 cam_nums = ["num_5", "num_10", "num_15"]
 map_type = "bunkyo-ku"
 
-pcam_nums = [0,22,14,15,44,48]
-# pcam_nums = range(49)
+pcam_nums = range(49)
 
 rsu_pos = np.array([700,1155])
 
@@ -72,10 +71,11 @@ pcam_poss = np.array([
     [1135,1945],
     [905,190]
 ])
+for i in range(len(pcam_poss)):
+    print(i, np.linalg.norm(rsu_pos - pcam_poss[i]))
 
 pcam_poss = pcam_poss[pcam_nums]
 
-print (pcam_poss)
 pcam_num_pos = zip(pcam_poss, pcam_nums)
 pcam_num_pos = sorted(pcam_num_pos, key=lambda x: np.linalg.norm(rsu_pos - x[0]))
 
@@ -83,8 +83,7 @@ pcam_poss = [pos for pos,num in pcam_num_pos]
 pcam_nums = [num for pos,num in pcam_num_pos]
 
 for i in range(len(pcam_poss)):
-    print(pcam_nums[i], pcam_poss[i])
-    print(np.linalg.norm(rsu_pos - pcam_poss[i]))
+    print(pcam_nums[i], pcam_poss[i],np.linalg.norm(rsu_pos - pcam_poss[i]))
 
 
 simTotalInterval = 15

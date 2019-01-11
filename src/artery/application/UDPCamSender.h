@@ -60,6 +60,11 @@ class UDPCamSender : public ApplicationBase
     int fakeCamNum = 0;
     double simStartTime = 0;
     double simEndTime = 0;
+    int numProxyCamDevsParEdge = 0;
+    int numProxyCamDevs = 0;
+
+    double dest_min_dist = 0;
+    double dest_max_dist = 1000;
 
     // state
     UDPSocket socket;

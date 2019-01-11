@@ -41,11 +41,19 @@ void UDPCamListener::initialize(int stage)
     ApplicationBase::initialize(stage);
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
-      if (std::strstr(this->getFullPath().c_str(), "pcam[24]")) {
+      if (std::strstr(this->getFullPath().c_str(), "GridWorld") != NULL &&
+          std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
+        std::string output = par("outputDir");
+        output += "output_" + this->getFullPath() + "_listener.txt";
+        ofs.open(output, std::ios::out);
+      } else if (std::strstr(this->getFullPath().c_str(), "BunkyoWorld") != NULL &&
+          std::strstr(this->getFullPath().c_str(), "pcam[0]") != NULL) {
         std::string output = par("outputDir");
         output += "output_" + this->getFullPath() + "_listener.txt";
         ofs.open(output, std::ios::out);
       }
+      dest_min_dist = par("dest_min_dist");
+      dest_max_dist = par("dest_max_dist");
     }
 }
 
@@ -112,16 +120,13 @@ bool UDPCamListener::checkDistance(cPacket *pk) {
     Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
     double distance = boost::geometry::distance(src_pos, pcam_pos);
 
-    double min_dist = 0;
-    double max_dist = 1000;
-
     double queueRT = check_and_cast<Mac1609_4 *>(this->getModuleByPath("^.nic.mac1609_4"))->getQueueRatio();
 //    if (std::strstr(this->getFullPath().c_str(),"pcam[24]") != NULL) {
 //      std::cout << "src_pos is: " << x << "," << y << endl;
 //      std::cout << "pcam_pos is: " << pcam_coord.x << "," << pcam_coord.y << endl;
-//      std::cout << "distance is: " << distance << " queueRT is: " << queueRT << " check is: " << (queueRT < 1 - (distance - min_dist) / (max_dist - min_dist)) << endl;
+//      std::cout << "distance is: " << distance << " queueRT is: " << queueRT << " check is: " << (queueRT < 1 - (distance - dest_min_dist) / (dest_max_dist - dest_min_dist)) << endl;
 //    }
-    return queueRT < 1 - (distance - min_dist) / (max_dist - min_dist);
+    return queueRT < 1 - (distance - dest_min_dist) / (dest_max_dist - dest_min_dist);
   } else {
     std::cout << "no data found" << endl;
     return false;
