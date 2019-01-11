@@ -28,7 +28,6 @@ simple UDPCamListener like IUDPApp
         string outputDir = default("../../output/");
         double dest_min_dist = default(0);
         double dest_max_dist = default(1000);
-        
         @display("i=block/app");
         @signal[pk](type=cPacket);
         @statistic[echoedPk](title="packets echoed"; source=pk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);

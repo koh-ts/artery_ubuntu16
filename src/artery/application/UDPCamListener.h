@@ -55,6 +55,7 @@ class UDPCamListener : public ApplicationBase
     double queueRT = 0;
     double dest_min_dist = 0;
     double dest_max_dist = 0;
+
   public:
     UDPCamListener() {}
     ~UDPCamListener() {}

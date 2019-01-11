@@ -41,15 +41,13 @@ void UDPCamListener::initialize(int stage)
     ApplicationBase::initialize(stage);
     if (stage == INITSTAGE_LOCAL) {
         // init statistics
-      if (std::strstr(this->getFullPath().c_str(), "GridWorld") != NULL &&
-          std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
+      if (std::strstr(this->getFullPath().c_str(),"GridWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[24]") != NULL) {
         std::string output = par("outputDir");
-        output += "output_" + this->getFullPath() + "_listener.txt";
+        output += "output_" + (std::string)this->getFullPath() + ".txt";
         ofs.open(output, std::ios::out);
-      } else if (std::strstr(this->getFullPath().c_str(), "BunkyoWorld") != NULL &&
-          std::strstr(this->getFullPath().c_str(), "pcam[0]") != NULL) {
+      } else if (std::strstr(this->getFullPath().c_str(),"BunkyoWorld") != NULL && std::strstr(this->getFullPath().c_str(), "pcam[0]") != NULL) {
         std::string output = par("outputDir");
-        output += "output_" + this->getFullPath() + "_listener.txt";
+        output += "output_" + (std::string)this->getFullPath() + ".txt";
         ofs.open(output, std::ios::out);
       }
       dest_min_dist = par("dest_min_dist");
