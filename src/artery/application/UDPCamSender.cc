@@ -441,6 +441,14 @@ void UDPCamSender::processStart()
               destAddresses.push_back(result);
           }
         }
+        L3Address result;
+        L3AddressResolver().tryResolve(
+            this->getModuleByPath("^.^.disseminator")->getFullPath().c_str()
+            , result);
+        if (result.isUnspecified())
+          std::cout << "resolve address error" << endl;
+        else
+          destAddresses.push_back(result);
         sort(destAddresses.begin(), destAddresses.end());
         destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
       } else {
@@ -555,6 +563,14 @@ void UDPCamSender::processStart()
               destAddresses.push_back(result);
           }
         }
+        L3Address result;
+        L3AddressResolver().tryResolve(
+            this->getModuleByPath("^.^.disseminator")->getFullPath().c_str()
+            , result);
+        if (result.isUnspecified())
+          std::cout << "resolve address error" << endl;
+        else
+          destAddresses.push_back(result);
         sort(destAddresses.begin(), destAddresses.end());
         destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
         // std::cout << "this is " << this->getFullPath() << endl;
