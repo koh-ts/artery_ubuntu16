@@ -441,6 +441,8 @@ void UDPCamSender::processStart()
               destAddresses.push_back(result);
           }
         }
+        sort(destAddresses.begin(), destAddresses.end());
+        destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
       } else {
       //   // router同士の接続の関係router[*]の*の値で0番目から示している
       //   int connections[][4] = {
@@ -542,7 +544,6 @@ void UDPCamSender::processStart()
           Coord src_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
           Position src_pos = Position(src_coord.x, src_coord.y);
           double distance = boost::geometry::distance(src_pos, dst_pos);
-          std::cout << distance << endl;
           if (distance > dest_min_dist && distance < dest_max_dist) {
             L3Address result;
             L3AddressResolver().tryResolve(
@@ -554,6 +555,8 @@ void UDPCamSender::processStart()
               destAddresses.push_back(result);
           }
         }
+        sort(destAddresses.begin(), destAddresses.end());
+        destAddresses.erase(unique(destAddresses.begin(), destAddresses.end()), destAddresses.end());
         // std::cout << "this is " << this->getFullPath() << endl;
         // for (auto itr = destAddresses.begin();itr != destAddresses.end(); ++itr) {
         //   std::cout << *itr << endl;
