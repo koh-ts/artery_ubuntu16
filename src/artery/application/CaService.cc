@@ -72,9 +72,9 @@ void CaService::initialize()
 	if (strstr(this->getFullPath().c_str(),"node")!=NULL) {
 	  isVehicle = true;
     mVehicleDataProvider = &getFacilities().get_const<VehicleDataProvider>();
-    std::string output = par("outputDir");
-		output += "output_" + (std::string)this->getFullPath() + "_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
-    ofs.open(output, std::ios::out);
+//    std::string output = par("outputDir");
+//		output += "output_" + (std::string)this->getFullPath() + "_" + std::to_string(mVehicleDataProvider->station_id()) + ".txt";
+//    ofs.open(output, std::ios::out);
 	} else {
 	  isVehicle = false;
     std::string output = par("outputDir");
@@ -103,11 +103,13 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 //		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
 //		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
 //		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
-		ofs << "time: " << omnetpp::simTime() << "\t"
-		    << "src station id: " << msg->header.stationID << "\t"
-		    << "src cam time: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "\t"
-		    << "src cam serial num: " << msg->cam.camParameters.basicContainer.referencePosition.longitude
-		    << endl;
+		if(ofs) {
+      ofs << "time: " << omnetpp::simTime() << "\t"
+          << "src station id: " << msg->header.stationID << "\t"
+          << "src cam time: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "\t"
+          << "src cam serial num: " << msg->cam.camParameters.basicContainer.referencePosition.longitude
+          << endl;
+		}
 //		    << "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
 //		    << msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t";
 //		if (isVehicle){
@@ -171,7 +173,8 @@ void CaService::sendCam(const SimTime& T_now)
   }
 	EV_INFO << "sending cam......" << endl;
 	// std::cout << "sending cam ........" << endl;
-	ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
+  if (ofs)
+    ofs << "time: " << omnetpp::simTime() << "\t" << "src cam time: " << mVehicleDataProvider->updated() << endl;
 //  uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getTimeFor(mVehicleDataProvider->updated()));
   uint16_t genDeltaTimeMod = countTaiMilliseconds(mTimer->getCurrentTime());
 	auto cam = createCooperativeAwarenessMessage(*mVehicleDataProvider, genDeltaTimeMod);
