@@ -37,5 +37,28 @@ void VeinsConnectionManager::receiveSignal(cComponent* src, simsignal_t signal, 
     }
 }
 
+double VeinsConnectionManager::calcInterfDist()
+{
+  if (std::strstr(this->getFullPath().c_str(),"node") != NULL) {
+    if (hasPar("node_maxInterfDist")) {
+        double interfDistance = par("node_maxInterfDist").doubleValue();
+        ccEV << "max interference distance:" << interfDistance << endl;
+        return interfDistance;
+    } else {
+        throw cRuntimeError("ConnectionManager: No value for maximum interference distance (maxInterfDist) provided.");
+    }
+  } else {
+    if (hasPar("maxInterfDist")) {
+        double interfDistance = par("maxInterfDist").doubleValue();
+        ccEV << "max interference distance:" << interfDistance << endl;
+        return interfDistance;
+    } else {
+        throw cRuntimeError("ConnectionManager: No value for maximum interference distance (maxInterfDist) provided.");
+    }
+  }
+}
+
+
+
 } // namespace artery
 
