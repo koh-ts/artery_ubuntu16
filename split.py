@@ -34,6 +34,7 @@ for method in methods:
                 startPos = 0
                 for i,line in enumerate(lines):
                     objs = line.split("\t")
+                    # 次のシミュレーションの最初の行を探している for oline in lines[startPos:i]参照
                     if float(objs[0].split(":")[1]) >= simStartTime + simTotalInterval * (count + 1):
                         of_path = str(outputDir.parent) + "/sim_" + str(count + offset) + "/" + file.name
                         of = open(of_path,mode="w")
