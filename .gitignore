@@ -6,3 +6,4 @@ analysis/
 summary/
 .settings/
 .cproject
+.ipynb_checkpoints
