@@ -307,16 +307,46 @@ ax5.set_ylim(-150,500)
 # In[8]:
 
 
-pp = PdfPages("summary/" + map_type + "/sim_all/pdr.pdf")
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_original_pcam.pdf")
 pp.savefig(fig_pdr)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_non_priority_grid_pcam.pdf")
+pp.savefig(fig_pdr1)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_distance_priority_grid_pcam.pdf")
+pp.savefig(fig_pdr2)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_cam_5.pdf")
+pp.savefig(fig_pdr3)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_cam_10.pdf")
+pp.savefig(fig_pdr4)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/pdr_cam_15.pdf")
+pp.savefig(fig_pdr5)
 pp.close()
 
 
 # In[9]:
 
 
-pp = PdfPages("summary/" + map_type + "/sim_all/delay.pdf")
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_original_pcam.pdf")
 pp.savefig(fig_delay)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_non_priority_grid_pcam.pdf")
+pp.savefig(fig_delay1)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_distance_priority_grid_pcam.pdf")
+pp.savefig(fig_delay2)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_cam_5.pdf")
+pp.savefig(fig_delay3)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_cam_10.pdf")
+pp.savefig(fig_delay4)
+pp.close()
+pp = PdfPages("summary/" + map_type + "/sim_all/delay_cam_15.pdf")
+pp.savefig(fig_delay5)
 pp.close()
 
 
