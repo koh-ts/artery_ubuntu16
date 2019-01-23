@@ -1,0 +1,49 @@
+Ubuntu 16.04でインストールするのを想定
+※python関連をいじっている環境は注意！(pyenv、vertualenv等を使用しているなど)
+  cmake時、実行時のエラーの温床です。共有ライブラリが入ってないのが原因っぽいが詳しくはわからないです。pipは多分大丈夫。
+
+python --version
+  2.7.12
+python2 --version
+  2.7.12
+python3 --version
+  3.5.2
+
+python3(必要ないかも)をインストールするときに必ず共有ライブラリ(python3-dev)もインストールすること！
+
+・インストールするもの
+  ・omnetpp++
+  ・Artery (以下が含まれている)
+    ・INET
+    ・Veins
+    ・Vanetza
+    ・Veins
+
+インストール手順
+
+1) omnetpp++ (https://omnetpp.org/)
+  ※動作確認できているのは5.4.1
+  1.1) ダウンロード(https://omnetpp.org/download/)をしてください
+  1.2) インストールガイド(https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)のchapter5に従ってインストール
+  1.3) インストール後に最初に起動するといろいろ設定があってから、inet等のプロジェクトを入れますか？と聞かれる(はず)が、noにするのを推奨(inetを入れてしまうとartery内のinetと混同する可能性がある)
+
+2) Artery (https://github.com/riebl/artery)
+  2.1) 色々入れる前にC++環境を準備。
+       具体的にはBoost(https://www.boost.org/)をいれます。
+       ※aptにもあるがバージョンが低いので入れないように。入れた場合はapt remove。
+       2.1.1) Boost1.67.0(https://www.boost.org/users/history/version_1_67_0.html)をダウンロード
+       2.1.2) unzipしたらディレクトリ内でboostrap.shを実行 (https://boostjp.github.io/howtobuild.html参照)
+       2.1.3) sudo ./b2 install (sudo多分必要)
+  2.3) INET、Veins、Vanetzaのインストール準備
+       それぞれライブラリをインストールする必要があるので先にrequirementsを読んでインストール
+  2.4) Arteryをclone (submoduleがあるのでreadme通りにclone)
+  ※手順2.5以降boostに関してwarningが出るが気にしなくて良い
+  2.5) readme通りにarteryディレクトリ内でmake all
+  2.6) arteryディレクトリ内で
+       mkdir build
+       cd build
+       cmake ..
+       cmake --build .
+  2.7) cmake --build build --target run_example
+
+エラー無しでここまで来れたら超ラッキーです
