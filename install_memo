@@ -12,6 +12,7 @@ python3 --version
 python3(必要ないかも)をインストールするときに必ず共有ライブラリ(python3-dev)もインストールすること！
 
 ・インストールするもの
+  ・sumo
   ・omnetpp++
   ・Artery (以下が含まれている)
     ・INET
@@ -21,29 +22,31 @@ python3(必要ないかも)をインストールするときに必ず共有ラ�
 
 インストール手順
 
-1) omnetpp++ (https://omnetpp.org/)
+1) sumo (http://sumo.sourceforge.net/)
+  aptでインストール
+2) omnetpp++ (https://omnetpp.org/)
   ※動作確認できているのは5.4.1
-  1.1) ダウンロード(https://omnetpp.org/download/)をしてください
-  1.2) インストールガイド(https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)のchapter5に従ってインストール
-  1.3) インストール後に最初に起動するといろいろ設定があってから、inet等のプロジェクトを入れますか？と聞かれる(はず)が、noにするのを推奨(inetを入れてしまうとartery内のinetと混同する可能性がある)
+  2.1) ダウンロード(https://omnetpp.org/download/)をしてください
+  2.2) インストールガイド(https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)のchapter5に従ってインストール
+  2.3) インストール後に最初に起動するといろいろ設定があってから、inet等のプロジェクトを入れますか？と聞かれる(はず)が、noにするのを推奨(inetを入れてしまうとartery内のinetと混同する可能性がある)
 
-2) Artery (https://github.com/riebl/artery)
-  2.1) 色々入れる前にC++環境を準備。
+3) Artery (https://github.com/riebl/artery)
+  3.1) 色々入れる前にC++環境を準備。
        具体的にはBoost(https://www.boost.org/)をいれます。
        ※aptにもあるがバージョンが低いので入れないように。入れた場合はapt remove。
-       2.1.1) Boost1.67.0(https://www.boost.org/users/history/version_1_67_0.html)をダウンロード
-       2.1.2) unzipしたらディレクトリ内でboostrap.shを実行 (https://boostjp.github.io/howtobuild.html参照)
-       2.1.3) sudo ./b2 install (sudo多分必要)
-  2.3) INET、Veins、Vanetzaのインストール準備
+       3.1.1) Boost1.67.0(https://www.boost.org/users/history/version_1_67_0.html)をダウンロード
+       3.1.2) unzipしたらディレクトリ内でboostrap.shを実行 (https://boostjp.github.io/howtobuild.html参照)
+       3.1.3) sudo ./b2 install (sudo多分必要)
+  3.2) INET、Veins、Vanetzaのインストール準備
        それぞれライブラリをインストールする必要があるので先にrequirementsを読んでインストール
-  2.4) Arteryをclone (submoduleがあるのでreadme通りにclone)
-  ※手順2.5以降boostに関してwarningが出るが気にしなくて良い
-  2.5) readme通りにarteryディレクトリ内でmake all
-  2.6) arteryディレクトリ内で
+  3.3) Arteryをclone (submoduleがあるのでreadme通りにclone)
+  ※手順2.4以降boostに関してwarningが出るが気にしなくて良い
+  3.4) readme通りにarteryディレクトリ内でmake all
+  3.5) arteryディレクトリ内で
        mkdir build
        cd build
        cmake ..
        cmake --build .
-  2.7) cmake --build build --target run_example
+  3.6) cmake --build build --target run_example
 
 エラー無しでここまで来れたら超ラッキーです
