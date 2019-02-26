@@ -12,6 +12,7 @@
 #include <vanetza/dcc/transmission.hpp>
 #include <vanetza/dcc/transmit_rate_control.hpp>
 #include <chrono>
+#include "artery/application/UDPCamListener.h"
 
 namespace artery
 {
@@ -36,6 +37,7 @@ long round(const boost::units::quantity<T>& q, const U& u)
 
 
 Define_Module(CaService)
+Define_Module(UDPCamListener)
 
 CaService::CaService() :
 		mVehicleDataProvider(nullptr),
@@ -99,15 +101,18 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		// std::cout << "scSignalCamReceived" << endl;
 		emit(scSignalCamReceived, &obj);
 		const vanetza::asn1::Cam& msg = obj.asn1();
-
 //		static const omnetpp::SimTime lifetime { 1100, omnetpp::SIMTIME_MS };
 //		auto tai = mTimer->reconstructMilliseconds(msg->cam.generationDeltaTime);
 //		const omnetpp::SimTime timeStamp = mTimer->getTimeFor(tai);
+		// std::cout << msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMajorOrientation << "\t"
+		// 			<< msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMajorConfidence << "\t"
+		// 			<< msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMinorConfidence << "\t" <<endl;
 		if(ofs) {
       ofs << "time: " << omnetpp::simTime() << "\t"
           << "src station id: " << msg->header.stationID << "\t"
           << "src cam time: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "\t"
-          << "src cam serial num: " << msg->cam.camParameters.basicContainer.referencePosition.longitude
+          << "src cam serial num: " << msg->cam.camParameters.basicContainer.referencePosition.longitude << "\t"
+					<< "distance:" << msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMajorConfidence << "\t" //
           << endl;
 		}
 //		    << "src pos: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << ","
@@ -125,6 +130,9 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 //		mLocalDynamicMap->updateAwareness(obj);
 	}
 }
+
+
+
 
 void CaService::checkTriggeringConditions(const SimTime& T_now)
 {

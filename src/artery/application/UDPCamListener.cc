@@ -81,6 +81,7 @@ void UDPCamListener::receiveCAM(cPacket *pk)
           << "\tttl: " << ctrl->getTtl();
     }
 
+
     if (checkDistance(pk)) {
       emit(rcvdPkSignal, pk);
     } else {
@@ -117,6 +118,20 @@ bool UDPCamListener::checkDistance(cPacket *pk) {
     Coord pcam_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
     Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
     double distance = boost::geometry::distance(src_pos, pcam_pos);
+    
+    std::string tmp = "";
+    count = 0;
+    std::stringstream sss{s};
+    while (std::getline(sss, buf, ',')) {
+      if (count != 10){
+        tmp += buf + ",";
+      } else {
+        tmp += std::to_string(distance) + ",";
+      }
+      count++;
+    }
+    tmp.pop_back();
+    pk->addPar("data1") = tmp.c_str();
 
     double queueRT = check_and_cast<Mac1609_4 *>(this->getModuleByPath("^.nic.mac1609_4"))->getQueueRatio();
 //    if (std::strstr(this->getFullPath().c_str(),"pcam[24]") != NULL) {
@@ -125,6 +140,35 @@ bool UDPCamListener::checkDistance(cPacket *pk) {
 //      std::cout << "distance is: " << distance << " queueRT is: " << queueRT << " check is: " << (queueRT < 1 - (distance - dest_min_dist) / (dest_max_dist - dest_min_dist)) << endl;
 //    }
     return queueRT < 1 - (distance - dest_min_dist) / (dest_max_dist - dest_min_dist);
+  } else {
+    std::cout << "no data found" << endl;
+    return false;
+  }
+}
+
+double UDPCamListener::calcDistance(cPacket *pk) {
+  if (pk->hasPar("data")) {
+    std::string s = (std::string)(pk->par("data"));
+    std::cout << s << endl;
+    std::stringstream ss{s};
+    std::string buf;
+    int count = 0;
+    double x,y;
+    while (std::getline(ss, buf, ',')) {
+      if(count == 7) {
+        x = std::stod(buf);
+      } else if (count == 8) {
+        y = std::stod(buf);
+      } else if (count >= 9) {
+        break;
+      }
+      count++;
+    }
+    Position src_pos = Position(x,y);
+
+    Coord pcam_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
+    Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
+    return boost::geometry::distance(src_pos, pcam_pos);
   } else {
     std::cout << "no data found" << endl;
     return false;

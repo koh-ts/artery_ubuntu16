@@ -13,8 +13,9 @@
 #include <vanetza/btp/ports.hpp>
 #include <vanetza/dcc/transmission.hpp>
 #include <vanetza/dcc/transmit_rate_control.hpp>
+#include "veins/base/utils/Coord.h"
+#include "artery/veins/VeinsMobility.h"
 #include <chrono>
-
 namespace artery
 {
 
@@ -101,41 +102,75 @@ void RSUCaService::sendCAMWithPacket(omnetpp::cPacket* pk) {
   this->request(request, std::move(payload));
 }
 
+// double RSUCaService::calcDistance(cPacket *pk) {
+//   if (pk->hasPar("data")) {
+//     std::string s = (std::string)(pk->par("data"));
+//     std::stringstream ss{s};
+//     std::string buf;
+//     int count = 0;
+//     double x,y;
+//     while (std::getline(ss, buf, ',')) {
+//       if(count == 7) {
+//         x = std::stod(buf);
+//       } else if (count == 8) {
+//         y = std::stod(buf);
+//       } else if (count >= 9) {
+//         break;
+//       }
+//       count++;
+//     }
+//     Position src_pos = Position(x,y);
+
+//     Coord pcam_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
+//     Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
+//     return boost::geometry::distance(src_pos, pcam_pos);
+//   } else {
+//     std::cout << "no data found" << endl;
+//     return false;
+//   }
+// }
+
+
 vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
   vanetza::asn1::Cam message;
   std::vector<std::string> pcam;
-  if (pk->hasPar("data")) {
-    std::string s = (std::string)(pk->par("data"));
+  double distance;
+  if (pk->hasPar("data1")) {
+    std::string s = (std::string)(pk->par("data1"));
     std::stringstream ss{s};
     std::string buf;
+    int i = 0;
     while (std::getline(ss, buf, ',')) {
       pcam.push_back(buf);
+      // std::cout << i << ":" << std::stol(buf) << endl;
+      // i++;
     }
   } else {
     std::cout << "no data found" << endl;
   }
   auto itr_pcam = pcam.begin();
+  // std::cout << distance << endl;
   ItsPduHeader_t& header = (*message).header;
-  header.protocolVersion = std::stol(*itr_pcam++);
-  header.messageID = std::stol(*itr_pcam++);
-  header.stationID = (StationID_t)std::stol(*itr_pcam++);
+  header.protocolVersion = std::stol(*itr_pcam++); //0
+  header.messageID = std::stol(*itr_pcam++); //1
+  header.stationID = (StationID_t)std::stol(*itr_pcam++); //2
 
   CoopAwareness_t& cam = (*message).cam;
   std::string srcTime = *itr_pcam;
-  cam.generationDeltaTime = (uint16_t)std::stol(*itr_pcam++) * GenerationDeltaTime_oneMilliSec;
+  cam.generationDeltaTime = (uint16_t)std::stol(*itr_pcam++) * GenerationDeltaTime_oneMilliSec; //3
   BasicContainer_t& basic = cam.camParameters.basicContainer;
   HighFrequencyContainer_t& hfc = cam.camParameters.highFrequencyContainer;
 
   basic.stationType = (StationType_t)std::stol(*itr_pcam++);
-  basic.referencePosition.altitude.altitudeValue = (AltitudeValue_t)std::stol(*itr_pcam++);
-  basic.referencePosition.altitude.altitudeConfidence = (AltitudeConfidence_t)std::stol(*itr_pcam++);
+  basic.referencePosition.altitude.altitudeValue = (AltitudeValue_t)std::stol(*itr_pcam++); //4
+  basic.referencePosition.altitude.altitudeConfidence = (AltitudeConfidence_t)std::stol(*itr_pcam++); //5
   //basic.referencePosition.longitude = (Longitude_t)std::stol(*itr_pcam++);
-  itr_pcam++;
+  itr_pcam++; //6
   //analysisのための便宜上の値変更(udp sequencenum)
   basic.referencePosition.longitude = (Longitude_t)((ApplicationPacket *)pk) -> getSequenceNumber();
 
   //basic.referencePosition.latitude = (Latitude_t)std::stol(*itr_pcam++);
-  itr_pcam++;
+  itr_pcam++; //7
   //analysisのための便宜上の値変更(udp src time マイクロ秒まで取得したかったのでここに入れる)
   basic.referencePosition.latitude = (Latitude_t)std::stol(srcTime);
 

@@ -39,6 +39,8 @@ class UDPCamListener : public ApplicationBase
   protected:
     UDPSocket socket;
 
+  public:
+    double calcDistance(cPacket*);
   protected:
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
     virtual void initialize(int stage) override;
@@ -51,6 +53,7 @@ class UDPCamListener : public ApplicationBase
     virtual bool handleNodeShutdown(IDoneCallback *doneCallback) override;
     virtual void handleNodeCrash() override;
     bool checkDistance(cPacket*);
+    
     std::ofstream ofs;
     double queueRT = 0;
     double dest_min_dist = 0;

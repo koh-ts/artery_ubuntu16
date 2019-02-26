@@ -46,6 +46,7 @@ class RSUCaService : public ItsG5BaseService
         void receiveSignal(omnetpp::cComponent*, omnetpp::simsignal_t, omnetpp::cObject*, omnetpp::cObject*) override;
 
     private:
+        double calcDistance(omnetpp::cPacket* pk);
         void checkTriggeringConditions(const omnetpp::SimTime&);
         bool checkHeadingDelta() const;
         bool checkPositionDelta() const;
