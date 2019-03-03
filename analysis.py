@@ -5,8 +5,8 @@ import sys
 args = sys.argv
 method = args[1]
 cam_num = args[2]
-map_type = "bunkyo-ku"
-world_name = "BunkyoWorld"
+map_type = "grid"
+world_name = "GridWorld"
 
 if not (method == "original_pcam" or method == "naive_grid_pcam" or method == "passive_grid_pcam"):
     print("error unknown method")

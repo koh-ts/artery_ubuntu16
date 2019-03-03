@@ -301,14 +301,20 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
 
   // 十字路の中心にPCAM装置があり、道路上に車両がいなければならないので、車両の(x,y)はPCAM装置の(X,Y) + (0, 0~pcamRange) or (0~pcamRange,0)
 
-  if (real_rand(mt1) > 0.5) {
+  
+
+  
+
+  std::vector<ApplicationPacket *> payloads;
+  for (int i = 0; i < fakeCamNum; i++) {
+    pcam_pos = mobility->getCurrentPosition();
+    if (real_rand(mt1) > 0.5) { //ここから
     pcam_pos += Coord(0,pos_rand(mt2) - pcamRange);
   } else {
     pcam_pos += Coord(pos_rand(mt2) - pcamRange, 0);
   }
-
-  std::ostringstream str;
-  str << "1" << ","                             //header.protocolVersion
+    std::ostringstream str;
+    str << "1" << ","                             //header.protocolVersion
       << ItsPduHeader__messageID_cam << ","     //header.messageId
       << pcamnum << ","                         //header.stationID
 //      << countTaiMilliseconds(mTimer.getTimeFor(simTime())) << ","   //cam.generationDeltaTime
@@ -336,21 +342,20 @@ std::vector<ApplicationPacket*> UDPCamSender::makeFakeCamPayloads() {
   str << VehicleLengthValue_unavailable << ","
       << VehicleLengthConfidenceIndication_noTrailerPresent << ","
       << VehicleWidth_unavailable << endl;
-
+//ここまでfor文に入れる
 //  std::cout << str.str() << endl;
-  ApplicationPacket *payload = new ApplicationPacket("CamPacket");
-  payload->setByteLength(sizeof(str));
-  payload->addPar("data") = str.str().c_str();
+    ApplicationPacket *payload = new ApplicationPacket("CamPacket");
+    payload->setByteLength(sizeof(str));
+    payload->addPar("data") = str.str().c_str();
 
-  std::vector<ApplicationPacket *> payloads;
-  for (int i = 0; i < fakeCamNum; i++) {
     ApplicationPacket *p = payload->dup();
     p->setSequenceNumber(numSent);
     payloads.push_back(p);
     numSent++;
+    delete payload;
   }
 
-  delete payload;
+  
 
   return payloads;
 }
