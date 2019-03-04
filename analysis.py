@@ -42,7 +42,7 @@ for sim_num in range(100):
         # rsu の rsu_linesをpdrで再利用するのでrsu_linesに変更は加えてはいけない
 
         # analysis of delay
-        delayf.write("simTime\tdelay_avg(ms)\tdelay_stdev(ms)\n")
+        delayf.write("simTime\tdelay_avg(ms)\tdelay_stdev(ms)\tdistance(m)\n")
         time = simStartTime
         delays = []
         for line in rsu_lines:
@@ -55,33 +55,43 @@ for sim_num in range(100):
                 delays.append(dstTime - srcTime)
             else:
                 if len(delays) == 0:
-                    print(str(time),"mean","nan","stdev","nan", "\n")
-                    delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
+                    # print(str(time),"mean","nan","stdev","nan", "\n")
+                    delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\t" + "nan" + "\n")
                 elif len(delays) == 1:
-                    print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan","\n")
-                    delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\n")
+                    if len(objs) >= 5:
+                        distance = int(objs[4].split(":")[1])
+                        print("distance", distance)
+                        delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\t" + str(distance) + "\n")
+                    else:
+                    # print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan","\n")
+                        delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\n")
                 else:
-                    print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
-                    delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\n")
+                    if len(objs) >= 5:
+                        distance = int(objs[4].split(":")[1])
+                        print("distance", distance)
+                        delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\t" + str(distance) + "\n")
+                    # print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
+                    else:
+                        delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\n")
 
                 time += timeDiff
                 while srcTime > time + timeDiff:
-                    print(str(time),"mean","nan","stdev","nan", "\n")
+                    # print(str(time),"mean","nan","stdev","nan", "\n")
                     delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
                     time += timeDiff
                 delays = []
                 delays.append(dstTime - srcTime)
-            print("srctime:",srcTime,"dsttime:",dstTime)
+            # print("srctime:",srcTime,"dsttime:",dstTime)
 
 
         if len(delays) == 0:
-            print(str(time),"mean","nan","stdev","nan", "\n")
+            # print(str(time),"mean","nan","stdev","nan", "\n")
             delayf.write(str(time) + "\t" + "nan" + "\t" + "nan" + "\n")
         elif len(delays) == 1:
-            print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan", "\n")
+            # print(str(time),"mean",str(mean(delays) * 1000),"stdev","nan", "\n")
             delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + "nan" + "\n")
         else:
-            print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
+            # print(str(time),"mean",str(mean(delays) * 1000),"stdev",str(stdev(delays) * 1000), "\n")
             delayf.write(str(time) + "\t" + str(mean(delays)* 1000) + "\t" + str(stdev(delays)* 1000) + "\n")
 
 
