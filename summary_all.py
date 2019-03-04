@@ -36,83 +36,82 @@ all_delays_los = []
 # all_delay_errors_los = []
 
 
-# for method in methods:
-#     print("entering method", method)
-#     print("entering non_los")
-#     for cam_num in cam_nums:
-#         print("entering cam_num: ", cam_num)
-#         pdrs_non_los = []
-#         delays_non_los = []
-#         # delay_errors_non_los = []
-#         for pos in pcam_pos_non_los:
-#             pdrs = []
-#             delays = []
-#             # delay_errors = []
-#             sim_from = 205
-#             sim_to = 210
-#             for sim_num in range(100):
-#                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
-#                     pdrlines = f.readlines()
-#                 for pdrline in pdrlines[1:]:
-#                     if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-#                         pdrs.append(float(pdrline.split("\t")[1]))
-#                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
-#                     delaylines = f.readlines()
-#                 for delayline in delaylines[1:]:
-#                     if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-#                         if not np.isnan(float(delayline.split("\t")[1])):
-#                             delays.append(float(delayline.split("\t")[1]))
-#             pdrs_non_los.append(pdrs)
-#             delays_non_los.append(delays)
-#         all_pdrs_non_los.append(pdrs_non_los)
-#         all_delays_non_los.append(delays_non_los)
+for method in methods:
+    print("entering method", method)
+    print("entering non_los")
+    for cam_num in cam_nums:
+        print("entering cam_num: ", cam_num)
+        pdrs_non_los = []
+        delays_non_los = []
+        x = []
+        y = []
+        # delay_errors_non_los = []
+        for pos in pcam_pos_non_los:
+            pdrs = []
+            delays = []
+            # delay_errors = []
+            sim_from = 205
+            sim_to = 210
+            for sim_num in range(100):
+                with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
+                    pdrlines = f.readlines()
+                for pdrline in pdrlines[1:]:
+                    if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                        pdrs.append(float(pdrline.split("\t")[1]))
+                with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
+                    delaylines = f.readlines()
+                for delayline in delaylines[1:]:
+                    if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                        if not np.isnan(float(delayline.split("\t")[1])):
+                            delays.append(float(delayline.split("\t")[1]))
+            pdrs_non_los.append(pdrs)
+            delays_non_los.append(delays)
+        all_pdrs_non_los.append(pdrs_non_los)
+        all_delays_non_los.append(delays_non_los)
 
-#     print("entering los")
-#     for cam_num in cam_nums:
-#         print("entering cam_num: ", cam_num)
-#         pdrs_los = []
-#         delays_los = []
-#         # delay_errors_los = []
-#         for pos in pcam_pos_los:
-#             pdrs = []
-#             delays = []
-#             # delay_errors = []
-#             sim_from = 205
-#             sim_to = 210
-#             for sim_num in range(100):
-#                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
-#                     pdrlines = f.readlines()
-#                 for pdrline in pdrlines[1:]:
-#                     if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-#                         pdrs.append(float(pdrline.split("\t")[1]))
-#                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
-#                     delaylines = f.readlines()
-#                 for delayline in delaylines[1:]:
-#                     if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-#                         if not np.isnan(float(delayline.split("\t")[1])):
-#                             delays.append(float(delayline.split("\t")[1]))
-#             pdrs_los.append(pdrs)
-#             delays_los.append(delays)
-#         all_pdrs_los.append(pdrs_los)
-#         all_delays_los.append(delays_los)
+    print("entering los")
+    for cam_num in cam_nums:
+        print("entering cam_num: ", cam_num)
+        pdrs_los = []
+        delays_los = []
+        # delay_errors_los = []
+        for pos in pcam_pos_los:
+            pdrs = []
+            delays = []
+            # delay_errors = []
+            sim_from = 205
+            sim_to = 210
+            for sim_num in range(100):
+                with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
+                    pdrlines = f.readlines()
+                for pdrline in pdrlines[1:]:
+                    if float(pdrline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(pdrline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                        pdrs.append(float(pdrline.split("\t")[1]))
+                with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
+                    delaylines = f.readlines()
+                for delayline in delaylines[1:]:
+                    if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+                        if not np.isnan(float(delayline.split("\t")[1])):
+                            delays.append(float(delayline.split("\t")[1]))
+            pdrs_los.append(pdrs)
+            delays_los.append(delays)
+        all_pdrs_los.append(pdrs_los)
+        all_delays_los.append(delays_los)
 
-sim_from = 205
-sim_to = 210
-
-x = []
-y = []
-method = "passive_grid_pcam"
-cam_num = "num_15"
-pos = 8
-sim_num = 0
-for pos in range(18):
-    with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
-        delaylines = f.readlines()
-    for delayline in delaylines[1:]:
-        if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
-            if not np.isnan(float(delayline.split("\t")[1])):
-                x.append(float(delayline.split("\t")[3].split("\n")[0]))
-                y.append(float(delayline.split("\t")[1]))
+# x = []
+# y = []
+# method = "passive_grid_pcam"
+# cam_num = "num_15"
+# pos = 8
+# sim_num = 0
+# for pos in range(18):
+#     with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/delay_" + str(pos) + ".txt") as f:
+#         delaylines = f.readlines()
+#     for delayline in delaylines[1:]:
+#         if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
+#             if not np.isnan(float(delayline.split("\t")[1])):
+#                 x.append(float(delayline.split("\t")[3].split("\n")[0]))
+#                 y.append(float(delayline.split("\t")[1]))
 
 # non_losのdelay
 fig_delay = plt.figure(figsize=(10,4), dpi= 300)
