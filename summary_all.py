@@ -13,6 +13,7 @@ sns.set_palette('Set1')
 
 args = sys.argv
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
+# methods = ["naive_grid_pcam"]
 cam_nums = ["num_5", "num_10", "num_15"]
 map_type = "grid"
 pcam_pos_non_los = [24, 16, 8, 0]
@@ -52,7 +53,7 @@ for method in methods:
             # delay_errors = []
             sim_from = 205
             sim_to = 210
-            for sim_num in range(100):
+            for sim_num in range(47):
                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
                     pdrlines = f.readlines()
                 for pdrline in pdrlines[1:]:
@@ -63,17 +64,44 @@ for method in methods:
                 for delayline in delaylines[1:]:
                     if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
                         if not np.isnan(float(delayline.split("\t")[1])):
-                            delays.append(float(delayline.split("\t")[1]))
+                            # delays.append(float(delayline.split("\t")[1]))
+                            # print(delayline.split("\t"))
+                            if len(delayline.split("\t")) > 3:
+                                x.append(float(delayline.split("\t")[3].split("\n")[0]))
+                                y.append(float(delayline.split("\t")[1]))
             pdrs_non_los.append(pdrs)
             delays_non_los.append(delays)
         all_pdrs_non_los.append(pdrs_non_los)
         all_delays_non_los.append(delays_non_los)
+
+        # non_losのdelay
+        fig_delay = plt.figure(figsize=(10,4), dpi= 300)
+        plt.tight_layout()
+        plt.suptitle("Non Line of sight " + method + " " + cam_num)
+        plt.subplots_adjust(bottom=0.35)
+        #xラベル用
+        fig_delay.text(0.5, 0.02, 'Distance(m)', ha='center', va='center')
+        #yラベル用
+        fig_delay.text(0.02, 0.5, 'Delay(ms)', ha='center', va='center', rotation='vertical')
+        # x = np.array(x)
+        # plt.subplots_adjust(right=0.6)
+
+        ax = fig_delay.add_subplot(1, 3, 1)
+        ax.scatter(x, y, s=2)
+        ax.set_ylim(-150,350)
+        fig_delay.show()
+
+        pp = PdfPages("summary/" + map_type +"/sim_all/delay_non_los" + method + cam_num + ".pdf")
+        pp.savefig(fig_delay)
+        pp.close()
 
     print("entering los")
     for cam_num in cam_nums:
         print("entering cam_num: ", cam_num)
         pdrs_los = []
         delays_los = []
+        x2 = []
+        y2 = []
         # delay_errors_los = []
         for pos in pcam_pos_los:
             pdrs = []
@@ -81,7 +109,7 @@ for method in methods:
             # delay_errors = []
             sim_from = 205
             sim_to = 210
-            for sim_num in range(100):
+            for sim_num in range(47):
                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(pos) + ".txt") as f:
                     pdrlines = f.readlines()
                 for pdrline in pdrlines[1:]:
@@ -93,10 +121,36 @@ for method in methods:
                     if float(delayline.split("\t")[0]) > sim_from + simTotalInterval * sim_num and float(delayline.split("\t")[0]) < sim_to + simTotalInterval * sim_num:
                         if not np.isnan(float(delayline.split("\t")[1])):
                             delays.append(float(delayline.split("\t")[1]))
+                        if len(delayline.split("\t")) > 3:
+                            x2.append(float(delayline.split("\t")[3].split("\n")[0]))
+                            y2.append(float(delayline.split("\t")[1]))
             pdrs_los.append(pdrs)
             delays_los.append(delays)
+            # non_losのdelay
+            fig_delay = plt.figure(figsize=(10,4), dpi= 300)
+            plt.tight_layout()
+            plt.suptitle("Line of sight " + method + " " + cam_num)
+            plt.subplots_adjust(bottom=0.35)
+            #xラベル用
+            fig_delay.text(0.5, 0.02, 'Distance(m)', ha='center', va='center')
+            #yラベル用
+            fig_delay.text(0.02, 0.5, 'Delay(ms)', ha='center', va='center', rotation='vertical')
+            x = np.array(x2)
+            y = np.array(y2)
+            # plt.subplots_adjust(right=0.6)
+
+            ax = fig_delay.add_subplot(1, 3, 1)
+            ax.scatter(x, y, s=2)
+            ax.set_ylim(-150,350)
+            fig_delay.show()
+
+            pp = PdfPages("summary/" + map_type +"/sim_all/delay_los" + method + cam_num + ".pdf")
+            pp.savefig(fig_delay)
+            pp.close()
         all_pdrs_los.append(pdrs_los)
         all_delays_los.append(delays_los)
+
+exit()
 
 # x = []
 # y = []
@@ -137,7 +191,7 @@ exit()
 
 
 # non_losのpdr
-fig_pdr = plt.figure(figsize=(10,4), dpi= 300)
+fig_pdr = plt.figure(figsize=(10,4), dpi= 300) #ここを小さくすると文字が大きくなる dpiをあげる？
 plt.tight_layout()
 plt.suptitle("Non Line of sight")
 plt.subplots_adjust(bottom=0.35)

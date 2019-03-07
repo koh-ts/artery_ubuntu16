@@ -1,19 +1,20 @@
 from pathlib import Path
 
-methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
+# methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
+methods = ["original_pcam", "passive_grid_pcam"]
 pcam_nums = ["num_5", "num_10", "num_15"]
 
 simStartTime = 200
 simTotalInterval = 15
 
-map_type = "bunkyo-ku"
+map_type = "grid"
 
 offset = 0
 
 
 for method in methods:
     for pcam_num in pcam_nums:
-        outputDir = Path("output/" + map_type + "/" + method + "/" + pcam_num + "/sim_all_1/")
+        outputDir = Path("output/" + map_type + "/" + method + "/" + pcam_num + "/sim_all/")
         files = outputDir.glob("*")
         for file in files:
             print(file)

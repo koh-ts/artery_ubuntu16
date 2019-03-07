@@ -99,6 +99,7 @@ void UDPCamListener::receiveCAM(cPacket *pk)
 bool UDPCamListener::checkDistance(cPacket *pk) {
   if (pk->hasPar("data")) {
     std::string s = (std::string)(pk->par("data"));
+    std::cout << s << endl;
     std::stringstream ss{s};
     std::string buf;
     int count = 0;
