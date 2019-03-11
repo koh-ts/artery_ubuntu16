@@ -20,6 +20,7 @@ sns.set_palette('Set1')
 args = sys.argv
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
 cam_nums = ["num_5", "num_10", "num_15"]
+# cam_nums = ["num_5", "num_15"]
 map_type = "bunkyo-ku"
 
 pcam_nums = range(49)
@@ -112,7 +113,7 @@ for method in methods:
             delays = []
             sim_from = 205
             sim_to = 210
-            for sim_num in range(100):
+            for sim_num in range(47):
                 with open(analysis_root_path + method + "/" + cam_num + "/sim_" + str(sim_num) + "/pdr_" + str(num) + ".txt") as f:
                     pdrlines = f.readlines()
                 for pdrline in pdrlines[1:]:

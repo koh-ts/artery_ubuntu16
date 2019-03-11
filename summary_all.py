@@ -15,6 +15,7 @@ args = sys.argv
 methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
 # methods = ["naive_grid_pcam"]
 cam_nums = ["num_5", "num_10", "num_15"]
+# cam_nums = ["num_5", "num_15"]
 map_type = "grid"
 pcam_pos_non_los = [24, 16, 8, 0]
 pcam_pos_los = [24, 23, 22, 21]
@@ -89,7 +90,6 @@ for method in methods:
         ax = fig_delay.add_subplot(1, 3, 1)
         ax.scatter(x, y, s=2)
         ax.set_ylim(-150,350)
-        fig_delay.show()
 
         pp = PdfPages("summary/" + map_type +"/sim_all/delay_non_los" + method + cam_num + ".pdf")
         pp.savefig(fig_delay)
@@ -142,7 +142,6 @@ for method in methods:
             ax = fig_delay.add_subplot(1, 3, 1)
             ax.scatter(x, y, s=2)
             ax.set_ylim(-150,350)
-            fig_delay.show()
 
             pp = PdfPages("summary/" + map_type +"/sim_all/delay_los" + method + cam_num + ".pdf")
             pp.savefig(fig_delay)
@@ -150,7 +149,6 @@ for method in methods:
         all_pdrs_los.append(pdrs_los)
         all_delays_los.append(delays_los)
 
-exit()
 
 # x = []
 # y = []
@@ -187,18 +185,18 @@ fig_delay.show()
 pp = PdfPages("summary/" + map_type + "/sim_all/delay_los.pdf")
 pp.savefig(fig_delay)
 pp.close()
-exit()
+# exit()
 
 
 # non_losのpdr
-fig_pdr = plt.figure(figsize=(10,4), dpi= 300) #ここを小さくすると文字が大きくなる dpiをあげる？
+fig_pdr = plt.figure(figsize=(12,4), dpi= 300) #ここを小さくすると文字が大きくなる dpiをあげる？
 plt.tight_layout()
-plt.suptitle("Non Line of sight")
+plt.suptitle("Non Line of sight", fontsize=20)
 plt.subplots_adjust(bottom=0.35)
 #xラベル用
-fig_pdr.text(0.5, 0.02, 'Distance(m)', ha='center', va='center')
+fig_pdr.text(0.5, 0.03, 'Distance(m)', ha='center', va='center', fontsize=20)
 #yラベル用
-fig_pdr.text(0.02, 0.5, 'PDR', ha='center', va='center', rotation='vertical')
+fig_pdr.text(0.06, 0.5, 'PDR', ha='center', va='center', rotation='vertical', fontsize=20)
 x = np.array(['0', '141', '283', '424'])
 
 ax = fig_pdr.add_subplot(1, 3, 1)
@@ -210,6 +208,7 @@ ax.set_ylim(-0.1, 1.1)
 ax = fig_pdr.add_subplot(1, 3, 3)
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[2]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[2]], markersize= 3, marker='o', label='Proxy CAM, 75vel/km', capthick=1, capsize=8, lw=2)
 ax.set_ylim(-0.1, 1.1)
+
 ax = fig_pdr.add_subplot(1, 3, 1)
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[3]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[3]], markersize= 3, marker='s', label='Non Priority Grid Proxy CAM, 25vel/km', capthick=1, capsize=8, lw=2, linestyle="-.")
 ax.set_ylim(-0.1, 1.1)
@@ -222,19 +221,19 @@ ax.set_ylim(-0.1, 1.1)
 ax = fig_pdr.add_subplot(1, 3, 1)
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[6]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[6]], markersize= 3, marker='d', label='Distance Priority Grid Proxy CAM, 25vel/km', capthick=1, capsize=8, lw=2, linestyle=":")
 ax.set_ylim(-0.1, 1.1)
-ax.set_xlabel("25vel/km")
+ax.set_xlabel("25vel/km", fontsize=14)
 # ax.legend(bbox_to_anchor=(0.5, -0.3), loc = "center", borderaxespad=0, fontsize=8)
 
 ax = fig_pdr.add_subplot(1, 3, 2)
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[7]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[7]], markersize= 3, marker='d', label='Distance Priority Grid Proxy CAM', capthick=1, capsize=8, lw=2, linestyle=":")
 ax.set_ylim(-0.1, 1.1)
-ax.set_xlabel("50vel/km")
-ax.legend(bbox_to_anchor=(0.5, -0.35), loc = "center", borderaxespad=0, fontsize=8)
+ax.set_xlabel("50vel/km", fontsize=14)
+ax.legend(bbox_to_anchor=(0.5, -0.4), loc = "center", borderaxespad=0, fontsize=14, ncol=3)
 
 ax = fig_pdr.add_subplot(1, 3, 3)
 ax.errorbar(x, [mean(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[8]] , yerr= [stdev(pdrs) if len(pdrs) >= 2 else 0 for pdrs in all_pdrs_non_los[8]], markersize= 3, marker='d', label='Distance Priority Grid Proxy CAM, 75vel/km', capthick=1, capsize=8, lw=2, linestyle=":")
 ax.set_ylim(-0.1, 1.1)
-ax.set_xlabel("75vel/km")
+ax.set_xlabel("75vel/km", fontsize=14)
 # ax.legend(bbox_to_anchor=(0.5, -0.3), loc = "center", borderaxespad=0, fontsize=8)
 
 pp = PdfPages("summary/" + map_type + "/sim_all/pdr_non_los.pdf")
