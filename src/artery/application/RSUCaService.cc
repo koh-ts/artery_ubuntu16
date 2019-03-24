@@ -140,6 +140,7 @@ vanetza::asn1::Cam RSUCaService::getCamFromPacket(omnetpp::cPacket* pk) {
     std::stringstream ss{s};
     std::string buf;
     int i = 0;
+    std::cout << s << endl;
     while (std::getline(ss, buf, ',')) {
       pcam.push_back(buf);
       // std::cout << i << ":" << std::stol(buf) << endl;

@@ -99,7 +99,7 @@ void UDPCamListener::receiveCAM(cPacket *pk)
 bool UDPCamListener::checkDistance(cPacket *pk) {
   if (pk->hasPar("data")) {
     std::string s = (std::string)(pk->par("data"));
-    std::cout << s << endl;
+    // std::cout << s << endl;
     std::stringstream ss{s};
     std::string buf;
     int count = 0;
@@ -119,7 +119,8 @@ bool UDPCamListener::checkDistance(cPacket *pk) {
     Coord pcam_coord = check_and_cast<VeinsMobility *>(this->getModuleByPath("^.^.mobility"))->getCurrentPosition();
     Position pcam_pos = Position(pcam_coord.x, pcam_coord.y);
     double distance = boost::geometry::distance(src_pos, pcam_pos);
-    
+    std::cout << "packet" << endl;
+    std::cout << std::to_string(distance) << endl;
     std::string tmp = "";
     count = 0;
     std::stringstream sss{s};
@@ -150,7 +151,7 @@ bool UDPCamListener::checkDistance(cPacket *pk) {
 double UDPCamListener::calcDistance(cPacket *pk) {
   if (pk->hasPar("data")) {
     std::string s = (std::string)(pk->par("data"));
-    std::cout << s << endl;
+    // std::cout << s << endl;
     std::stringstream ss{s};
     std::string buf;
     int count = 0;
