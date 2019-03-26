@@ -1,8 +1,8 @@
 from pathlib import Path
 
-# methods = ["original_pcam", "naive_grid_pcam", "passive_grid_pcam"]
-methods = ["passive_grid_pcam"]
-# pcam_nums = ["num_5", "num_10", "num_15"]
+methods = [ "naive_grid_pcam", "passive_grid_pcam"]
+# methods = ["passive_grid_pcam"]
+pcam_nums = ["num_5", "num_10", "num_15"]
 pcam_nums = ["num_10"]
 
 simStartTime = 200
