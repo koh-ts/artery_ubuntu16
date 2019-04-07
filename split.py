@@ -1,14 +1,14 @@
 from pathlib import Path
 
-methods = [ "naive_grid_pcam", "passive_grid_pcam"]
-# methods = ["passive_grid_pcam"]
+# methods = [ "naive_grid_pcam", "passive_grid_pcam", "original_pcam"]
+methods = ["original_pcam"]
 pcam_nums = ["num_5", "num_10", "num_15"]
-pcam_nums = ["num_10"]
+# pcam_nums = ["num_10"]
 
 simStartTime = 200
 simTotalInterval = 15
 
-map_type = "grid"
+map_type = "paris"
 
 offset = 0
 
