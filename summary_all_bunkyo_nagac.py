@@ -86,8 +86,14 @@ pcam_poss = pcam_poss[pcam_nums]
 pcam_num_pos = zip(pcam_poss, pcam_nums)
 pcam_num_pos = sorted(pcam_num_pos, key=lambda x: np.linalg.norm(rsu_pos - x[0]))
 
-pcam_poss = [pos for pos,num in pcam_num_pos]
-pcam_nums = [num for pos,num in pcam_num_pos]
+pcam_poss, pcam_nums = [], []
+for pos, num in pcam_num_pos:
+    if num in [1,2,11,12,13,16,17,18,19,20,21,23,25,36,46,47,48]:
+        continue
+    pcam_poss.append(pos)
+    pcam_nums.append(num)
+# pcam_poss = [pos for pos,num in pcam_num_pos]
+# pcam_nums = [num for pos,num in pcam_num_pos]
 
 for i in range(len(pcam_poss)):
     print(pcam_nums[i], pcam_poss[i],np.linalg.norm(rsu_pos - pcam_poss[i]))
@@ -165,6 +171,10 @@ for method in methods:
 # pdr
 x = []
 for i in range(len(pcam_poss)):
+    print(i, np.linalg.norm(rsu_pos - pcam_poss[i]))
+    # if i in [1,2,11,12,13,17,18,19,20,21,23,25,36,46,47,48]:
+    #     print("deleted")
+    #     continue
     x.append(np.linalg.norm(rsu_pos - pcam_poss[i]))
 
 
