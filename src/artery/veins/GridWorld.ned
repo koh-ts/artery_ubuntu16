@@ -12,6 +12,12 @@ import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
 import ned.DatarateChannel;
 import inet.visualizer.integrated.IntegratedVisualizer;
 import inet.node.rip.RIPRouter;
+import inet.environment.contract.IPhysicalEnvironment;
+import inet.physicallayer.contract.packetlevel.IRadioMedium;
+import artery.envmod.GlobalEnvironmentModel;
+import artery.envmod.LocalEnvironmentModel;
+import artery.inet.World;
+import artery.utility.IdentityRegistry;
 
 
 network GridWorld
@@ -24,6 +30,11 @@ network GridWorld
         double playgroundSizeX @unit(m); // x size of the area the nodes are in (in meters)
         double playgroundSizeY @unit(m); // y size of the area the nodes are in (in meters)
         double playgroundSizeZ @unit(m); // z size of the area the nodes are in (in meters)
+        bool withPhysicalEnvironment = default(false);
+        // traci.mapper.vehicleType = default("artery.inet.Car");
+        // traci.nodes.vehicleSinkModule = default(".mobility");
+        // storyboard.middlewareModule = default(".middleware");
+        **.globalEnvironmentModule = default("environmentModel");
         @display("bgb=620,620");
 
     types:
@@ -78,6 +89,27 @@ network GridWorld
         rsu[numRoadSideUnits]: RSU;
         configurator: IPv4NetworkConfigurator {
             @display("p=948.72003,617.472");
+        }
+        radioMedium: <default("Ieee80211ScalarRadioMedium")> like IRadioMedium {
+            parameters:
+                @display("p=60,20");
+                mediumLimitCache.carrierFrequency = 5.9GHz;
+        }
+
+        physicalEnvironment: <default("PhysicalEnvironment")> like IPhysicalEnvironment if withPhysicalEnvironment {
+            parameters:
+                @display("p=100,20");
+        }
+        environmentModel: GlobalEnvironmentModel {
+            parameters:
+                @display("p=140,20");
+                identityRegistryModule = default("idRegistry");
+                traciModule = default("traci");
+                nodeMobilityModule = default(".mobility");
+        }
+        idRegistry: IdentityRegistry {
+            parameters:
+                @display("p=180,20");
         }
 //        visualizer: IntegratedVisualizer {
 //            @display("p=282,31");
