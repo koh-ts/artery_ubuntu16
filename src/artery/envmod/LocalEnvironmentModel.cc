@@ -13,6 +13,7 @@
 #include <inet/common/ModuleAccess.h>
 #include <omnetpp/cxmlelement.h>
 #include <utility>
+#include <typeinfo>
 
 using namespace omnetpp;
 
