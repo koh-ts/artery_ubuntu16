@@ -8,7 +8,7 @@ map_name = "grid"
 from_path = "./" + map_name + "_un_fixed.rou.xml"
 to_path = "./" + map_name + ".rou.xml"
 
-route_num = 9
+route_num = 3 
 car_pop_interval = 0.1
 sim_time = 600
 min_distance = 200

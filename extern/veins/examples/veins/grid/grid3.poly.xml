@@ -1,0 +1,5 @@
+<additionals>    <poly id="poly_0" type="building" color="green" fill="1" layer="0.00" shape="5.0,5.0 95.0,5.0 95.0,95.0 5.0,95.0"/>
+    <poly id="poly_1" type="building" color="green" fill="1" layer="0.00" shape="105.0,5.0 195.0,5.0 195.0,95.0 105.0,95.0"/>
+    <poly id="poly_2" type="building" color="green" fill="1" layer="0.00" shape="5.0,105.0 95.0,105.0 95.0,195.0 5.0,195.0"/>
+    <poly id="poly_3" type="building" color="green" fill="1" layer="0.00" shape="105.0,105.0 195.0,105.0 195.0,195.0 105.0,195.0"/>
+</additionals>
