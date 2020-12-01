@@ -8,10 +8,10 @@ map_name = "grid"
 from_path = "./" + map_name + "_un_fixed.rou.xml"
 to_path = "./" + map_name + ".rou.xml"
 
-route_num = 3 
+route_num = 4 
 car_pop_interval = 0.1
 sim_time = 600
-min_distance = 200
+min_distance = 100
 
 try:
     print("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " --flows=" + str(route_num) + " -n " + map_name + ".net.xml --route-file=" + map_name + "_un_fixed.rou.xml")
