@@ -15,8 +15,8 @@ min_distance = 100
 
 try:
     print("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " --flows=" + str(route_num) + " -n " + map_name + ".net.xml --route-file=" + map_name + "_un_fixed.rou.xml")
-    res = subprocess.getoutput("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " -e 100 -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
-    print(res)
+    # res = subprocess.getoutput("$SUMO_HOME/tools/randomTrips.py --validate --min-distance=" + str(min_distance) + " -e 100 -n " + map_name + ".net.xml --flow=" + str(route_num) + " --route-file=" + map_name + "_un_fixed.rou.xml")
+    # print(res)
 except:
     print("Error.")
 
