@@ -11,6 +11,8 @@
 #include "artery/application/Middleware.h"
 #include "artery/utility/IdentityRegistry.h"
 #include <inet/common/ModuleAccess.h>
+#include <iostream>
+#include <typeinfo>
 
 using namespace omnetpp;
 

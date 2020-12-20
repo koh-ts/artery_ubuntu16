@@ -3,6 +3,10 @@ package artery.veins;
 import org.car2x.veins.base.modules.IBaseApplLayer;
 import org.car2x.veins.base.modules.IMobility;
 import org.car2x.veins.modules.nic.INic80211p;
+import artery.envmod.GlobalEnvironmentModel;
+import artery.envmod.LocalEnvironmentModel;
+import artery.inet.World;
+import artery.utility.IdentityRegistry;
 
 module RSU
 {
@@ -12,6 +16,7 @@ module RSU
         string applType = default("artery.veins.ApplicationLayer"); // type of application layer
         string nicType = default("org.car2x.veins.modules.nic.Nic80211p"); // type of network interface card
         string mobilityType = default("artery.veins.Mobility");
+        **.globalEnvironmentModule = default("environmentModel");
 
     gates:
         input radioIn @directIn; // gate for sendDirect
@@ -34,6 +39,17 @@ module RSU
         mobility: <mobilityType> like IMobility {
             parameters:
                 @display("p=130,150");
+        }
+        environmentModel: GlobalEnvironmentModel {
+            parameters:
+                @display("p=140,20");
+                identityRegistryModule = default("idRegistry");
+                traciModule = default("traci");
+                nodeMobilityModule = default(".mobility");
+        }
+        idRegistry: IdentityRegistry {
+            parameters:
+                @display("p=180,20");
         }
 
     connections:

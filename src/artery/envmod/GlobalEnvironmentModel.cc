@@ -68,6 +68,7 @@ bool GlobalEnvironmentModel::addVehicle(traci::VehicleController* vehicle)
         auto identity = mIdentityRegistry->lookup<IdentityRegistry::traci>(vehicle->getVehicleId());
         if (identity) {
             id = identity->application;
+            // std::cout << id << std::endl;
         }
     }
 

@@ -38,7 +38,7 @@ void IdentityRegistry::receiveSignal(cComponent*, simsignal_t signal, cObject* o
         auto identity = check_and_cast<Identity*>(obj);
         auto& traci_index = mIdentities.get<traci>();
         auto found = traci_index.find(identity->traci);
-        std::cout << signal << std::endl;
+        // std::cout << signal << std::endl;
         // 新しく車両が入ると206のメッセージが発信される
         if (found != traci_index.end()) {
             mIdentities.replace(found, *identity);
