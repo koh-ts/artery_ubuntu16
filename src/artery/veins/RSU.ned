@@ -7,6 +7,7 @@ import artery.envmod.GlobalEnvironmentModel;
 import artery.envmod.LocalEnvironmentModel;
 import artery.inet.World;
 import artery.utility.IdentityRegistry;
+import artery.application.StationaryMiddleware;
 
 module RSU
 {
@@ -17,7 +18,6 @@ module RSU
         string nicType = default("org.car2x.veins.modules.nic.Nic80211p"); // type of network interface card
         string mobilityType = default("artery.veins.Mobility");
         **.globalEnvironmentModule = default("environmentModel");
-
     gates:
         input radioIn @directIn; // gate for sendDirect
 
@@ -40,16 +40,10 @@ module RSU
             parameters:
                 @display("p=130,150");
         }
-        environmentModel: GlobalEnvironmentModel {
+        environmentModel: LocalEnvironmentModel {
             parameters:
                 @display("p=140,20");
-                identityRegistryModule = default("idRegistry");
-                traciModule = default("traci");
-                nodeMobilityModule = default(".mobility");
-        }
-        idRegistry: IdentityRegistry {
-            parameters:
-                @display("p=180,20");
+                middlewareModule = absPath("^.middleware");
         }
 
     connections:
