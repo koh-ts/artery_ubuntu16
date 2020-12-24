@@ -108,7 +108,7 @@ void CaService::indicate(const vanetza::btp::DataIndication& ind, std::unique_pt
 		// 			<< msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMajorConfidence << "\t"
 		// 			<< msg->cam.camParameters.basicContainer.referencePosition.positionConfidenceEllipse.semiMinorConfidence << "\t" <<endl;
 		if(ofs) {
-		std::cout << "HI" << endl;
+		// std::cout << "HI" << endl;
       ofs << "time: " << omnetpp::simTime() << "\t"
           << "src station id: " << msg->header.stationID << "\t"
           << "src cam time: " << msg->cam.camParameters.basicContainer.referencePosition.latitude << "\t"
